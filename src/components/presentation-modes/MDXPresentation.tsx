@@ -1,8 +1,14 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { ChevronLeft, ChevronRight, Zap, Code, Layout as LayoutIcon } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  Code,
+  Layout as LayoutIcon,
+} from "lucide-react";
 
 interface MDXSlide {
   id: string;
@@ -89,6 +95,70 @@ const SLIDES: MDXSlide[] = [
     },
   },
   {
+    id: "useref",
+    type: "demo",
+    content: {
+      headline: "useRef",
+      code: `function FocusInput() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={() => inputRef.current?.focus()}>
+        Focus
+      </button>
+    </>
+  );
+}`,
+      demo: <FocusDemo />,
+    },
+  },
+  {
+    id: "usememo",
+    type: "code",
+    content: {
+      headline: "useMemo",
+      subheading: "Cache expensive computations between renders.",
+      code: `function FilteredList({ items, query }) {
+  const filtered = useMemo(
+    () => items.filter(item =>
+      item.name.toLowerCase().includes(query)
+    ),
+    [items, query]
+  );
+
+  return <ul>{filtered.map(i => <li key={i.id}>{i.name}</li>)}</ul>;
+}`,
+    },
+  },
+  {
+    id: "patterns",
+    type: "split",
+    content: {
+      headline: "Hook Patterns",
+      body: [
+        "useReducer for complex state logic",
+        "useCallback to stabilize callbacks",
+        "useId for accessible form labels",
+        "useSyncExternalStore for external data",
+      ],
+    },
+  },
+  {
+    id: "comparison",
+    type: "split",
+    content: {
+      headline: "Class vs Hooks",
+      body: [
+        "componentDidMount → useEffect(() => {}, [])",
+        "this.state → useState()",
+        "shouldComponentUpdate → React.memo + useMemo",
+        "refs → useRef()",
+      ],
+    },
+  },
+  {
     id: "summary",
     type: "summary",
     content: {
@@ -113,7 +183,7 @@ function CounterDemo() {
       >
         Click Me
       </button>
-      <button 
+      <button
         onClick={() => setCount(0)}
         className="text-xs text-cyan-400/50 hover:text-cyan-400 underline"
       >
@@ -123,10 +193,32 @@ function CounterDemo() {
   );
 }
 
+function FocusDemo() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  return (
+    <div className="flex flex-col items-center gap-4 p-8 bg-black/40 rounded-2xl border border-cyan-500/30 backdrop-blur-sm">
+      <input
+        ref={inputRef}
+        placeholder="Click the button..."
+        className="px-4 py-2 bg-black/60 border border-slate-700 rounded-xl text-cyan-400 font-mono text-center focus:ring-2 focus:ring-cyan-500 outline-none"
+      />
+      <button
+        onClick={() => inputRef.current?.focus()}
+        className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(8,145,178,0.4)]"
+      >
+        Focus Input
+      </button>
+    </div>
+  );
+}
+
 export function MDXPresentation() {
   const [current, setCurrent] = useState(0);
 
-  const next = useCallback(() => setCurrent((s) => Math.min(s + 1, SLIDES.length - 1)), []);
+  const next = useCallback(
+    () => setCurrent((s) => Math.min(s + 1, SLIDES.length - 1)),
+    [],
+  );
   const prev = useCallback(() => setCurrent((s) => Math.max(s - 1, 0)), []);
 
   useEffect(() => {
@@ -170,14 +262,16 @@ export function MDXPresentation() {
         >
           <ChevronLeft size={24} />
         </button>
-        
+
         <div className="flex gap-1.5">
           {SLIDES.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === current ? "bg-cyan-400 w-6" : "bg-slate-700 w-1.5 hover:bg-slate-600"
+                i === current
+                  ? "bg-cyan-400 w-6"
+                  : "bg-slate-700 w-1.5 hover:bg-slate-600"
               }`}
             />
           ))}
@@ -196,7 +290,9 @@ export function MDXPresentation() {
       <div className="absolute bottom-8 left-8 text-xs font-mono text-slate-500 flex items-center gap-4">
         <span>MDX_PRESENTATION_v1.0</span>
         <span className="h-3 w-px bg-slate-800" />
-        <span className="text-cyan-400/50 uppercase tracking-widest">{slide.id}</span>
+        <span className="text-cyan-400/50 uppercase tracking-widest">
+          {slide.id}
+        </span>
       </div>
     </div>
   );
@@ -254,9 +350,9 @@ function SlideContent({ slide }: { slide: MDXSlide }) {
             </ul>
           </div>
           <div className="bg-slate-900/50 p-1 rounded-3xl border border-slate-800">
-             <div className="aspect-video bg-black/40 rounded-[calc(1.5rem-1px)] flex items-center justify-center">
-                <LayoutIcon size={120} className="text-slate-800" />
-             </div>
+            <div className="aspect-video bg-black/40 rounded-[calc(1.5rem-1px)] flex items-center justify-center">
+              <LayoutIcon size={120} className="text-slate-800" />
+            </div>
           </div>
         </div>
       );
@@ -272,7 +368,7 @@ function SlideContent({ slide }: { slide: MDXSlide }) {
               <SyntaxHighlighter
                 language="jsx"
                 style={atomDark}
-                customStyle={{ margin: 0, padding: '2rem', fontSize: '1.1rem' }}
+                customStyle={{ margin: 0, padding: "2rem", fontSize: "1.1rem" }}
               >
                 {content.code || ""}
               </SyntaxHighlighter>
@@ -280,8 +376,8 @@ function SlideContent({ slide }: { slide: MDXSlide }) {
           </div>
           <div className="flex flex-col items-center">
             <div className="mb-4 text-xs font-bold text-cyan-500 uppercase tracking-widest flex items-center gap-2">
-               <span className="flex h-2 w-2 rounded-full bg-cyan-500 animate-pulse" />
-               Live Preview
+              <span className="flex h-2 w-2 rounded-full bg-cyan-500 animate-pulse" />
+              Live Preview
             </div>
             {content.demo}
           </div>
@@ -292,14 +388,16 @@ function SlideContent({ slide }: { slide: MDXSlide }) {
       return (
         <div className="space-y-8">
           <div className="max-w-2xl">
-            <h2 className="text-5xl font-bold text-white mb-4">{content.headline}</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">
+              {content.headline}
+            </h2>
             <p className="text-2xl text-slate-400">{content.subheading}</p>
           </div>
           <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
             <SyntaxHighlighter
               language="jsx"
               style={atomDark}
-              customStyle={{ margin: 0, padding: '2.5rem', fontSize: '1.2rem' }}
+              customStyle={{ margin: 0, padding: "2.5rem", fontSize: "1.2rem" }}
             >
               {content.code || ""}
             </SyntaxHighlighter>
@@ -320,8 +418,12 @@ function SlideContent({ slide }: { slide: MDXSlide }) {
                 transition={{ delay: i * 0.1 + 0.3 }}
                 className="bg-slate-900 border border-slate-800 p-8 rounded-3xl"
               >
-                <div className="text-2xl font-bold text-cyan-400 mb-2">{item}</div>
-                <div className="text-sm text-slate-500">Optimized for React 18+</div>
+                <div className="text-2xl font-bold text-cyan-400 mb-2">
+                  {item}
+                </div>
+                <div className="text-sm text-slate-500">
+                  Optimized for React 18+
+                </div>
               </motion.div>
             ))}
           </div>

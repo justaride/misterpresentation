@@ -3,25 +3,37 @@ import { useState, useEffect } from "react";
 import { Maximize2, Minimize2, Play, Pause } from "lucide-react";
 
 const TAKAHASHI_SLIDES = [
-  "TAKAHASHI",
-  "METHOD",
-  "BIG TEXT",
-  "NO IMAGES",
-  "HIGH IMPACT",
-  "SYNCHRONIZED",
-  "WITH SPEECH",
-  "RAPID FIRE",
-  "SIMPLE",
-  "BOLD",
-  "MISTER",
-  "PRESENTATIONS",
+  "IMAGINE",
+  "A WORLD",
+  "WHERE",
+  "MEETINGS",
+  "DON'T SUCK.",
+  "WE BUILT",
+  "THAT WORLD.",
+  "$2.3M",
+  "IN REVENUE.",
+  "YEAR ONE.",
+  "HOW?",
+  "ONE WORD.",
+  "SIMPLICITY.",
+  "NO DECKS.",
+  "NO TEMPLATES.",
+  "JUST IDEAS.",
+  "10X FASTER",
+  "THAN POWERPOINT.",
+  "WE NEED",
+  "$5M",
+  "TO SCALE.",
+  "JOIN US.",
 ];
 
 export interface TakahashiPresentationProps {
   slides?: string[];
 }
 
-export function TakahashiPresentation({ slides = TAKAHASHI_SLIDES }: TakahashiPresentationProps) {
+export function TakahashiPresentation({
+  slides = TAKAHASHI_SLIDES,
+}: TakahashiPresentationProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -48,12 +60,9 @@ export function TakahashiPresentation({ slides = TAKAHASHI_SLIDES }: TakahashiPr
     }
   };
 
-  const nextSlide = () =>
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () =>
-    setCurrentSlide(
-      (prev) => (prev - 1 + slides.length) % slides.length,
-    );
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
     <div className="relative w-full h-[600px] bg-black text-white overflow-hidden flex items-center justify-center font-black">

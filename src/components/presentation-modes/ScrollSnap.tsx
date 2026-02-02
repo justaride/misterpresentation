@@ -1,6 +1,17 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ChevronDown, Code2, MousePointer2, Zap, Smartphone, Layers } from "lucide-react";
+import {
+  ChevronDown,
+  Code2,
+  MousePointer2,
+  Zap,
+  Smartphone,
+  Layers,
+  Accessibility,
+  Palette,
+  Gauge,
+  MonitorSmartphone,
+} from "lucide-react";
 
 const SECTIONS = [
   {
@@ -32,7 +43,7 @@ const SECTIONS = [
   {
     id: "attention",
     title: "The Physics of Attention",
-    subtitle: "\"When the page stops, the mind focuses.\"",
+    subtitle: '"When the page stops, the mind focuses."',
     bg: "bg-black",
     text: "text-white",
     icon: <Zap size={64} className="text-yellow-400" />,
@@ -54,15 +65,104 @@ const SECTIONS = [
     icon: <Code2 size={64} />,
     content: (
       <pre className="mt-8 p-6 bg-black/50 rounded-xl border border-white/10 font-mono text-sm md:text-base text-left">
-        <code className="text-pink-400">.container</code>{" {"}{"\n"}
+        <code className="text-pink-400">.container</code>
+        {" {"}
+        {"\n"}
         {"  "}overflow-y: <span className="text-yellow-300">scroll</span>;{"\n"}
-        {"  "}scroll-snap-type: <span className="text-blue-300">y mandatory</span>;{"\n"}
-        {"}"}{"\n\n"}
-        <code className="text-pink-400">.section</code>{" {"}{"\n"}
+        {"  "}scroll-snap-type:{" "}
+        <span className="text-blue-300">y mandatory</span>;{"\n"}
+        {"}"}
+        {"\n\n"}
+        <code className="text-pink-400">.section</code>
+        {" {"}
+        {"\n"}
         {"  "}height: <span className="text-yellow-300">100vh</span>;{"\n"}
-        {"  "}scroll-snap-align: <span className="text-blue-300">start</span>;{"\n"}
+        {"  "}scroll-snap-align: <span className="text-blue-300">start</span>;
+        {"\n"}
         {"}"}
       </pre>
+    ),
+  },
+  {
+    id: "mobile",
+    title: "Mobile-First.",
+    subtitle: "Snap was born for thumbs, not mice.",
+    bg: "bg-zinc-950",
+    text: "text-white",
+    icon: <MonitorSmartphone size={64} className="text-emerald-400" />,
+    content: (
+      <div className="mt-8 flex items-center justify-center gap-6">
+        <div className="w-20 h-36 border-2 border-emerald-400/40 rounded-2xl flex items-center justify-center">
+          <span className="text-xs font-mono text-emerald-400">375px</span>
+        </div>
+        <div className="w-40 h-28 border-2 border-white/20 rounded-xl flex items-center justify-center">
+          <span className="text-xs font-mono opacity-50">1440px</span>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "a11y",
+    title: "Accessible by Default.",
+    subtitle: "Keyboard navigation. Reduced motion. Focus rings.",
+    bg: "bg-black",
+    text: "text-white",
+    icon: <Accessibility size={64} className="text-amber-400" />,
+    content: (
+      <div className="mt-8 flex gap-4 text-sm font-mono">
+        <kbd className="px-3 py-1.5 bg-white/10 rounded-lg border border-white/20">
+          Tab
+        </kbd>
+        <kbd className="px-3 py-1.5 bg-white/10 rounded-lg border border-white/20">
+          Space
+        </kbd>
+        <kbd className="px-3 py-1.5 bg-white/10 rounded-lg border border-white/20">
+          ↑ ↓
+        </kbd>
+      </div>
+    ),
+  },
+  {
+    id: "palette",
+    title: "Color with Intent.",
+    subtitle: "Each section earns its own palette.",
+    bg: "bg-zinc-900",
+    text: "text-white",
+    icon: <Palette size={64} className="text-pink-400" />,
+    content: (
+      <div className="mt-8 grid grid-cols-4 gap-3 max-w-xs">
+        {[
+          "bg-blue-600",
+          "bg-purple-600",
+          "bg-emerald-600",
+          "bg-amber-500",
+          "bg-rose-600",
+          "bg-cyan-500",
+          "bg-indigo-600",
+          "bg-lime-500",
+        ].map((c, i) => (
+          <div key={i} className={`w-12 h-12 ${c} rounded-xl shadow-lg`} />
+        ))}
+      </div>
+    ),
+  },
+  {
+    id: "performance",
+    title: "60fps or Bust.",
+    subtitle: "GPU-accelerated scroll. Zero jank.",
+    bg: "bg-black",
+    text: "text-white",
+    icon: <Gauge size={64} className="text-red-500" />,
+    content: (
+      <div className="mt-8 flex items-center gap-4">
+        <div className="px-4 py-2 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 font-mono text-sm font-bold">
+          60 FPS
+        </div>
+        <span className="text-white/40">|</span>
+        <span className="text-sm text-white/50 font-mono">
+          0ms layout shift
+        </span>
+      </div>
     ),
   },
   {
@@ -81,7 +181,7 @@ export function ScrollSnapPresentation() {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
@@ -110,11 +210,11 @@ export function ScrollSnapPresentation() {
               className="max-w-4xl flex flex-col items-center gap-6"
             >
               <div className="mb-4">{section.icon}</div>
-              
+
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter">
                 {section.title}
               </h2>
-              
+
               <p className="text-xl md:text-3xl font-light opacity-80 max-w-2xl">
                 {section.subtitle}
               </p>
@@ -132,7 +232,7 @@ export function ScrollSnapPresentation() {
                 <ChevronDown size={32} />
               </motion.div>
             )}
-            
+
             {/* Slide Number */}
             <div className="absolute bottom-8 right-8 font-mono text-sm opacity-20">
               {index + 1} / {SECTIONS.length}

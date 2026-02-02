@@ -1,6 +1,13 @@
 import { useState, useEffect, useCallback, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Grid, X } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  ChevronDown,
+  Grid,
+  X,
+} from "lucide-react";
 
 interface SlideData {
   id: string;
@@ -80,6 +87,153 @@ const REVEAL_SLIDES: SlideData[] = [
     textColor: "text-white",
   },
   {
+    id: "roadmap",
+    title: "Roadmap",
+    headline: "The Roadmap",
+    subheading: "Our path to total vertical integration.",
+    bg: "bg-[#2B6CB0]",
+    textColor: "text-white",
+    verticalSlides: [
+      {
+        id: "timeline",
+        title: "Timeline",
+        headline: "Key Milestones",
+        body: (
+          <div className="mt-8 flex flex-col gap-4 text-left max-w-md mx-auto">
+            {[
+              { q: "Q1", label: "Launch Synergy Portal v2" },
+              { q: "Q2", label: "Acquire competitors (all of them)" },
+              { q: "Q3", label: "IPO on the Coffee Exchange" },
+              { q: "Q4", label: "Pivot again (just in case)" },
+            ].map((m, i) => (
+              <motion.div
+                key={i}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: i * 0.2 + 0.5 }}
+                className="flex items-center gap-4"
+              >
+                <span className="text-sm font-bold bg-blue-500 text-white px-3 py-1 rounded-full">
+                  {m.q}
+                </span>
+                <span className="text-xl">{m.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        ),
+        bg: "bg-[#2C5282]",
+        textColor: "text-white",
+      },
+      {
+        id: "milestones",
+        title: "Milestones",
+        headline: "Already Achieved",
+        body: [
+          "Hired a Chief Synergy Officer",
+          "Trademarked the word 'Leverage'",
+          "Built a blockchain for coffee orders",
+        ],
+        bg: "bg-[#2A4365]",
+        textColor: "text-white",
+      },
+    ],
+  },
+  {
+    id: "team",
+    title: "Team",
+    headline: "The Dream Team",
+    body: [
+      "J.P. Buzzword — CEO & Chief Synergist",
+      "Ava Metrics — VP of Data Alchemy",
+      "Chad Fullstack — Head of Engineering",
+    ],
+    bg: "bg-[#553C9A]",
+    textColor: "text-white",
+    verticalSlides: [
+      {
+        id: "org-chart",
+        title: "Org Chart",
+        headline: "Organizational Synergy",
+        body: (
+          <div className="mt-8 flex flex-col items-center gap-4">
+            <div className="px-6 py-3 bg-purple-600 rounded-xl text-white font-bold">
+              CEO
+            </div>
+            <div className="w-px h-6 bg-white/30" />
+            <div className="flex gap-8">
+              {["VP Synergy", "VP Growth", "VP Vibes"].map((role, i) => (
+                <div
+                  key={i}
+                  className="px-4 py-2 bg-purple-500/50 rounded-lg text-sm"
+                >
+                  {role}
+                </div>
+              ))}
+            </div>
+            <div className="w-px h-6 bg-white/30" />
+            <div className="text-sm opacity-50 italic">Everyone else</div>
+          </div>
+        ),
+        bg: "bg-[#44337A]",
+        textColor: "text-white",
+      },
+    ],
+  },
+  {
+    id: "financials",
+    title: "Financials",
+    headline: "The Numbers",
+    subheading: "Revenue is a state of mind.",
+    body: (
+      <div className="mt-8 flex items-end gap-3 h-48 w-full max-w-lg mx-auto">
+        {[15, 25, 18, 40, 35, 55, 48, 72, 65, 90, 85, 100].map((h, i) => (
+          <motion.div
+            key={i}
+            initial={{ height: 0 }}
+            animate={{ height: `${h}%` }}
+            transition={{ delay: i * 0.08 + 0.3, duration: 0.8 }}
+            className="flex-1 bg-green-500 rounded-t-sm"
+          />
+        ))}
+      </div>
+    ),
+    bg: "bg-[#1C4532]",
+    textColor: "text-white",
+  },
+  {
+    id: "testimonials",
+    title: "Testimonials",
+    headline: "What They Say",
+    body: (
+      <div className="mt-8 space-y-6 max-w-xl mx-auto text-left">
+        {[
+          {
+            quote: "I've never seen so many buzzwords in one deck.",
+            author: "— Anonymous Investor",
+          },
+          {
+            quote: "They pivoted to coffee and somehow it worked.",
+            author: "— TechCrunch",
+          },
+          { quote: "The synergy is palpable.", author: "— Our Mom" },
+        ].map((t, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.3 + 0.5 }}
+            className="bg-white/10 p-6 rounded-xl"
+          >
+            <p className="text-xl italic mb-2">"{t.quote}"</p>
+            <p className="text-sm opacity-60">{t.author}</p>
+          </motion.div>
+        ))}
+      </div>
+    ),
+    bg: "bg-[#2D3748]",
+    textColor: "text-white",
+  },
+  {
     id: "questions",
     title: "Questions",
     headline: "Next Steps",
@@ -99,17 +253,23 @@ export function RevealClassic() {
   const totalH = REVEAL_SLIDES.length;
   const totalV = currentHSlide.verticalSlides?.length || 0;
 
-  const navigateH = useCallback((dir: number) => {
-    setHIndex((prev) => {
-      const next = Math.max(0, Math.min(prev + dir, totalH - 1));
-      if (next !== prev) setVIndex(0);
-      return next;
-    });
-  }, [totalH]);
+  const navigateH = useCallback(
+    (dir: number) => {
+      setHIndex((prev) => {
+        const next = Math.max(0, Math.min(prev + dir, totalH - 1));
+        if (next !== prev) setVIndex(0);
+        return next;
+      });
+    },
+    [totalH],
+  );
 
-  const navigateV = useCallback((dir: number) => {
-    setVIndex((prev) => Math.max(0, Math.min(prev + dir, totalV)));
-  }, [totalV]);
+  const navigateV = useCallback(
+    (dir: number) => {
+      setVIndex((prev) => Math.max(0, Math.min(prev + dir, totalV)));
+    },
+    [totalV],
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -118,11 +278,21 @@ export function RevealClassic() {
         return;
       }
       switch (e.key) {
-        case "ArrowRight": navigateH(1); break;
-        case "ArrowLeft": navigateH(-1); break;
-        case "ArrowDown": navigateV(1); break;
-        case "ArrowUp": navigateV(-1); break;
-        case "o": setIsOverview(true); break;
+        case "ArrowRight":
+          navigateH(1);
+          break;
+        case "ArrowLeft":
+          navigateH(-1);
+          break;
+        case "ArrowDown":
+          navigateV(1);
+          break;
+        case "ArrowUp":
+          navigateV(-1);
+          break;
+        case "o":
+          setIsOverview(true);
+          break;
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -146,7 +316,7 @@ export function RevealClassic() {
             exit={{ opacity: 0 }}
             className="absolute inset-0 z-[100] bg-black/90 p-12 overflow-y-auto"
           >
-            <button 
+            <button
               onClick={() => setIsOverview(false)}
               className="fixed top-8 right-8 text-white p-2 hover:bg-white/10 rounded-full"
             >
@@ -155,19 +325,27 @@ export function RevealClassic() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {REVEAL_SLIDES.map((s, hi) => (
                 <div key={s.id} className="space-y-4">
-                  <div 
+                  <div
                     onClick={() => goToSlide(hi, 0)}
                     className={`aspect-video ${s.bg} rounded border-2 transition-all cursor-pointer hover:scale-105 ${hi === hIndex && vIndex === 0 ? "border-blue-500 ring-4 ring-blue-500/50" : "border-transparent"}`}
                   >
-                    <div className={`p-4 text-[10px] ${s.textColor} font-bold truncate`}>{s.headline}</div>
+                    <div
+                      className={`p-4 text-[10px] ${s.textColor} font-bold truncate`}
+                    >
+                      {s.headline}
+                    </div>
                   </div>
                   {s.verticalSlides?.map((vs, vi) => (
-                    <div 
+                    <div
                       key={vs.id}
                       onClick={() => goToSlide(hi, vi + 1)}
                       className={`aspect-video ${vs.bg} rounded border-2 transition-all cursor-pointer hover:scale-105 ml-8 ${hi === hIndex && vIndex === vi + 1 ? "border-blue-500 ring-4 ring-blue-500/50" : "border-transparent"}`}
                     >
-                       <div className={`p-4 text-[10px] ${vs.textColor} font-bold truncate`}>{vs.headline}</div>
+                      <div
+                        className={`p-4 text-[10px] ${vs.textColor} font-bold truncate`}
+                      >
+                        {vs.headline}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -187,13 +365,21 @@ export function RevealClassic() {
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className={`absolute inset-0 flex flex-col items-center justify-center p-12 text-center ${
-              vIndex === 0 ? currentHSlide.bg : currentHSlide.verticalSlides![vIndex - 1].bg
+              vIndex === 0
+                ? currentHSlide.bg
+                : currentHSlide.verticalSlides![vIndex - 1].bg
             } ${
-              vIndex === 0 ? currentHSlide.textColor : currentHSlide.verticalSlides![vIndex - 1].textColor
+              vIndex === 0
+                ? currentHSlide.textColor
+                : currentHSlide.verticalSlides![vIndex - 1].textColor
             }`}
           >
-            <SlideContent 
-              data={vIndex === 0 ? currentHSlide : currentHSlide.verticalSlides![vIndex - 1]} 
+            <SlideContent
+              data={
+                vIndex === 0
+                  ? currentHSlide
+                  : currentHSlide.verticalSlides![vIndex - 1]
+              }
             />
           </motion.div>
         </AnimatePresence>
@@ -202,37 +388,37 @@ export function RevealClassic() {
       {/* Controls */}
       <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 z-50">
         <div className="flex flex-col items-center">
-          <button 
-            onClick={() => navigateV(-1)} 
+          <button
+            onClick={() => navigateV(-1)}
             disabled={vIndex === 0}
             className={`p-2 transition-opacity ${vIndex === 0 ? "opacity-10" : "opacity-50 hover:opacity-100"}`}
           >
             <ChevronUp size={48} />
           </button>
           <div className="flex items-center gap-2">
-            <button 
-              onClick={() => navigateH(-1)} 
+            <button
+              onClick={() => navigateH(-1)}
               disabled={hIndex === 0}
               className={`p-2 transition-opacity ${hIndex === 0 ? "opacity-10" : "opacity-50 hover:opacity-100"}`}
             >
               <ChevronLeft size={48} />
             </button>
-            <button 
+            <button
               onClick={() => setIsOverview(true)}
               className="p-2 opacity-30 hover:opacity-100 transition-opacity"
             >
               <Grid size={24} />
             </button>
-            <button 
-              onClick={() => navigateH(1)} 
+            <button
+              onClick={() => navigateH(1)}
               disabled={hIndex === totalH - 1}
               className={`p-2 transition-opacity ${hIndex === totalH - 1 ? "opacity-10" : "opacity-50 hover:opacity-100"}`}
             >
               <ChevronRight size={48} />
             </button>
           </div>
-          <button 
-            onClick={() => navigateV(1)} 
+          <button
+            onClick={() => navigateV(1)}
             disabled={vIndex === totalV}
             className={`p-2 transition-opacity ${vIndex === totalV ? "opacity-10" : "opacity-50 hover:opacity-100"}`}
           >
@@ -243,7 +429,7 @@ export function RevealClassic() {
 
       {/* Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/10">
-        <motion.div 
+        <motion.div
           className="h-full bg-blue-500"
           initial={false}
           animate={{ width: `${((hIndex + 1) / totalH) * 100}%` }}
@@ -256,7 +442,7 @@ export function RevealClassic() {
 function SlideContent({ data }: { data: any }) {
   return (
     <div className="max-w-5xl w-full">
-      <motion.h1 
+      <motion.h1
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className="text-6xl md:text-8xl font-bold mb-8 tracking-tight"
@@ -265,7 +451,7 @@ function SlideContent({ data }: { data: any }) {
       </motion.h1>
 
       {data.subheading && (
-        <motion.p 
+        <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -276,7 +462,7 @@ function SlideContent({ data }: { data: any }) {
       )}
 
       {data.body && (
-        <motion.div 
+        <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -298,7 +484,7 @@ function SlideContent({ data }: { data: any }) {
       )}
 
       {data.footer && (
-        <motion.footer 
+        <motion.footer
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           transition={{ delay: 1 }}

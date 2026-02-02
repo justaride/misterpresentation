@@ -39,5 +39,13 @@ export const FULL_TAKAHASHI_SLIDES = [
   "POWERFUL.",
   "TRY",
   "IT.",
-  "NOW."
+  "NOW.",
+  "YOUR",
+  "AUDIENCE",
+  "WILL",
+  "THANK",
+  "YOU.",
+  "LESS",
+  "IS",
+  "MORE.",
 ];

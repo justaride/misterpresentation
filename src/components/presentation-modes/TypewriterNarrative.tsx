@@ -1,6 +1,17 @@
 import { useState, useEffect, useCallback, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Lightbulb, FileText, Fingerprint } from "lucide-react";
+import {
+  Search,
+  Lightbulb,
+  FileText,
+  Fingerprint,
+  AlertTriangle,
+  Eye,
+  ShieldCheck,
+  Skull,
+  Coffee,
+  Lock,
+} from "lucide-react";
 
 // Types
 type BaseSlide = {
@@ -61,7 +72,13 @@ type EndSlide = BaseSlide & {
   };
 };
 
-type Slide = TitleSlide | NarrativeSlide | ListSlide | DialogueSlide | StampSlide | EndSlide;
+type Slide =
+  | TitleSlide
+  | NarrativeSlide
+  | ListSlide
+  | DialogueSlide
+  | StampSlide
+  | EndSlide;
 
 // Slide Data
 const SLIDES: Slide[] = [
@@ -111,9 +128,99 @@ const SLIDES: Slide[] = [
       dialogue: [
         { speaker: "detective", text: "Where were you on render?" },
         { speaker: "suspect", text: "I was display: block, I swear!" },
-        { speaker: "detective", text: "Don't lie to me. Computed styles never lie." },
+        {
+          speaker: "detective",
+          text: "Don't lie to me. Computed styles never lie.",
+        },
       ],
       icon: <Lightbulb size={64} />,
+    },
+  },
+  {
+    id: "evidence",
+    type: "narrative",
+    content: {
+      headline: "THE EVIDENCE LOCKER",
+      body: [
+        "I pulled the browser devtools open.",
+        "The box model diagram glowed faintly.",
+        "Margin: 0. Padding: 0. Border: 0.",
+        "And yet... a gap persisted.",
+        "Something was hiding in plain sight.",
+      ],
+      icon: <Eye size={64} />,
+    },
+  },
+  {
+    id: "interrogation-2",
+    type: "dialogue",
+    content: {
+      headline: "THE SECOND INTERROGATION",
+      dialogue: [
+        { speaker: "detective", text: "I know you're an inline element." },
+        { speaker: "suspect", text: "So what? I have rights!" },
+        {
+          speaker: "detective",
+          text: "You have a line-height of 1.5. That's your gap.",
+        },
+        { speaker: "suspect", text: "...I want a lawyer." },
+      ],
+      icon: <AlertTriangle size={64} />,
+    },
+  },
+  {
+    id: "accomplices",
+    type: "list",
+    content: {
+      headline: "KNOWN ACCOMPLICES",
+      items: [
+        "1. font-size: 0 on the parent",
+        "2. A rogue ::before pseudo-element",
+        "3. The ghost of a whitespace text node",
+        "4. An inherited text-indent from 2017",
+      ],
+      icon: <Skull size={64} />,
+    },
+  },
+  {
+    id: "stakeout",
+    type: "narrative",
+    content: {
+      headline: "THE STAKEOUT",
+      body: [
+        "I set a MutationObserver on the DOM.",
+        "Waited. Watched. Refreshed.",
+        "At exactly 768px, the gap doubled.",
+        "A media query. Of course.",
+        "Someone had written `margin-top: auto`.",
+      ],
+      icon: <Coffee size={64} />,
+    },
+  },
+  {
+    id: "confession",
+    type: "dialogue",
+    content: {
+      headline: "THE CONFESSION",
+      dialogue: [
+        { speaker: "detective", text: "It was you all along, wasn't it?" },
+        {
+          speaker: "suspect",
+          text: "Fine. I confess. I'm vertical-align: baseline.",
+        },
+        { speaker: "detective", text: "Book 'em. Set to bottom." },
+      ],
+      icon: <Lock size={64} />,
+    },
+  },
+  {
+    id: "classified",
+    type: "stamp",
+    content: {
+      stamp: "CLASSIFIED",
+      body: "The media query was planted.\nSomeone wanted this layout to break.",
+      footer: "Internal investigation pending.",
+      icon: <ShieldCheck size={64} />,
     },
   },
   {
@@ -167,7 +274,7 @@ export function TypewriterNarrative() {
     <div className="relative w-full h-screen bg-[#f4e4bc] text-[#1a1a1a] overflow-hidden font-mono selection:bg-red-900 selection:text-white">
       {/* Paper Texture Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply" />
-      
+
       {/* Vignette */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
 
@@ -198,8 +305,14 @@ export function TypewriterNarrative() {
       </div>
 
       {/* Navigation Areas */}
-      <div className="absolute inset-y-0 left-0 w-1/4 cursor-w-resize z-10" onClick={prevSlide} />
-      <div className="absolute inset-y-0 right-0 w-1/4 cursor-e-resize z-10" onClick={nextSlide} />
+      <div
+        className="absolute inset-y-0 left-0 w-1/4 cursor-w-resize z-10"
+        onClick={prevSlide}
+      />
+      <div
+        className="absolute inset-y-0 right-0 w-1/4 cursor-e-resize z-10"
+        onClick={nextSlide}
+      />
     </div>
   );
 }
@@ -221,7 +334,13 @@ function SlideContent({ data }: { data: Slide }) {
     },
   };
 
-  const TypewriterText = ({ text, className = "" }: { text: string; className?: string }) => (
+  const TypewriterText = ({
+    text,
+    className = "",
+  }: {
+    text: string;
+    className?: string;
+  }) => (
     <motion.div
       variants={containerVariants}
       initial="hidden"
@@ -243,7 +362,12 @@ function SlideContent({ data }: { data: Slide }) {
           <motion.div
             initial={{ opacity: 0, scale: 2, rotate: 15 }}
             animate={{ opacity: 1, scale: 1, rotate: -15 }}
-            transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 20 }}
+            transition={{
+              delay: 0.5,
+              type: "spring",
+              stiffness: 200,
+              damping: 20,
+            }}
             className="absolute -top-16 -right-12 md:-right-24 border-4 border-[#d00] text-[#d00] p-2 md:p-4 text-xl md:text-2xl font-bold uppercase opacity-80"
             style={{ fontFamily: "serif" }}
           >
@@ -320,7 +444,10 @@ function SlideContent({ data }: { data: Slide }) {
             {data.content.dialogue.map((line, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: line.speaker === "detective" ? -50 : 50 }}
+                initial={{
+                  opacity: 0,
+                  x: line.speaker === "detective" ? -50 : 50,
+                }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 1 }}
                 className={`flex ${
@@ -345,18 +472,27 @@ function SlideContent({ data }: { data: Slide }) {
     case "stamp":
       return (
         <div className="text-center relative">
-           <motion.div
+          <motion.div
             initial={{ opacity: 0, scale: 3, rotate: 5 }}
             animate={{ opacity: 1, scale: 1, rotate: 5 }}
-            transition={{ delay: 0.5, type: "spring", stiffness: 300, damping: 15 }}
+            transition={{
+              delay: 0.5,
+              type: "spring",
+              stiffness: 300,
+              damping: 15,
+            }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[8px] border-[#d00] text-[#d00] px-12 py-4 text-6xl md:text-9xl font-bold uppercase opacity-90 z-10 mix-blend-multiply"
             style={{ fontFamily: "serif" }}
           >
             {data.content.stamp}
           </motion.div>
           <div className="blur-[2px] opacity-50">
-             <div className="text-2xl md:text-4xl mb-8 whitespace-pre-wrap">{data.content.body}</div>
-             <div className="text-sm font-bold uppercase tracking-widest">{data.content.footer}</div>
+            <div className="text-2xl md:text-4xl mb-8 whitespace-pre-wrap">
+              {data.content.body}
+            </div>
+            <div className="text-sm font-bold uppercase tracking-widest">
+              {data.content.footer}
+            </div>
           </div>
         </div>
       );
@@ -364,7 +500,7 @@ function SlideContent({ data }: { data: Slide }) {
     case "end":
       return (
         <div className="w-full h-full bg-black text-white flex flex-col items-center justify-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
@@ -372,7 +508,7 @@ function SlideContent({ data }: { data: Slide }) {
           >
             {data.content.headline}
           </motion.h1>
-           <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             transition={{ delay: 2, duration: 1 }}
