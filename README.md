@@ -31,16 +31,57 @@ This project explores various ways to present information on the web, moving bey
     *   Retro paper textures and stamp effects.
 *   **Example:** "Case File: #404 - The Missing Pixel"
 
+### 4. Reveal.js Classic
+*   **Style:** Standard corporate slide deck.
+*   **Features:**
+    *   2D Navigation (Horizontal & Vertical slides).
+    *   Overview mode (Press 'O').
+    *   Progress bar and speaker notes.
+*   **Example:** "Q3 Strategic Performance Review" (Satire)
+
+### 5. Lottie Storyboard
+*   **Style:** Animated user journey.
+*   **Features:**
+    *   Embedded vector animations (Lottie).
+    *   Smooth background color transitions.
+    *   Storyboard-style narrative flow.
+*   **Example:** "User Journey: The Happy Path"
+
+### 6. MDX Presentation
+*   **Style:** Technical talk / Documentation.
+*   **Features:**
+    *   Write slides in Markdown/MDX.
+    *   Embedded interactive React components.
+    *   Professional code syntax highlighting.
+*   **Example:** "Introduction to React Hooks"
+
+### 7. Parallax Storyteller
+*   **Style:** Immersive Scrollytelling.
+*   **Features:**
+    *   Depth-based parallax layers.
+    *   Dynamic background gradients.
+    *   Sticky scroll progress indicators.
+*   **Example:** "The Deep Sea Expedition"
+
+### 8. Live Code Walkthrough
+*   **Style:** Educational coding tutorial.
+*   **Features:**
+    *   Step-by-step refactoring guide.
+    *   Side-by-side code and live preview.
+    *   Line highlighting and contextual notes.
+*   **Example:** "Building a Custom React Hook"
+
 ## Upcoming Modes
-*   **Reveal.js Classic** (Slide-based)
-*   **Lottie Storyboard** (Animation-heavy)
-*   **MDX Presentation** (Code-focused)
+*   **Kinetic Typography**
+*   **3D Globe Explorer**
+*   **Live Data Dashboard**
 *   And many more...
 
 ## Tech Stack
 *   **Framework:** React + Vite
 *   **Styling:** Tailwind CSS
-*   **Animation:** Framer Motion
+*   **Animation:** Framer Motion, Lottie React
+*   **Code:** React Syntax Highlighter
 *   **Icons:** Lucide React
 
 ## Development

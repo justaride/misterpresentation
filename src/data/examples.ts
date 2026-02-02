@@ -30,7 +30,7 @@ export const EXAMPLES: Example[] = [
     format: "scrollytelling",
     difficulty: "intermediate",
     tags: ["parallax", "intersection-observer"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "scroll-snap-deck",
@@ -54,17 +54,16 @@ export const EXAMPLES: Example[] = [
     tags: ["scroll-timeline", "css-view-transitions"],
     status: "coming-soon",
   },
-  {
-    id: "reveal-classic",
-    title: "Reveal.js Classic",
-    description:
-      "The classic Reveal.js setup with custom Mister theme and speaker notes.",
-    category: "slide-based",
-    format: "standard",
-    difficulty: "beginner",
-    tags: ["reveal-js"],
-    status: "coming-soon",
-  },
+    {
+      id: "reveal-classic",
+      title: "Reveal.js Classic",
+      description: "The classic Reveal.js setup with custom Mister theme and speaker notes.",
+      category: "slide-based",
+      format: "standard",
+      difficulty: "beginner",
+      tags: ["reveal-js"],
+      status: "available",
+    },
   {
     id: "custom-slide-transitions",
     title: "Custom Slide Transitions",
@@ -184,7 +183,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "beginner",
     tags: ["lottie"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "live-code-walkthrough",
@@ -195,7 +194,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "intermediate",
     tags: ["prism-js", "shiki"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "mdx-presentation",
@@ -206,7 +205,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "beginner",
     tags: ["mdx", "shiki"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "branching-narrative",

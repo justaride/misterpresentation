@@ -3,6 +3,11 @@ import { EXAMPLES } from "../data/examples";
 import { TakahashiPresentation } from "../components/presentation-modes/Takahashi";
 import { ScrollSnapPresentation } from "../components/presentation-modes/ScrollSnap";
 import { TypewriterNarrative } from "../components/presentation-modes/TypewriterNarrative";
+import { RevealClassic } from "../components/presentation-modes/RevealClassic";
+import { LottieStoryboard } from "../components/presentation-modes/LottieStoryboard";
+import { MDXPresentation } from "../components/presentation-modes/MDXPresentation";
+import { ParallaxStoryteller } from "../components/presentation-modes/ParallaxStoryteller";
+import { LiveCodeWalkthrough } from "../components/presentation-modes/LiveCodeWalkthrough";
 import { FULL_TAKAHASHI_SLIDES } from "../data/presentation-content";
 import { ArrowLeft } from "lucide-react";
 
@@ -35,6 +40,16 @@ export function ExampleViewer() {
         return <ScrollSnapPresentation />;
       case "typewriter-narrative":
         return <TypewriterNarrative />;
+      case "reveal-classic":
+        return <RevealClassic />;
+      case "lottie-storyboard":
+        return <LottieStoryboard />;
+      case "mdx-presentation":
+        return <MDXPresentation />;
+      case "parallax-storyteller":
+        return <ParallaxStoryteller />;
+      case "live-code-walkthrough":
+        return <LiveCodeWalkthrough />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
