@@ -1,0 +1,212 @@
+import type { Example } from "../types";
+
+export const EXAMPLES: Example[] = [
+  {
+    id: "takahashi-demo",
+    title: "The Takahashi Method",
+    description: "Experience the rapid-fire, high-impact Takahashi style. Big text, no images, pure rhythm.",
+    category: "typography",
+    format: "takahashi",
+    difficulty: "beginner",
+    tags: ["typography", "rapid-fire", "minimalist"],
+    status: "available",
+  },
+  {
+    id: "parallax-storyteller",
+    title: "Parallax Storyteller",
+    description:
+      "A scroll-driven narrative with layered parallax backgrounds and intersection-observer reveals.",
+    category: "scroll-driven",
+    format: "scrollytelling",
+    difficulty: "intermediate",
+    tags: ["parallax", "intersection-observer"],
+    status: "coming-soon",
+  },
+  {
+    id: "scroll-snap-deck",
+    title: "Scroll-Snap Deck",
+    description:
+      "Full-screen slides using CSS scroll-snap for a buttery native scroll experience.",
+    category: "scroll-driven",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["css-scroll-snap"],
+    status: "coming-soon",
+  },
+  {
+    id: "scroll-timeline-showcase",
+    title: "Scroll Timeline Showcase",
+    description:
+      "Cutting-edge CSS scroll-timeline animations with view transition fallbacks.",
+    category: "scroll-driven",
+    format: "scrollytelling",
+    difficulty: "advanced",
+    tags: ["scroll-timeline", "css-view-transitions"],
+    status: "coming-soon",
+  },
+  {
+    id: "reveal-classic",
+    title: "Reveal.js Classic",
+    description:
+      "The classic Reveal.js setup with custom Mister theme and speaker notes.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["reveal-js"],
+    status: "coming-soon",
+  },
+  {
+    id: "custom-slide-transitions",
+    title: "Custom Slide Transitions",
+    description:
+      "Slide deck with bespoke CSS view transitions and Framer Motion choreography.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["css-view-transitions", "framer-motion"],
+    status: "coming-soon",
+  },
+  {
+    id: "presenter-mode-deck",
+    title: "Presenter Mode Deck",
+    description:
+      "Full presenter mode with timer, notes panel, and Web Animations API transitions.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["web-animations-api"],
+    status: "coming-soon",
+  },
+  {
+    id: "live-data-dashboard",
+    title: "Live Data Dashboard",
+    description:
+      "Interactive dashboard presentation with live D3 and Chart.js visualizations.",
+    category: "interactive-data",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["d3", "chart-js"],
+    status: "coming-soon",
+  },
+  {
+    id: "poll-driven-slides",
+    title: "Poll-Driven Slides",
+    description:
+      "Audience-interactive slides with real-time polling and animated result charts.",
+    category: "interactive-data",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["web-animations-api"],
+    status: "coming-soon",
+  },
+  {
+    id: "globe-explorer",
+    title: "3D Globe Explorer",
+    description:
+      "Interactive 3D globe presentation built with Three.js and React Three Fiber.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["three-js", "r3f"],
+    status: "coming-soon",
+  },
+  {
+    id: "webgl-particle-deck",
+    title: "WebGL Particle Deck",
+    description:
+      "Particle system transitions between slides using raw WebGL and Three.js.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["webgl", "three-js"],
+    status: "coming-soon",
+  },
+  {
+    id: "kinetic-typography",
+    title: "Kinetic Typography",
+    description:
+      "Motion-driven text animations with Framer Motion and SVG path morphing.",
+    category: "typography",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["framer-motion", "svg-animation"],
+    status: "coming-soon",
+  },
+  {
+    id: "typewriter-narrative",
+    title: "Typewriter Narrative",
+    description:
+      "Retro typewriter-style text reveal with CSS view transitions between scenes.",
+    category: "typography",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["css-view-transitions"],
+    status: "coming-soon",
+  },
+  {
+    id: "gsap-showreel",
+    title: "GSAP Showreel",
+    description:
+      "High-impact animation showreel powered by GSAP ScrollTrigger and timeline sequences.",
+    category: "animation-heavy",
+    format: "scrollytelling",
+    difficulty: "advanced",
+    tags: ["gsap"],
+    status: "coming-soon",
+  },
+  {
+    id: "framer-motion-playground",
+    title: "Framer Motion Playground",
+    description:
+      "Interactive playground showcasing Framer Motion layout animations and gestures.",
+    category: "animation-heavy",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["framer-motion"],
+    status: "coming-soon",
+  },
+  {
+    id: "lottie-storyboard",
+    title: "Lottie Storyboard",
+    description:
+      "Storyboard presentation with embedded Lottie animations for each scene.",
+    category: "animation-heavy",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["lottie"],
+    status: "coming-soon",
+  },
+  {
+    id: "live-code-walkthrough",
+    title: "Live Code Walkthrough",
+    description:
+      "Step-through code presentation with syntax highlighting and live execution.",
+    category: "code-focused",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["prism-js", "shiki"],
+    status: "coming-soon",
+  },
+  {
+    id: "mdx-presentation",
+    title: "MDX Presentation",
+    description:
+      "Write slides in MDX with embedded React components and Shiki code blocks.",
+    category: "code-focused",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["mdx", "shiki"],
+    status: "coming-soon",
+  },
+  {
+    id: "branching-narrative",
+    title: "Branching Narrative",
+    description:
+      "Choose-your-own-adventure presentation with branching paths and scroll reveals.",
+    category: "storytelling",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["framer-motion", "intersection-observer"],
+    status: "coming-soon",
+  },
+];
