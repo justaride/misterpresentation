@@ -1,6 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { EXAMPLES } from "../data/examples";
 import { TakahashiPresentation } from "../components/presentation-modes/Takahashi";
+import { ScrollSnapPresentation } from "../components/presentation-modes/ScrollSnap";
+import { TypewriterNarrative } from "../components/presentation-modes/TypewriterNarrative";
+import { FULL_TAKAHASHI_SLIDES } from "../data/presentation-content";
 import { ArrowLeft } from "lucide-react";
 
 export function ExampleViewer() {
@@ -26,6 +29,12 @@ export function ExampleViewer() {
     switch (example.id) {
       case "takahashi-demo":
         return <TakahashiPresentation />;
+      case "full-takahashi-mockup":
+        return <TakahashiPresentation slides={FULL_TAKAHASHI_SLIDES} />;
+      case "scroll-snap-deck":
+        return <ScrollSnapPresentation />;
+      case "typewriter-narrative":
+        return <TypewriterNarrative />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">

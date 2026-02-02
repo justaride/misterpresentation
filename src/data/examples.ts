@@ -12,6 +12,16 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "full-takahashi-mockup",
+    title: "Takahashi Method: Full Example",
+    description: "A complete 40-slide example demonstrating the power of the Takahashi method.",
+    category: "typography",
+    format: "takahashi",
+    difficulty: "beginner",
+    tags: ["typography", "presentation", "mockup"],
+    status: "available",
+  },
+  {
     id: "parallax-storyteller",
     title: "Parallax Storyteller",
     description:
@@ -31,7 +41,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "beginner",
     tags: ["css-scroll-snap"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "scroll-timeline-showcase",
@@ -141,7 +151,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "beginner",
     tags: ["css-view-transitions"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "gsap-showreel",

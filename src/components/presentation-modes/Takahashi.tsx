@@ -17,7 +17,11 @@ const TAKAHASHI_SLIDES = [
   "PRESENTATIONS",
 ];
 
-export function TakahashiPresentation() {
+export interface TakahashiPresentationProps {
+  slides?: string[];
+}
+
+export function TakahashiPresentation({ slides = TAKAHASHI_SLIDES }: TakahashiPresentationProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -26,11 +30,11 @@ export function TakahashiPresentation() {
     let interval: ReturnType<typeof setInterval>;
     if (isPlaying) {
       interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % TAKAHASHI_SLIDES.length);
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
       }, 1500); // Fast pace for Takahashi
     }
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, slides.length]);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -45,10 +49,10 @@ export function TakahashiPresentation() {
   };
 
   const nextSlide = () =>
-    setCurrentSlide((prev) => (prev + 1) % TAKAHASHI_SLIDES.length);
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () =>
     setCurrentSlide(
-      (prev) => (prev - 1 + TAKAHASHI_SLIDES.length) % TAKAHASHI_SLIDES.length,
+      (prev) => (prev - 1 + slides.length) % slides.length,
     );
 
   return (
@@ -62,7 +66,7 @@ export function TakahashiPresentation() {
           {isPlaying ? <Pause size={24} /> : <Play size={24} />}
         </button>
         <span className="font-mono text-sm opacity-50">
-          {currentSlide + 1} / {TAKAHASHI_SLIDES.length}
+          {currentSlide + 1} / {slides.length}
         </span>
         <button
           onClick={toggleFullscreen}
@@ -93,7 +97,7 @@ export function TakahashiPresentation() {
           className="w-full text-center px-4"
         >
           <h1 className="text-[15vw] leading-none tracking-tighter uppercase select-none">
-            {TAKAHASHI_SLIDES[currentSlide]}
+            {slides[currentSlide]}
           </h1>
         </motion.div>
       </AnimatePresence>
