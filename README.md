@@ -2,6 +2,8 @@
 
 A showcase of creative, interactive, and experimental web presentation modes built with React, Vite, Framer Motion, and Tailwind CSS.
 
+**Live:** [mister-presentations.vercel.app](https://mister-presentations.vercel.app)
+
 ## Overview
 
 This project explores various ways to present information on the web, moving beyond standard slide decks into scroll-driven narratives, typography-focused experiences, and interactive visualizations.
@@ -9,90 +11,138 @@ This project explores various ways to present information on the web, moving bey
 ## Presentation Modes
 
 ### 1. The Takahashi Method
-*   **Style:** Rapid-fire, high-impact typography.
-*   **Features:** Big text, high contrast, synchronized with speech rhythm.
-*   **Examples:**
-    *   *Demo:* A quick loop showing the core concept.
-    *   *Full Example:* "Why Do We Present?" - A 40-slide manifesto on visual storytelling.
+
+- **Style:** Rapid-fire, high-impact typography.
+- **Features:** Big text, high contrast, synchronized with speech rhythm.
+- **Examples:**
+  - _Demo:_ 22-slide startup pitch narrative ("Imagine a world where meetings don't suck.")
+  - _Full Example:_ 50-slide manifesto on visual storytelling.
 
 ### 2. Scroll-Snap Deck
-*   **Style:** Vertical, full-screen sections with native scrolling physics.
-*   **Features:**
-    *   CSS Scroll Snap for "buttery" friction.
-    *   Progress tracking.
-    *   Code syntax highlighting.
-*   **Example:** "The Art of Vertical Storytelling"
+
+- **Style:** Vertical, full-screen sections with native scrolling physics.
+- **Slides:** 10 sections
+- **Features:**
+  - CSS Scroll Snap for "buttery" friction.
+  - Progress tracking.
+  - Mobile-first, accessibility, color palette, and performance sections.
+- **Example:** "The Art of Vertical Storytelling"
 
 ### 3. Typewriter Narrative
-*   **Style:** Noir / Detective Case File.
-*   **Features:**
-    *   Character-by-character text reveal.
-    *   "Dialogue" mode for conversations.
-    *   Retro paper textures and stamp effects.
-*   **Example:** "Case File: #404 - The Missing Pixel"
+
+- **Style:** Noir / Detective Case File.
+- **Slides:** 12 slides
+- **Features:**
+  - Character-by-character text reveal.
+  - "Dialogue" mode for interrogation scenes.
+  - Evidence locker, accomplices list, stakeout, and confession scenes.
+  - Retro paper textures and stamp effects.
+- **Example:** "Case File: #404 - The Missing Pixel"
 
 ### 4. Reveal.js Classic
-*   **Style:** Standard corporate slide deck.
-*   **Features:**
-    *   2D Navigation (Horizontal & Vertical slides).
-    *   Overview mode (Press 'O').
-    *   Progress bar and speaker notes.
-*   **Example:** "Q3 Strategic Performance Review" (Satire)
+
+- **Style:** Standard corporate slide deck (satire).
+- **Slides:** 9 horizontal + 3 vertical sub-slides
+- **Features:**
+  - 2D Navigation (Horizontal & Vertical slides).
+  - Overview mode (Press 'O').
+  - Roadmap timeline, org chart, financials, and testimonials.
+  - Progress bar and speaker notes.
+- **Example:** "Q3 Strategic Performance Review"
 
 ### 5. Lottie Storyboard
-*   **Style:** Animated user journey.
-*   **Features:**
-    *   Embedded vector animations (Lottie).
-    *   Smooth background color transitions.
-    *   Storyboard-style narrative flow.
-*   **Example:** "User Journey: The Happy Path"
+
+- **Style:** Animated user journey.
+- **Slides:** 8 steps with 5 unique Lottie animations
+- **Features:**
+  - Per-step inline vector animations (spinner, heart, rocket, star, checkmark).
+  - Smooth background color transitions.
+  - Storyboard-style narrative: overwhelm, spark, liftoff, encore.
+- **Example:** "User Journey: The Happy Path"
 
 ### 6. MDX Presentation
-*   **Style:** Technical talk / Documentation.
-*   **Features:**
-    *   Write slides in Markdown/MDX.
-    *   Embedded interactive React components.
-    *   Professional code syntax highlighting.
-*   **Example:** "Introduction to React Hooks"
+
+- **Style:** Technical talk / Documentation.
+- **Slides:** 10 slides
+- **Features:**
+  - Embedded interactive React components (counter, focus input).
+  - useRef, useMemo, Hook Patterns, and Class vs Hooks slides.
+  - Professional code syntax highlighting.
+- **Example:** "Introduction to React Hooks"
 
 ### 7. Parallax Storyteller
-*   **Style:** Immersive Scrollytelling.
-*   **Features:**
-    *   Depth-based parallax layers.
-    *   Dynamic background gradients.
-    *   Sticky scroll progress indicators.
-*   **Example:** "The Deep Sea Expedition"
+
+- **Style:** Immersive Scrollytelling.
+- **Depth Zones:** 8 (surface to 10,000m)
+- **Features:**
+  - Depth-based parallax layers with 8-stop gradient.
+  - Whale, submarine, and anglerfish SVG creatures.
+  - Mesopelagic, Bathyal, and Hadal zones.
+  - Sticky scroll depth gauge.
+- **Example:** "The Deep Sea Expedition"
 
 ### 8. Live Code Walkthrough
-*   **Style:** Educational coding tutorial.
-*   **Features:**
-    *   Step-by-step refactoring guide.
-    *   Side-by-side code and live preview.
-    *   Line highlighting and contextual notes.
-*   **Example:** "Building a Custom React Hook"
+
+- **Style:** Educational coding tutorial.
+- **Steps:** 8 (including anti-pattern, testing, debounced hook)
+- **Features:**
+  - Step-by-step refactoring guide.
+  - Side-by-side code and live preview.
+  - Line highlighting and contextual lesson notes.
+- **Example:** "Building a Custom React Hook"
 
 ## Upcoming Modes
-*   **Kinetic Typography**
-*   **3D Globe Explorer**
-*   **Live Data Dashboard**
-*   And many more...
+
+- **Kinetic Typography**
+- **3D Globe Explorer**
+- **Live Data Dashboard**
+- **GSAP Showreel**
+- **Branching Narrative**
+- And more...
 
 ## Tech Stack
-*   **Framework:** React + Vite
-*   **Styling:** Tailwind CSS
-*   **Animation:** Framer Motion, Lottie React
-*   **Code:** React Syntax Highlighter
-*   **Icons:** Lucide React
+
+- **Framework:** React 19 + Vite 7
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **Animation:** Framer Motion, Lottie React
+- **Code:** React Syntax Highlighter (Prism)
+- **Icons:** Lucide React
 
 ## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Start dev server
 npm run dev
+```
 
-# Build for production
-npm run build
+## Scripts
+
+| Command           | Description                         |
+| ----------------- | ----------------------------------- |
+| `npm run dev`     | Start dev server                    |
+| `npm run build`   | Type-check and build for production |
+| `npm run preview` | Preview production build locally    |
+
+## Project Structure
+
+```
+src/
+  components/
+    presentation-modes/   # All presentation components
+  data/
+    examples.ts           # Example metadata (available + coming-soon)
+    presentation-content.ts # Full Takahashi slide data
+    mockups/              # Blueprint docs for each mode
+  pages/                  # Route pages (gallery + viewer)
+  hooks/                  # Shared hooks
+  types.ts                # Shared types
+```
+
+## Deployment
+
+Hosted on Vercel. Push to `master` or run:
+
+```bash
+vercel --prod
 ```
