@@ -8,6 +8,7 @@ import { LottieStoryboard } from "../components/presentation-modes/LottieStorybo
 import { MDXPresentation } from "../components/presentation-modes/MDXPresentation";
 import { ParallaxStoryteller } from "../components/presentation-modes/ParallaxStoryteller";
 import { LiveCodeWalkthrough } from "../components/presentation-modes/LiveCodeWalkthrough";
+import { NeccGritIntro } from "../components/presentation-modes/NeccGritIntro";
 import { FULL_TAKAHASHI_SLIDES } from "../data/presentation-content";
 import { ArrowLeft } from "lucide-react";
 
@@ -50,13 +51,15 @@ export function ExampleViewer() {
         return <ParallaxStoryteller />;
       case "live-code-walkthrough":
         return <LiveCodeWalkthrough />;
+      case "necc-grit-intro":
+        return <NeccGritIntro />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
             <h2 className="text-3xl font-display mb-4">Coming Soon</h2>
             <p className="max-w-md text-fg/60">
-              The <strong>{example.title}</strong> example is currently under development. 
-              Check back later for the implementation!
+              The <strong>{example.title}</strong> example is currently under
+              development. Check back later for the implementation!
             </p>
           </div>
         );
@@ -66,18 +69,21 @@ export function ExampleViewer() {
   return (
     <div className="min-h-screen bg-bg text-fg flex flex-col">
       <header className="border-b border-border bg-card/50 p-4 flex items-center gap-4">
-        <Link to="/examples" className="p-2 hover:bg-accent/10 rounded-full transition-colors">
+        <Link
+          to="/examples"
+          className="p-2 hover:bg-accent/10 rounded-full transition-colors"
+        >
           <ArrowLeft size={20} />
         </Link>
         <div>
           <h1 className="font-display text-lg leading-none">{example.title}</h1>
-          <p className="text-xs font-mono text-fg/50">{example.format} • {example.difficulty}</p>
+          <p className="text-xs font-mono text-fg/50">
+            {example.format} • {example.difficulty}
+          </p>
         </div>
       </header>
-      
-      <main className="flex-1 flex flex-col">
-        {renderExample()}
-      </main>
+
+      <main className="flex-1 flex flex-col">{renderExample()}</main>
     </div>
   );
 }

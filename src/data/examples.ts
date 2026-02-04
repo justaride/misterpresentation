@@ -4,7 +4,8 @@ export const EXAMPLES: Example[] = [
   {
     id: "takahashi-demo",
     title: "The Takahashi Method",
-    description: "Experience the rapid-fire, high-impact Takahashi style. Big text, no images, pure rhythm.",
+    description:
+      "Experience the rapid-fire, high-impact Takahashi style. Big text, no images, pure rhythm.",
     category: "typography",
     format: "takahashi",
     difficulty: "beginner",
@@ -14,7 +15,8 @@ export const EXAMPLES: Example[] = [
   {
     id: "full-takahashi-mockup",
     title: "Takahashi Method: Full Example",
-    description: "A complete 40-slide example demonstrating the power of the Takahashi method.",
+    description:
+      "A complete 40-slide example demonstrating the power of the Takahashi method.",
     category: "typography",
     format: "takahashi",
     difficulty: "beginner",
@@ -54,16 +56,17 @@ export const EXAMPLES: Example[] = [
     tags: ["scroll-timeline", "css-view-transitions"],
     status: "coming-soon",
   },
-    {
-      id: "reveal-classic",
-      title: "Reveal.js Classic",
-      description: "The classic Reveal.js setup with custom Mister theme and speaker notes.",
-      category: "slide-based",
-      format: "standard",
-      difficulty: "beginner",
-      tags: ["reveal-js"],
-      status: "available",
-    },
+  {
+    id: "reveal-classic",
+    title: "Reveal.js Classic",
+    description:
+      "The classic Reveal.js setup with custom Mister theme and speaker notes.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["reveal-js"],
+    status: "available",
+  },
   {
     id: "custom-slide-transitions",
     title: "Custom Slide Transitions",
@@ -205,6 +208,17 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "beginner",
     tags: ["mdx", "shiki"],
+    status: "available",
+  },
+  {
+    id: "necc-grit-intro",
+    title: "NECC x Grit.ai Intro",
+    description:
+      "ScrollSnap-basert intro-presentasjon for NECC-prosjektet. Mørkt tema, emerald-aksenter, 12 slides på norsk.",
+    category: "scroll-driven",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["css-scroll-snap", "framer-motion"],
     status: "available",
   },
   {
