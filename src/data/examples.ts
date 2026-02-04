@@ -5,7 +5,7 @@ export const EXAMPLES: Example[] = [
     id: "takahashi-demo",
     title: "The Takahashi Method",
     description:
-      "Experience the rapid-fire, high-impact Takahashi style. Big text, no images, pure rhythm.",
+      "A rapid-fire startup pitch for Clearbox, an AI email triage tool. Pure Takahashi energy.",
     category: "typography",
     format: "takahashi",
     difficulty: "beginner",
@@ -14,9 +14,9 @@ export const EXAMPLES: Example[] = [
   },
   {
     id: "full-takahashi-mockup",
-    title: "Takahashi Method: Full Example",
+    title: "Climate Tech Keynote",
     description:
-      "A complete 40-slide example demonstrating the power of the Takahashi method.",
+      "A 60-slide climate tech keynote delivered in the Takahashi method. Big numbers, bigger impact.",
     category: "typography",
     format: "takahashi",
     difficulty: "beginner",
