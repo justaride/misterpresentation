@@ -15,6 +15,8 @@ import {
   MessageCircle,
   ChevronDown,
   Network,
+  Leaf,
+  Landmark,
 } from "lucide-react";
 
 type Section = {
@@ -200,6 +202,51 @@ const SECTIONS: Section[] = [
     ),
   },
   {
+    id: "nch",
+    title: "Nordic Circular Hotspot",
+    subtitle:
+      "Paraplyorganisasjonen som akselererer sirkulær økonomi i Norden.",
+    bg: "bg-stone-50",
+    icon: <Landmark size={64} className="text-green-700" />,
+    content: (
+      <div className="flex flex-wrap justify-center gap-3 mt-8">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
+          Siden 2018
+        </Badge>
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
+          70+ partnere
+        </Badge>
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
+          5 land
+        </Badge>
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
+          Nordic Innovation
+        </Badge>
+      </div>
+    ),
+  },
+  {
+    id: "natural-state",
+    title: "Natural State",
+    subtitle:
+      "Strategibyrået som leder NCC-prosjektet. Stedsutvikling, sirkulær økonomi, nordisk-japansk filosofi.",
+    bg: "bg-stone-100",
+    icon: <Leaf size={64} className="text-green-700" />,
+    content: (
+      <div className="flex flex-wrap justify-center gap-3 mt-8">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
+          Einar Kleppe Holthe
+        </Badge>
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
+          Jan Thomas Odegard
+        </Badge>
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
+          Prosjektledelse
+        </Badge>
+      </div>
+    ),
+  },
+  {
     id: "problem",
     title: "40% av alt avfall",
     subtitle:
@@ -219,16 +266,26 @@ const SECTIONS: Section[] = [
   },
   {
     id: "portfolio",
-    title: "3 Plattformer. 85 500+ Kodelinjer.",
-    subtitle: "Alt bygget fra bunnen av — åpen kildekode, moderne stack.",
+    title: "3 Plattformer",
+    subtitle:
+      "Digitale verktøy for å skalere sirkulær bygging på tvers av Norden.",
     bg: "bg-stone-100",
     icon: <LayoutGrid size={64} className="text-green-700" />,
     content: (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 w-full max-w-3xl">
         {[
-          { name: "Næste", desc: "Markedsintelligens", loc: "21 847" },
-          { name: "PCB", desc: "Åpen database", loc: "14 220" },
-          { name: "Løkka", desc: "Gårdeierplattform", loc: "49 433" },
+          {
+            name: "Næste",
+            desc: "Hjelper bedrifter forstå sirkulære markedsmuligheter med segmentanalyse og scoring.",
+          },
+          {
+            name: "PCB",
+            desc: "Åpen database som samler sirkulære byggeprosjekter — 55 prosjekter i 5 land.",
+          },
+          {
+            name: "Løkka",
+            desc: "Gir gårdeiere kontroll over sirkulær eiendomsforvaltning med multi-tenant plattform.",
+          },
         ].map((p) => (
           <div
             key={p.name}
@@ -236,7 +293,6 @@ const SECTIONS: Section[] = [
           >
             <h3 className="text-lg font-bold text-stone-900">{p.name}</h3>
             <p className="text-sm text-stone-500 mt-1">{p.desc}</p>
-            <p className="text-green-700 font-mono text-sm mt-3">{p.loc} LOC</p>
           </div>
         ))}
       </div>
@@ -291,9 +347,17 @@ const SECTIONS: Section[] = [
     bg: "bg-stone-50",
     icon: <Home size={64} className="text-green-700" />,
     content: (
-      <p className="text-green-700 font-mono text-2xl mt-6 font-bold">
-        49 433 kodelinjer
-      </p>
+      <div className="flex flex-wrap justify-center gap-3 mt-8">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
+          Multi-tenant
+        </Badge>
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
+          Eiendomsforvaltning
+        </Badge>
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
+          Sirkulær
+        </Badge>
+      </div>
     ),
   },
   {
@@ -360,7 +424,7 @@ const SECTIONS: Section[] = [
     content: (
       <div className="flex flex-wrap justify-center gap-3 mt-8">
         <Badge className="bg-green-50 text-green-800 border border-green-200">
-          85 500+ LOC
+          AI-assistert
         </Badge>
         <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
           3 plattformer
@@ -373,15 +437,15 @@ const SECTIONS: Section[] = [
   },
   {
     id: "collab",
-    title: "Grit.ai + NECC?",
-    subtitle: "Vi er nysgjerrige på mulighetene.",
+    title: "GritAI + NECC?",
+    subtitle: "Vi ser muligheter for samarbeid innen AI og utvikling.",
     bg: "bg-stone-100",
     icon: <Handshake size={64} className="text-green-700" />,
     content: (
       <div className="mt-8 space-y-3 text-left max-w-lg">
         {[
-          "Passer prosjektet i inkubator-programmet?",
-          "Kan Grit.ai bidra med sprint-kapasitet?",
+          "Kan GritAI bidra med AI-drevet utviklingskapasitet?",
+          "Passer NECC som prosjekt for AI-konsultering og skalering?",
           "Åpent for innspill og samarbeid.",
         ].map((q) => (
           <div key={q} className="flex items-start gap-3">
