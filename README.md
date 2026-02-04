@@ -91,6 +91,17 @@ This project explores various ways to present information on the web, moving bey
   - Line highlighting and contextual lesson notes.
 - **Example:** "Building a Custom React Hook"
 
+### 9. NECC x Grit.ai Intro
+
+- **Style:** Nordic light scroll-snap presentation.
+- **Slides:** 13
+- **Features:**
+  - Light stone/green Nordic color palette.
+  - SVG radial ecosystem mind map (responsive: full map on desktop, vertical list on mobile).
+  - Framer Motion scroll animations and progress bar.
+  - Norwegian language content covering circular construction across 5 Nordic countries.
+- **Example:** "NECC — Nordic Ecosystem for Circular Construction"
+
 ## Upcoming Modes
 
 - **Kinetic Typography**

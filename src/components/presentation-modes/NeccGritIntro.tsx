@@ -14,6 +14,7 @@ import {
   Handshake,
   MessageCircle,
   ChevronDown,
+  Network,
 } from "lucide-react";
 
 type Section = {
@@ -39,29 +40,160 @@ const Badge = ({
   </span>
 );
 
+const EcosystemMindMap = () => {
+  const cx = 300;
+  const cy = 200;
+
+  const countries = [
+    { label: "NO", x: cx + 120, y: cy - 60 },
+    { label: "SE", x: cx - 80, y: cy - 80 },
+    { label: "DK", x: cx - 120, y: cy + 40 },
+    { label: "FI", x: cx - 160, y: cy - 40 },
+    { label: "IS", x: cx + 160, y: cy + 20 },
+  ];
+
+  const platforms = [
+    { label: "Næste", x: cx - 60, y: cy + 120 },
+    { label: "PCB", x: cx, y: cy + 140 },
+    { label: "Løkka", x: cx + 80, y: cy + 120 },
+  ];
+
+  const funding = { label: "Nordic Innovation", x: cx, y: cy - 140 };
+
+  return (
+    <div className="mt-8 w-full max-w-2xl">
+      <div className="hidden md:block relative" style={{ height: 380 }}>
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 600 380"
+          fill="none"
+        >
+          {countries.map((c) => (
+            <line
+              key={c.label}
+              x1={cx}
+              y1={cy}
+              x2={c.x}
+              y2={c.y}
+              stroke="#d6d3d1"
+              strokeWidth={1}
+            />
+          ))}
+          {platforms.map((p) => (
+            <line
+              key={p.label}
+              x1={cx}
+              y1={cy}
+              x2={p.x}
+              y2={p.y}
+              stroke="#d6d3d1"
+              strokeWidth={1}
+            />
+          ))}
+          <line
+            x1={cx}
+            y1={cy}
+            x2={funding.x}
+            y2={funding.y}
+            stroke="#d6d3d1"
+            strokeWidth={1}
+          />
+        </svg>
+
+        <div
+          className="absolute w-20 h-20 rounded-full bg-green-50 border-2 border-green-300 flex items-center justify-center text-green-900 font-bold text-sm"
+          style={{ left: cx - 40, top: cy - 40 }}
+        >
+          NECC
+        </div>
+
+        {countries.map((c) => (
+          <div
+            key={c.label}
+            className="absolute w-14 h-14 rounded-full bg-stone-100 border border-stone-300 flex items-center justify-center text-stone-700 font-mono text-xs font-medium"
+            style={{ left: c.x - 28, top: c.y - 28 }}
+          >
+            {c.label}
+          </div>
+        ))}
+
+        {platforms.map((p) => (
+          <div
+            key={p.label}
+            className="absolute px-3 py-1.5 rounded-full bg-stone-100 border border-stone-300 text-stone-700 font-mono text-xs font-medium whitespace-nowrap"
+            style={{ left: p.x - 30, top: p.y - 12 }}
+          >
+            {p.label}
+          </div>
+        ))}
+
+        <div
+          className="absolute px-3 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-mono text-xs font-medium whitespace-nowrap"
+          style={{ left: funding.x - 55, top: funding.y - 12 }}
+        >
+          {funding.label}
+        </div>
+      </div>
+
+      <div className="md:hidden space-y-3">
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-12 h-12 rounded-full bg-green-50 border-2 border-green-300 flex items-center justify-center text-green-900 font-bold text-xs">
+            NECC
+          </div>
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          {["NO", "SE", "DK", "FI", "IS"].map((c) => (
+            <span
+              key={c}
+              className="px-2 py-1 rounded-full bg-stone-100 border border-stone-300 text-stone-700 font-mono text-xs"
+            >
+              {c}
+            </span>
+          ))}
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          {["Næste", "PCB", "Løkka"].map((p) => (
+            <span
+              key={p}
+              className="px-2 py-1 rounded-full bg-stone-100 border border-stone-300 text-stone-700 font-mono text-xs"
+            >
+              {p}
+            </span>
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <span className="px-2 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-mono text-xs">
+            Nordic Innovation
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const SECTIONS: Section[] = [
   {
     id: "intro",
     title: "NECC",
     subtitle: "Nordic Ecosystem for Circular Construction",
-    bg: "bg-zinc-950",
-    icon: <Globe size={64} className="text-emerald-500" />,
+    bg: "bg-stone-50",
+    icon: <Globe size={64} className="text-green-700" />,
   },
   {
     id: "vision",
     title: "Sirkulært som Standard",
     subtitle: "Et nordisk samarbeid for å gjøre sirkulær bygging til normen.",
-    bg: "bg-zinc-900",
-    icon: <Recycle size={64} className="text-emerald-500" />,
+    bg: "bg-stone-100",
+    icon: <Recycle size={64} className="text-green-700" />,
     content: (
       <div className="flex flex-wrap justify-center gap-3 mt-8">
-        <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
           3 år
         </Badge>
-        <Badge className="bg-teal-500/20 text-teal-400 border border-teal-500/30">
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
           11.84 MNOK
         </Badge>
-        <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
           5 land
         </Badge>
       </div>
@@ -72,14 +204,14 @@ const SECTIONS: Section[] = [
     title: "40% av alt avfall",
     subtitle:
       "Byggebransjen er Nordens største avfallskilde. Det må endre seg.",
-    bg: "bg-zinc-950",
-    icon: <Trash2 size={64} className="text-red-400" />,
+    bg: "bg-stone-50",
+    icon: <Trash2 size={64} className="text-red-600" />,
     content: (
       <div className="mt-8 w-full max-w-md">
-        <div className="h-4 bg-zinc-800 rounded-full overflow-hidden">
-          <div className="h-full w-[40%] bg-gradient-to-r from-red-500 to-red-400 rounded-full" />
+        <div className="h-4 bg-stone-200 rounded-full overflow-hidden">
+          <div className="h-full w-[40%] bg-gradient-to-r from-red-400 to-red-300 rounded-full" />
         </div>
-        <p className="text-sm text-zinc-500 mt-2 font-mono">
+        <p className="text-sm text-stone-500 mt-2 font-mono">
           40% av totalt avfall i Norden
         </p>
       </div>
@@ -89,8 +221,8 @@ const SECTIONS: Section[] = [
     id: "portfolio",
     title: "3 Plattformer. 85 500+ Kodelinjer.",
     subtitle: "Alt bygget fra bunnen av — åpen kildekode, moderne stack.",
-    bg: "bg-zinc-900",
-    icon: <LayoutGrid size={64} className="text-emerald-500" />,
+    bg: "bg-stone-100",
+    icon: <LayoutGrid size={64} className="text-green-700" />,
     content: (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 w-full max-w-3xl">
         {[
@@ -100,13 +232,11 @@ const SECTIONS: Section[] = [
         ].map((p) => (
           <div
             key={p.name}
-            className="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-5 text-left"
+            className="bg-white border border-stone-200 rounded-xl p-5 text-left"
           >
-            <h3 className="text-lg font-bold text-white">{p.name}</h3>
-            <p className="text-sm text-zinc-400 mt-1">{p.desc}</p>
-            <p className="text-emerald-400 font-mono text-sm mt-3">
-              {p.loc} LOC
-            </p>
+            <h3 className="text-lg font-bold text-stone-900">{p.name}</h3>
+            <p className="text-sm text-stone-500 mt-1">{p.desc}</p>
+            <p className="text-green-700 font-mono text-sm mt-3">{p.loc} LOC</p>
           </div>
         ))}
       </div>
@@ -116,17 +246,17 @@ const SECTIONS: Section[] = [
     id: "pcb",
     title: "Public Circular Buildings",
     subtitle: "Åpen database for sirkulære byggeprosjekter i Norden.",
-    bg: "bg-zinc-950",
-    icon: <Building2 size={64} className="text-teal-400" />,
+    bg: "bg-stone-50",
+    icon: <Building2 size={64} className="text-teal-700" />,
     content: (
       <div className="flex flex-wrap justify-center gap-3 mt-8">
-        <Badge className="bg-teal-500/20 text-teal-400 border border-teal-500/30">
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
           55 prosjekter
         </Badge>
-        <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
           Materialgjenbruk
         </Badge>
-        <Badge className="bg-teal-500/20 text-teal-400 border border-teal-500/30">
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
           5 land
         </Badge>
       </div>
@@ -137,17 +267,17 @@ const SECTIONS: Section[] = [
     title: "Næste Dashboard",
     subtitle:
       "Markedsintelligens, segmentanalyse, og sirkulær scoring for aktører i byggebransjen.",
-    bg: "bg-zinc-900",
-    icon: <BarChart3 size={64} className="text-emerald-500" />,
+    bg: "bg-stone-100",
+    icon: <BarChart3 size={64} className="text-green-700" />,
     content: (
       <div className="flex flex-wrap justify-center gap-3 mt-8">
-        <Badge className="bg-zinc-800 text-zinc-300 border border-zinc-700">
+        <Badge className="bg-stone-100 text-stone-700 border border-stone-300">
           Segmentanalyse
         </Badge>
-        <Badge className="bg-zinc-800 text-zinc-300 border border-zinc-700">
+        <Badge className="bg-stone-100 text-stone-700 border border-stone-300">
           Sirkulær Scoring
         </Badge>
-        <Badge className="bg-zinc-800 text-zinc-300 border border-zinc-700">
+        <Badge className="bg-stone-100 text-stone-700 border border-stone-300">
           Markedsdata
         </Badge>
       </div>
@@ -158,10 +288,10 @@ const SECTIONS: Section[] = [
     title: "Løkka Plattform",
     subtitle:
       "Multi-tenant gårdeierplattform for sirkulær eiendomsforvaltning.",
-    bg: "bg-zinc-950",
-    icon: <Home size={64} className="text-emerald-500" />,
+    bg: "bg-stone-50",
+    icon: <Home size={64} className="text-green-700" />,
     content: (
-      <p className="text-teal-400 font-mono text-2xl mt-6 font-bold">
+      <p className="text-green-700 font-mono text-2xl mt-6 font-bold">
         49 433 kodelinjer
       </p>
     ),
@@ -170,14 +300,14 @@ const SECTIONS: Section[] = [
     id: "reach",
     title: "360+ Sider. 5 Land.",
     subtitle: "En plattform som dekker hele Norden.",
-    bg: "bg-zinc-900",
-    icon: <MapPin size={64} className="text-teal-400" />,
+    bg: "bg-stone-100",
+    icon: <MapPin size={64} className="text-teal-700" />,
     content: (
       <div className="flex flex-wrap justify-center gap-3 mt-8">
         {["Norge", "Sverige", "Danmark", "Finland", "Island"].map((c) => (
           <Badge
             key={c}
-            className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+            className="bg-green-50 text-green-800 border border-green-200"
           >
             {c}
           </Badge>
@@ -186,11 +316,19 @@ const SECTIONS: Section[] = [
     ),
   },
   {
+    id: "ecosystem",
+    title: "Hele Nettverket",
+    subtitle: "NECC knytter sammen land, plattformer og finansiering.",
+    bg: "bg-stone-50",
+    icon: <Network size={64} className="text-green-700" />,
+    content: <EcosystemMindMap />,
+  },
+  {
     id: "tech",
     title: "Bygget med AI",
     subtitle: "Moderne teknologi og AI-verktøy i hele utviklingsprosessen.",
-    bg: "bg-zinc-950",
-    icon: <Cpu size={64} className="text-emerald-500" />,
+    bg: "bg-stone-100",
+    icon: <Cpu size={64} className="text-green-700" />,
     content: (
       <div className="flex flex-wrap justify-center gap-2 mt-8 max-w-2xl">
         {[
@@ -205,7 +343,7 @@ const SECTIONS: Section[] = [
         ].map((t) => (
           <span
             key={t}
-            className="px-3 py-1.5 bg-zinc-800 border border-zinc-700 rounded-lg text-sm font-mono text-zinc-300"
+            className="px-3 py-1.5 bg-stone-100 border border-stone-300 rounded-lg text-sm font-mono text-stone-700"
           >
             {t}
           </span>
@@ -217,17 +355,17 @@ const SECTIONS: Section[] = [
     id: "team",
     title: "Lite Team. Høy Fart.",
     subtitle: "AI-assistert utvikling gir startup-tempo med et lite team.",
-    bg: "bg-zinc-900",
-    icon: <Rocket size={64} className="text-emerald-500" />,
+    bg: "bg-stone-50",
+    icon: <Rocket size={64} className="text-green-700" />,
     content: (
       <div className="flex flex-wrap justify-center gap-3 mt-8">
-        <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
           85 500+ LOC
         </Badge>
-        <Badge className="bg-teal-500/20 text-teal-400 border border-teal-500/30">
+        <Badge className="bg-teal-50 text-teal-700 border border-teal-200">
           3 plattformer
         </Badge>
-        <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+        <Badge className="bg-green-50 text-green-800 border border-green-200">
           AI-drevet
         </Badge>
       </div>
@@ -237,8 +375,8 @@ const SECTIONS: Section[] = [
     id: "collab",
     title: "Grit.ai + NECC?",
     subtitle: "Vi er nysgjerrige på mulighetene.",
-    bg: "bg-zinc-950",
-    icon: <Handshake size={64} className="text-emerald-500" />,
+    bg: "bg-stone-100",
+    icon: <Handshake size={64} className="text-green-700" />,
     content: (
       <div className="mt-8 space-y-3 text-left max-w-lg">
         {[
@@ -247,8 +385,8 @@ const SECTIONS: Section[] = [
           "Åpent for innspill og samarbeid.",
         ].map((q) => (
           <div key={q} className="flex items-start gap-3">
-            <span className="text-emerald-500 mt-0.5">&#8250;</span>
-            <p className="text-zinc-300">{q}</p>
+            <span className="text-green-700 mt-0.5">&#8250;</span>
+            <p className="text-stone-600">{q}</p>
           </div>
         ))}
       </div>
@@ -258,8 +396,8 @@ const SECTIONS: Section[] = [
     id: "contact",
     title: "La oss snakke videre",
     subtitle: "gabriel@necc.no • necc.no",
-    bg: "bg-gradient-to-b from-zinc-950 to-emerald-950",
-    icon: <MessageCircle size={64} className="text-emerald-500" />,
+    bg: "bg-gradient-to-b from-stone-50 to-green-50",
+    icon: <MessageCircle size={64} className="text-green-700" />,
   },
 ];
 
@@ -273,9 +411,9 @@ export function NeccGritIntro() {
   });
 
   return (
-    <div className="relative w-full h-screen bg-zinc-950 text-white overflow-hidden">
+    <div className="relative w-full h-screen bg-stone-50 text-stone-900 overflow-hidden">
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-emerald-500 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-green-700 origin-left z-50"
         style={{ scaleX }}
       />
 
@@ -299,7 +437,7 @@ export function NeccGritIntro() {
               <h2 className="text-4xl md:text-7xl font-black tracking-tighter">
                 {section.title}
               </h2>
-              <p className="text-lg md:text-2xl font-light text-zinc-400 max-w-2xl">
+              <p className="text-lg md:text-2xl font-light text-stone-500 max-w-2xl">
                 {section.subtitle}
               </p>
               {section.content}

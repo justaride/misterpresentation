@@ -214,7 +214,7 @@ export const EXAMPLES: Example[] = [
     id: "necc-grit-intro",
     title: "NECC x Grit.ai Intro",
     description:
-      "ScrollSnap-basert intro-presentasjon for NECC-prosjektet. Mørkt tema, emerald-aksenter, 12 slides på norsk.",
+      "ScrollSnap-basert intro-presentasjon for NECC-prosjektet. Nordisk lyst tema, 13 slides på norsk med ecosystem mind map.",
     category: "scroll-driven",
     format: "standard",
     difficulty: "beginner",
