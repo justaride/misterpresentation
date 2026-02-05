@@ -121,20 +121,101 @@ This project explores various ways to present information on the web, moving bey
   - Animated result bars and “leading” highlight.
   - Host/Audience roles with shareable audience link + reset + slide controls.
 
-## Upcoming Modes
+### 12. Framer Motion Playground
 
-- **Kinetic Typography**
-- **3D Globe Explorer**
-- **GSAP Showreel**
-- **Branching Narrative**
-- And more...
+- **Style:** Interactive animation sandbox.
+- **Demos:** 5 (Layout, Gestures, Springs, Stagger, Morphing)
+- **Features:**
+  - Shared layout animations with highlight follow.
+  - Drag, hover, and tap gesture demos.
+  - Configurable spring physics (bouncy, smooth, stiff).
+  - Stagger grid with enter/exit orchestration.
+  - Shape morphing via border-radius transitions.
+
+### 13. Kinetic Typography
+
+- **Style:** Motion-driven text art.
+- **Slides:** 6 animation styles
+- **Features:**
+  - Explode: letters scatter from random positions.
+  - Wave: continuous sinusoidal bounce.
+  - Cascade: word-by-word drop with perspective.
+  - Spiral: circular orbit convergence.
+  - Glitch: RGB split with tremor loop.
+  - Bounce: spring-loaded letter entry.
+
+### 14. Branching Narrative
+
+- **Style:** Choose-your-own-adventure.
+- **Nodes:** 11 story nodes with 6 endings
+- **Features:**
+  - Decision-tree startup story (scale vs optimize, pitch vs cut, etc.).
+  - Breadcrumb trail showing path history.
+  - Keyboard shortcuts ([1]/[2] to choose, Backspace to go back, R to restart).
+
+### 15. Custom Slide Transitions
+
+- **Style:** Transition showcase deck.
+- **Slides:** 6 (one per transition type)
+- **Features:**
+  - Fade, slide, zoom, 3D flip, morph (border-radius), and clip-path wipe.
+  - Each slide labels its own transition type and CSS property.
+  - Perspective container for 3D effects.
+
+### 16. Scroll Timeline Showcase
+
+- **Style:** Scroll-driven parallax.
+- **Sections:** 5 + hero + outro
+- **Features:**
+  - Alternating left/right parallax sections with scroll-linked transforms.
+  - Gradient progress bar (blue → purple → rose).
+  - Code snippet previews for CSS scroll-timeline, View Transitions API, and Framer Motion fallback.
+
+### 17. Presenter Mode Deck
+
+- **Style:** Professional speaker deck.
+- **Slides:** 6
+- **Features:**
+  - Live timer (per-slide + total) with color coding (green → yellow → red).
+  - Toggleable speaker notes side panel (N key).
+  - Browser Fullscreen API integration (F key).
+  - Spring-physics slide transitions.
+
+### 18. GSAP Showreel
+
+- **Style:** GSAP ScrollTrigger demo reel.
+- **Sections:** 6 (hero, ScrollTrigger, timelines, staggers, physics, finale)
+- **Features:**
+  - Scrub-linked animations: title reveals, shape staggers, bar charts.
+  - Gradient progress bar synced to scroll.
+  - Proper cleanup via `gsap.context().revert()` on unmount.
+
+### 19. 3D Globe Explorer
+
+- **Style:** Interactive 3D globe.
+- **Locations:** 6 global offices
+- **Features:**
+  - Three.js + React Three Fiber wireframe globe with auto-rotation.
+  - Clickable location markers with HTML overlay tooltips.
+  - Star field background, orbit controls, sidebar location list.
+  - Keyboard shortcuts (1-6 to select, Esc to deselect).
+
+### 20. WebGL Particle Deck
+
+- **Style:** GPU particle system.
+- **Slides:** 6 formations, 3000 particles
+- **Features:**
+  - Particles morph between: random scatter, flow field helix, sphere, explosion, spiral vortex, grid.
+  - Additive blending with slide-specific colors.
+  - Lerp-based smooth transitions between formations.
 
 ## Tech Stack
 
 - **Framework:** React 19 + Vite 7
-- **Language:** TypeScript
+- **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS 4
-- **Animation:** Framer Motion, Lottie React
+- **Animation:** Framer Motion, GSAP + ScrollTrigger, Lottie React
+- **3D/WebGL:** Three.js, React Three Fiber, Drei
 - **Code:** React Syntax Highlighter (Prism)
 - **Icons:** Lucide React
 
@@ -160,7 +241,7 @@ src/
   components/
     presentation-modes/   # All presentation components
   data/
-    examples.ts           # Example metadata (available + coming-soon)
+    examples.ts           # Example metadata (all 20 modes available)
     presentation-content.ts # Full Takahashi slide data
     mockups/              # Blueprint docs for each mode
   pages/                  # Route pages (gallery + viewer)
