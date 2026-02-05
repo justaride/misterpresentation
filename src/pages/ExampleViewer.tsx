@@ -145,6 +145,21 @@ const TimelineExplorer = lazy(() =>
     default: m.TimelineExplorer,
   })),
 );
+const PhysicsPlayground = lazy(() =>
+  import("../components/presentation-modes/PhysicsPlayground").then((m) => ({
+    default: m.PhysicsPlayground,
+  })),
+);
+const SpatialCanvas = lazy(() =>
+  import("../components/presentation-modes/SpatialCanvas").then((m) => ({
+    default: m.SpatialCanvas,
+  })),
+);
+const AudioReactive = lazy(() =>
+  import("../components/presentation-modes/AudioReactive").then((m) => ({
+    default: m.AudioReactive,
+  })),
+);
 
 export function ExampleViewer() {
   const { id } = useParams();
@@ -223,6 +238,12 @@ export function ExampleViewer() {
         return <HolographicCards />;
       case "timeline-explorer":
         return <TimelineExplorer />;
+      case "physics-playground":
+        return <PhysicsPlayground />;
+      case "spatial-canvas":
+        return <SpatialCanvas />;
+      case "audio-reactive":
+        return <AudioReactive />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">

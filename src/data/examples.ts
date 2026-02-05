@@ -309,4 +309,37 @@ export const EXAMPLES: Example[] = [
     tags: ["canvas", "terminal", "ascii-art"],
     status: "available",
   },
+  {
+    id: "physics-playground",
+    title: "Physics Playground",
+    description:
+      "2D physics engine where slide elements obey gravity, bounce, and can be grabbed and thrown. Web performance metrics as physical objects.",
+    category: "animation-heavy",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["canvas", "physics", "interactive"],
+    status: "available",
+  },
+  {
+    id: "spatial-canvas",
+    title: "Spatial Canvas",
+    description:
+      "Prezi-style infinite canvas with camera zoom, pan, and rotate. Mind-map of the JavaScript ecosystem with connected clusters.",
+    category: "animation-heavy",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["framer-motion", "camera", "infinite-canvas"],
+    status: "available",
+  },
+  {
+    id: "audio-reactive",
+    title: "Audio Reactive Visualizer",
+    description:
+      "Audio-driven visualizations with Web Audio API. Frequency bars, waveforms, beat detection, and particle bursts. Built-in ambient audio or microphone input.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["web-audio-api", "canvas", "beat-detection"],
+    status: "available",
+  },
 ];
