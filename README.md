@@ -209,13 +209,132 @@ This project explores various ways to present information on the web, moving bey
   - Additive blending with slide-specific colors.
   - Lerp-based smooth transitions between formations.
 
+### 21. Terminal Hacker
+
+- **Style:** Hacker-themed CLI simulation.
+- **Slides:** 8 auto-typing commands
+- **Features:**
+  - Matrix rain canvas background.
+  - CRT scanline and vignette overlay.
+  - Auto-typing command prompts with simulated output.
+  - ASCII art headers, directory listings, and system scans.
+- **Example:** "The Future of Open Source"
+
+### 22. Comic Panel Layout
+
+- **Style:** Manga / comic book panels.
+- **Pages:** 6
+- **Features:**
+  - CSS Grid panel layouts with speech bubbles and thought clouds.
+  - SFX text ("BOOM!", "SWOOSH!") with animated reveals.
+  - Halftone dot overlay and speed lines SVG.
+  - Sequential panel reveal with Framer Motion springs.
+- **Example:** "How We Built Our Design System"
+
+### 23. Voice-Controlled Deck
+
+- **Style:** Futuristic voice-command interface.
+- **Slides:** 8
+- **Features:**
+  - Web Speech API voice recognition ("next", "back", "goto 3").
+  - Web Audio API real-time waveform visualizer.
+  - Voice status indicator and command feedback.
+  - Keyboard fallback and permission-gated microphone access.
+- **Example:** "The Rise of Voice Interfaces"
+
+### 24. Newspaper Editorial
+
+- **Style:** Print-inspired broadsheet layout.
+- **Sections:** Masthead, 6+ articles, classifieds, crossword, weather
+- **Features:**
+  - Multi-column CSS layout with drop caps and pull quotes.
+  - Serif typography with old-style numerals.
+  - Classified ads section and crossword teaser grid.
+  - `@media print` stylesheet for physical printing.
+- **Example:** "THE DAILY DEVELOPER — Vol. CXVII"
+
+### 25. AI Chat Presentation
+
+- **Style:** Simulated AI chat interface.
+- **Topics:** 7 (CSS Grid, Container Queries, :has(), Cascade Layers, Subgrid, View Transitions, Nesting)
+- **Features:**
+  - Typing indicator with bouncing dots.
+  - Character-by-character text reveal via requestAnimationFrame.
+  - Suggested prompt chips and free-text input with keyword matching.
+  - Syntax-highlighted code blocks in responses.
+- **Example:** "Modern CSS Features"
+
+### 26. Holographic Card Deck
+
+- **Style:** 3D holographic trading cards.
+- **Cards:** 8 (startup pitch deck)
+- **Features:**
+  - Mouse-tracking 3D tilt via `useMotionValue` / `useTransform`.
+  - Rainbow holographic gradient overlay and glare effect.
+  - Card flip animation with spring physics.
+  - Swipe gestures and dot indicator navigation.
+- **Example:** "NeonPay Series B Pitch"
+
+### 27. Timeline Explorer
+
+- **Style:** Horizontal scrolling timeline.
+- **Events:** 21 (1989–2025)
+- **Features:**
+  - Era color-coding: Origins, Dot-Com, Web 2.0, Modern.
+  - Expandable event detail cards.
+  - Branching sub-timelines for related events.
+  - Gradient progress scrubber bar and scroll-position tracking.
+- **Example:** "History of the Web"
+
+### 28. Physics Playground
+
+- **Style:** 2D physics sandbox.
+- **Slides:** 7
+- **Features:**
+  - Custom physics engine: gravity, collision detection, bounce, friction.
+  - Draggable and throwable elements with velocity transfer.
+  - Rectangular and circular rigid bodies with mass-based interactions.
+  - Gravity direction changes on slide transitions.
+  - Reset button to replay physics animation.
+- **Example:** "Understanding Web Performance"
+
+### 29. Spatial Canvas
+
+- **Style:** Prezi-style infinite canvas.
+- **Stops:** 9 content clusters
+- **Features:**
+  - 5000×5000 virtual canvas with camera zoom, pan, and rotate.
+  - Smooth spring-physics camera transitions between stops.
+  - SVG connection lines between related content clusters.
+  - Minimap with viewport indicator and click-to-navigate.
+  - Scroll wheel zoom and touch drag-to-pan.
+  - Overview mode to see entire canvas.
+- **Example:** "The JavaScript Ecosystem"
+
+### 30. Audio Reactive Visualizer
+
+- **Style:** Audio-driven visual experience.
+- **Slides:** 7 with 7 visualization modes
+- **Features:**
+  - Web Audio API with AnalyserNode for real-time FFT data.
+  - Visualization modes: radial equalizer, waveform, bars, rings, particles, spiral, blob.
+  - Beat detection with particle burst response.
+  - Built-in ambient audio via Web Audio oscillators (no audio files).
+  - Microphone input option with permission request.
+  - Volume control and mute toggle.
+  - Color palette shifts based on dominant frequency.
+- **Example:** "The Science of Sound"
+
 ## Tech Stack
 
 - **Framework:** React 19 + Vite 7
-- **Language:** TypeScript (strict mode)
+- **Language:** TypeScript 5 (strict mode)
 - **Styling:** Tailwind CSS 4
 - **Animation:** Framer Motion, GSAP + ScrollTrigger, Lottie React
 - **3D/WebGL:** Three.js, React Three Fiber, Drei
+- **Audio:** Web Audio API (AnalyserNode, OscillatorNode, getUserMedia)
+- **Speech:** Web Speech API (SpeechRecognition)
+- **Canvas:** Canvas 2D (physics engine, Matrix rain, waveform visualizer, audio visualizations)
 - **Code:** React Syntax Highlighter (Prism)
 - **Icons:** Lucide React
 
@@ -241,7 +360,7 @@ src/
   components/
     presentation-modes/   # All presentation components
   data/
-    examples.ts           # Example metadata (all 20 modes available)
+    examples.ts           # Example metadata (all 30 modes available)
     presentation-content.ts # Full Takahashi slide data
     mockups/              # Blueprint docs for each mode
   pages/                  # Route pages (gallery + viewer)
