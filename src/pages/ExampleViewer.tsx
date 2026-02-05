@@ -1,16 +1,115 @@
+import { Suspense, lazy } from "react";
 import { useParams, Link } from "react-router-dom";
 import { EXAMPLES } from "../data/examples";
-import { TakahashiPresentation } from "../components/presentation-modes/Takahashi";
-import { ScrollSnapPresentation } from "../components/presentation-modes/ScrollSnap";
-import { TypewriterNarrative } from "../components/presentation-modes/TypewriterNarrative";
-import { RevealClassic } from "../components/presentation-modes/RevealClassic";
-import { LottieStoryboard } from "../components/presentation-modes/LottieStoryboard";
-import { MDXPresentation } from "../components/presentation-modes/MDXPresentation";
-import { ParallaxStoryteller } from "../components/presentation-modes/ParallaxStoryteller";
-import { LiveCodeWalkthrough } from "../components/presentation-modes/LiveCodeWalkthrough";
-import { NeccGritIntro } from "../components/presentation-modes/NeccGritIntro";
 import { FULL_TAKAHASHI_SLIDES } from "../data/presentation-content";
 import { ArrowLeft } from "lucide-react";
+
+const TakahashiPresentation = lazy(() =>
+  import("../components/presentation-modes/Takahashi").then((m) => ({
+    default: m.TakahashiPresentation,
+  })),
+);
+const ScrollSnapPresentation = lazy(() =>
+  import("../components/presentation-modes/ScrollSnap").then((m) => ({
+    default: m.ScrollSnapPresentation,
+  })),
+);
+const TypewriterNarrative = lazy(() =>
+  import("../components/presentation-modes/TypewriterNarrative").then((m) => ({
+    default: m.TypewriterNarrative,
+  })),
+);
+const RevealClassic = lazy(() =>
+  import("../components/presentation-modes/RevealClassic").then((m) => ({
+    default: m.RevealClassic,
+  })),
+);
+const LottieStoryboard = lazy(() =>
+  import("../components/presentation-modes/LottieStoryboard").then((m) => ({
+    default: m.LottieStoryboard,
+  })),
+);
+const MDXPresentation = lazy(() =>
+  import("../components/presentation-modes/MDXPresentation").then((m) => ({
+    default: m.MDXPresentation,
+  })),
+);
+const ParallaxStoryteller = lazy(() =>
+  import("../components/presentation-modes/ParallaxStoryteller").then((m) => ({
+    default: m.ParallaxStoryteller,
+  })),
+);
+const LiveCodeWalkthrough = lazy(() =>
+  import("../components/presentation-modes/LiveCodeWalkthrough").then((m) => ({
+    default: m.LiveCodeWalkthrough,
+  })),
+);
+const NeccGritIntro = lazy(() =>
+  import("../components/presentation-modes/NeccGritIntro").then((m) => ({
+    default: m.NeccGritIntro,
+  })),
+);
+const LiveDataDashboard = lazy(() =>
+  import("../components/presentation-modes/LiveDataDashboard").then((m) => ({
+    default: m.LiveDataDashboard,
+  })),
+);
+const PollDrivenSlides = lazy(() =>
+  import("../components/presentation-modes/PollDrivenSlides").then((m) => ({
+    default: m.PollDrivenSlides,
+  })),
+);
+const FramerMotionPlayground = lazy(() =>
+  import("../components/presentation-modes/FramerMotionPlayground").then(
+    (m) => ({
+      default: m.FramerMotionPlayground,
+    }),
+  ),
+);
+const KineticTypography = lazy(() =>
+  import("../components/presentation-modes/KineticTypography").then((m) => ({
+    default: m.KineticTypography,
+  })),
+);
+const BranchingNarrative = lazy(() =>
+  import("../components/presentation-modes/BranchingNarrative").then((m) => ({
+    default: m.BranchingNarrative,
+  })),
+);
+const CustomSlideTransitions = lazy(() =>
+  import("../components/presentation-modes/CustomSlideTransitions").then(
+    (m) => ({
+      default: m.CustomSlideTransitions,
+    }),
+  ),
+);
+const ScrollTimelineShowcase = lazy(() =>
+  import("../components/presentation-modes/ScrollTimelineShowcase").then(
+    (m) => ({
+      default: m.ScrollTimelineShowcase,
+    }),
+  ),
+);
+const PresenterModeDeck = lazy(() =>
+  import("../components/presentation-modes/PresenterModeDeck").then((m) => ({
+    default: m.PresenterModeDeck,
+  })),
+);
+const GsapShowreel = lazy(() =>
+  import("../components/presentation-modes/GsapShowreel").then((m) => ({
+    default: m.GsapShowreel,
+  })),
+);
+const GlobeExplorer = lazy(() =>
+  import("../components/presentation-modes/GlobeExplorer").then((m) => ({
+    default: m.GlobeExplorer,
+  })),
+);
+const WebGLParticleDeck = lazy(() =>
+  import("../components/presentation-modes/WebGLParticleDeck").then((m) => ({
+    default: m.WebGLParticleDeck,
+  })),
+);
 
 export function ExampleViewer() {
   const { id } = useParams();
@@ -53,6 +152,28 @@ export function ExampleViewer() {
         return <LiveCodeWalkthrough />;
       case "necc-grit-intro":
         return <NeccGritIntro />;
+      case "live-data-dashboard":
+        return <LiveDataDashboard />;
+      case "poll-driven-slides":
+        return <PollDrivenSlides />;
+      case "framer-motion-playground":
+        return <FramerMotionPlayground />;
+      case "kinetic-typography":
+        return <KineticTypography />;
+      case "branching-narrative":
+        return <BranchingNarrative />;
+      case "custom-slide-transitions":
+        return <CustomSlideTransitions />;
+      case "scroll-timeline-showcase":
+        return <ScrollTimelineShowcase />;
+      case "presenter-mode-deck":
+        return <PresenterModeDeck />;
+      case "gsap-showreel":
+        return <GsapShowreel />;
+      case "globe-explorer":
+        return <GlobeExplorer />;
+      case "webgl-particle-deck":
+        return <WebGLParticleDeck />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
@@ -83,7 +204,22 @@ export function ExampleViewer() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col">{renderExample()}</main>
+      <main className="flex-1 flex flex-col">
+        <Suspense
+          fallback={
+            <div className="flex-1 flex items-center justify-center p-10">
+              <div className="text-center space-y-3">
+                <div className="mx-auto h-10 w-10 rounded-full border-2 border-border/30 border-t-accent animate-spin" />
+                <p className="font-mono text-xs text-fg/60 uppercase tracking-widest">
+                  Loading example…
+                </p>
+              </div>
+            </div>
+          }
+        >
+          {renderExample()}
+        </Suspense>
+      </main>
     </div>
   );
 }

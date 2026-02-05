@@ -102,11 +102,29 @@ This project explores various ways to present information on the web, moving bey
   - Norwegian language content covering circular construction across 5 Nordic countries.
 - **Example:** "NECC — Nordic Ecosystem for Circular Construction"
 
+### 10. Live Data Dashboard
+
+- **Style:** Real-time ops / KPI dashboard.
+- **Scenes:** 4 (Pulse, Acquisition, Performance, Revenue)
+- **Features:**
+  - Live-updating KPI cards with sparklines.
+  - Active users trend chart + traffic mix + signups by channel.
+  - Rule-based alerts and a rolling activity feed.
+  - Presenter controls: pause, speed, focus mode, reset + keyboard shortcuts.
+
+### 11. Poll-Driven Slides
+
+- **Style:** Audience-interactive polling.
+- **Slides:** 4 polls (demo deck)
+- **Features:**
+  - Real-time voting synced across tabs (BroadcastChannel).
+  - Animated result bars and “leading” highlight.
+  - Host/Audience roles with shareable audience link + reset + slide controls.
+
 ## Upcoming Modes
 
 - **Kinetic Typography**
 - **3D Globe Explorer**
-- **Live Data Dashboard**
 - **GSAP Showreel**
 - **Branching Narrative**
 - And more...

@@ -54,7 +54,7 @@ export const EXAMPLES: Example[] = [
     format: "scrollytelling",
     difficulty: "advanced",
     tags: ["scroll-timeline", "css-view-transitions"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "reveal-classic",
@@ -76,7 +76,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "intermediate",
     tags: ["css-view-transitions", "framer-motion"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "presenter-mode-deck",
@@ -87,18 +87,18 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "advanced",
     tags: ["web-animations-api"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "live-data-dashboard",
     title: "Live Data Dashboard",
     description:
-      "Interactive dashboard presentation with live D3 and Chart.js visualizations.",
+      "Operational KPI dashboard with live-updating charts, alerts, and an activity feed.",
     category: "interactive-data",
     format: "standard",
     difficulty: "intermediate",
-    tags: ["d3", "chart-js"],
-    status: "coming-soon",
+    tags: ["dashboard", "realtime", "svg-charts", "kpi"],
+    status: "available",
   },
   {
     id: "poll-driven-slides",
@@ -108,8 +108,8 @@ export const EXAMPLES: Example[] = [
     category: "interactive-data",
     format: "standard",
     difficulty: "advanced",
-    tags: ["web-animations-api"],
-    status: "coming-soon",
+    tags: ["realtime", "polling", "broadcast-channel", "charts"],
+    status: "available",
   },
   {
     id: "globe-explorer",
@@ -120,7 +120,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "advanced",
     tags: ["three-js", "r3f"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "webgl-particle-deck",
@@ -131,7 +131,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "advanced",
     tags: ["webgl", "three-js"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "kinetic-typography",
@@ -142,7 +142,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "intermediate",
     tags: ["framer-motion", "svg-animation"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "typewriter-narrative",
@@ -164,7 +164,7 @@ export const EXAMPLES: Example[] = [
     format: "scrollytelling",
     difficulty: "advanced",
     tags: ["gsap"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "framer-motion-playground",
@@ -175,7 +175,7 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "intermediate",
     tags: ["framer-motion"],
-    status: "coming-soon",
+    status: "available",
   },
   {
     id: "lottie-storyboard",
@@ -230,6 +230,6 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "advanced",
     tags: ["framer-motion", "intersection-observer"],
-    status: "coming-soon",
+    status: "available",
   },
 ];
