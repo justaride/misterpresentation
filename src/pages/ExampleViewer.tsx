@@ -110,6 +110,41 @@ const WebGLParticleDeck = lazy(() =>
     default: m.WebGLParticleDeck,
   })),
 );
+const TerminalHacker = lazy(() =>
+  import("../components/presentation-modes/TerminalHacker").then((m) => ({
+    default: m.TerminalHacker,
+  })),
+);
+const ComicPanelLayout = lazy(() =>
+  import("../components/presentation-modes/ComicPanelLayout").then((m) => ({
+    default: m.ComicPanelLayout,
+  })),
+);
+const VoiceControlledDeck = lazy(() =>
+  import("../components/presentation-modes/VoiceControlledDeck").then((m) => ({
+    default: m.VoiceControlledDeck,
+  })),
+);
+const NewspaperEditorial = lazy(() =>
+  import("../components/presentation-modes/NewspaperEditorial").then((m) => ({
+    default: m.NewspaperEditorial,
+  })),
+);
+const AiChatPresentation = lazy(() =>
+  import("../components/presentation-modes/AiChatPresentation").then((m) => ({
+    default: m.AiChatPresentation,
+  })),
+);
+const HolographicCards = lazy(() =>
+  import("../components/presentation-modes/HolographicCards").then((m) => ({
+    default: m.HolographicCards,
+  })),
+);
+const TimelineExplorer = lazy(() =>
+  import("../components/presentation-modes/TimelineExplorer").then((m) => ({
+    default: m.TimelineExplorer,
+  })),
+);
 
 export function ExampleViewer() {
   const { id } = useParams();
@@ -174,6 +209,20 @@ export function ExampleViewer() {
         return <GlobeExplorer />;
       case "webgl-particle-deck":
         return <WebGLParticleDeck />;
+      case "terminal-hacker":
+        return <TerminalHacker />;
+      case "comic-panel-layout":
+        return <ComicPanelLayout />;
+      case "voice-controlled-deck":
+        return <VoiceControlledDeck />;
+      case "newspaper-editorial":
+        return <NewspaperEditorial />;
+      case "ai-chat-presentation":
+        return <AiChatPresentation />;
+      case "holographic-cards":
+        return <HolographicCards />;
+      case "timeline-explorer":
+        return <TimelineExplorer />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">

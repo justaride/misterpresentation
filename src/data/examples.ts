@@ -232,4 +232,81 @@ export const EXAMPLES: Example[] = [
     tags: ["framer-motion", "intersection-observer"],
     status: "available",
   },
+  {
+    id: "timeline-explorer",
+    title: "Timeline Explorer",
+    description:
+      "Horizontal scrolling timeline of web history from 1989-2025 with era color-coding, expandable events, and branching sub-timelines.",
+    category: "scroll-driven",
+    format: "scrollytelling",
+    difficulty: "intermediate",
+    tags: ["framer-motion", "horizontal-scroll", "timeline"],
+    status: "available",
+  },
+  {
+    id: "holographic-cards",
+    title: "Holographic Card Deck",
+    description:
+      "3D holographic cards with mouse-tracking tilt, rainbow foil effects, glassmorphism, and swipe gestures.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["framer-motion", "css-3d", "glassmorphism"],
+    status: "available",
+  },
+  {
+    id: "ai-chat-presentation",
+    title: "AI Chat Presentation",
+    description:
+      "Conversational AI chat interface that reveals presentation content through simulated dialogue with typing indicators.",
+    category: "interactive-data",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["framer-motion", "chat-ui", "interactive"],
+    status: "available",
+  },
+  {
+    id: "newspaper-editorial",
+    title: "Newspaper Editorial",
+    description:
+      "Print-inspired editorial layout with multi-column text, drop caps, pull quotes, classified ads, and a crossword teaser.",
+    category: "typography",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["css-columns", "typography", "print-css"],
+    status: "available",
+  },
+  {
+    id: "voice-controlled-deck",
+    title: "Voice-Controlled Deck",
+    description:
+      "Navigate slides with voice commands using the Web Speech API. Features waveform visualizer and futuristic UI.",
+    category: "interactive-data",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["web-speech-api", "web-audio-api", "canvas"],
+    status: "available",
+  },
+  {
+    id: "comic-panel-layout",
+    title: "Comic Panel Layout",
+    description:
+      "Manga-style comic panels with speech bubbles, action lines, halftone overlays, and sequential reveals.",
+    category: "storytelling",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["framer-motion", "css-grid", "svg"],
+    status: "available",
+  },
+  {
+    id: "terminal-hacker",
+    title: "Terminal Hacker",
+    description:
+      "Hacker-themed CLI presentation with Matrix rain, auto-typing commands, ASCII art, and CRT scanlines.",
+    category: "code-focused",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["canvas", "terminal", "ascii-art"],
+    status: "available",
+  },
 ];
