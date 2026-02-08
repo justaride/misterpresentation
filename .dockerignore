@@ -8,6 +8,7 @@ dist
 logs
 rlm
 scripts
+!scripts/live-data-server.mjs
 specs
 *.md
 .DS_Store
