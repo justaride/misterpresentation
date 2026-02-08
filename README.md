@@ -2,7 +2,7 @@
 
 A showcase of creative, interactive, and experimental web presentation modes built with React, Vite, Framer Motion, and Tailwind CSS.
 
-**Live:** [mister-presentations.vercel.app](https://mister-presentations.vercel.app)
+**Live:** [misterpresentations.gabistudio.dev](https://misterpresentations.gabistudio.dev)
 
 ## Overview
 
@@ -352,15 +352,15 @@ npm run dev
 
 ## Scripts
 
-| Command           | Description                         |
-| ----------------- | ----------------------------------- |
-| `npm run dev`     | Start dev server                    |
-| `npm run build`   | Type-check and build for production |
-| `npm run preview` | Preview production build locally    |
-| `npm run test:e2e` | Run Playwright E2E smoke tests     |
-| `npm run test:e2e:ui` | Run Playwright UI runner        |
+| Command                    | Description                            |
+| -------------------------- | -------------------------------------- |
+| `npm run dev`              | Start dev server                       |
+| `npm run build`            | Type-check and build for production    |
+| `npm run preview`          | Preview production build locally       |
+| `npm run test:e2e`         | Run Playwright E2E smoke tests         |
+| `npm run test:e2e:ui`      | Run Playwright UI runner               |
 | `npm run live:data:server` | Local simulated live stream (SSE + WS) |
-| `npm run live:data:hub` | Local hub mode (push real data) |
+| `npm run live:data:hub`    | Local hub mode (push real data)        |
 
 ## CI
 
