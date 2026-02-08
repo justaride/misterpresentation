@@ -357,6 +357,14 @@ npm run dev
 | `npm run dev`     | Start dev server                    |
 | `npm run build`   | Type-check and build for production |
 | `npm run preview` | Preview production build locally    |
+| `npm run test:e2e` | Run Playwright E2E smoke tests     |
+| `npm run test:e2e:ui` | Run Playwright UI runner        |
+| `npm run live:data:server` | Local simulated live stream (SSE + WS) |
+| `npm run live:data:hub` | Local hub mode (push real data) |
+
+## CI
+
+GitHub Actions runs `npm run build` and `npm run test:e2e` on pushes and pull requests.
 
 ## Project Structure
 
@@ -375,8 +383,24 @@ src/
 
 ## Deployment
 
-Hosted on Vercel. Push to `master` or run:
+### Frontend
 
 ```bash
 vercel --prod
 ```
+
+This repo also supports a simple Docker + Nginx deploy:
+
+- Docker build uses `Dockerfile` and `nginx.conf`.
+- Vite env vars are compile-time. If you want SSE/WS defaults without manually typing URLs, pass build args:
+  - `VITE_LIVE_SSE_URL=https://.../api/live`
+  - `VITE_LIVE_WS_URL=wss://.../api/live/ws`
+
+### Live Data Hub (optional)
+
+To run SSE/WebSocket streaming in production, deploy the hub service separately (or behind your proxy):
+
+- Docker image: `Dockerfile.live-data`
+- Guides:
+  - Coolify + Hetzner: `DEPLOY_LIVE_DATA_HUB_COOLIFY.md`
+  - Fly.io: `DEPLOY_LIVE_DATA_HUB.md`
