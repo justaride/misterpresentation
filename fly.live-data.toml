@@ -1,0 +1,16 @@
+# Fly.io app config for the Live Data Hub (SSE + WebSocket)
+#
+# Deploy with:
+#   fly apps create <app-name>
+#   fly secrets set LIVE_PUSH_TOKEN=... -a <app-name>
+#   fly deploy -c fly.live-data.toml -a <app-name>
+
+[build]
+  dockerfile = "Dockerfile.live-data"
+
+[env]
+  MODE = "hub"
+
+[http_service]
+  internal_port = 8787
+  force_https = true

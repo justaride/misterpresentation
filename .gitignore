@@ -1,0 +1,55 @@
+node_modules
+dist
+playwright-report
+test-results
+.DS_Store
+*.local
+
+# Local duplicate files
+/.dockerignore 2
+/CONSTITUTION 2.md
+/Dockerfile 2
+/nginx 2.conf
+/ralph_history 2.txt
+/src/components/presentation-modes/ScrollTimelineShowcase 2.tsx
+/src/components/presentation-modes/WebGLParticleDeck 2.tsx
+/src/data/mockups/scroll-snap-blueprint 2.md
+
+# Agent/tool configs
+.adal
+.agent
+.agents
+.augment
+.claude
+.cline
+.codebuddy
+.codex
+.commandcode
+.continue
+.crush
+.cursor
+.factory
+.gemini
+.goose
+.iflow
+.junie
+.kilocode
+.kiro
+.kode
+.mcpjam
+.mux
+.neovate
+.openclaude
+.opencode
+.openhands
+.pi
+.pochi
+.qoder
+.qwen
+.roo
+.trae
+.vibe
+.windsurf
+.zencoder
+skills
+.vercel

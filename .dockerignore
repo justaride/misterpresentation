@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.vercel
+.claude
+.cursor
+.vscode
+logs
+rlm
+scripts
+specs
+*.md
+.DS_Store

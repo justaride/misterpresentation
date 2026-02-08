@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: rgb(var(--bg));
+  --color-fg: rgb(var(--fg));
+  --color-card: rgb(var(--card));
+  --color-muted: rgb(var(--muted));
+  --color-accent: rgb(var(--accent));
+  --color-warn: rgb(var(--warn));
+  --color-danger: rgb(var(--danger));
+  --color-border: rgb(var(--border));
+
+  --font-display: "Anton", "Bebas Neue", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-typewriter: "Courier Prime", monospace;
+}
+
+:root {
+  --bg: 243 231 211;
+  --fg: 17 24 39;
+  --card: 255 251 242;
+  --muted: 100 116 139;
+  --accent: 182 255 77;
+  --warn: 255 176 0;
+  --danger: 255 77 77;
+  --border: 17 24 39;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.scanlines {
+  position: relative;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.06),
+    rgba(0, 0, 0, 0.06) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  z-index: 10;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.grid-paper {
+  background-image:
+    linear-gradient(rgba(17, 24, 39, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 24, 39, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg));
+  border-left: 2px solid rgb(var(--border));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--fg));
+  border: 2px solid rgb(var(--bg));
+}

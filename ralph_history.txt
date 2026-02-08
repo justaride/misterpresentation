@@ -1,0 +1,4 @@
+# Ralph History — Mister Presentations
+# Format: [DATE] [STATUS] Description
+# STATUS: DONE | BLOCKED | LEARNING
+
