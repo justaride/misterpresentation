@@ -95,6 +95,18 @@ const PresenterModeDeck = lazy(() =>
     default: m.PresenterModeDeck,
   })),
 );
+const PechaKucha20x20 = lazy(() =>
+  import("../components/presentation-modes/PechaKucha20x20").then((m) => ({
+    default: m.PechaKucha20x20,
+  })),
+);
+const EarlyAdopterClientDeck = lazy(() =>
+  import("../components/presentation-modes/EarlyAdopterClientDeck").then(
+    (m) => ({
+      default: m.EarlyAdopterClientDeck,
+    }),
+  ),
+);
 const GsapShowreel = lazy(() =>
   import("../components/presentation-modes/GsapShowreel").then((m) => ({
     default: m.GsapShowreel,
@@ -218,6 +230,10 @@ export function ExampleViewer() {
         return <ScrollTimelineShowcase />;
       case "presenter-mode-deck":
         return <PresenterModeDeck />;
+      case "pecha-kucha-20x20":
+        return <PechaKucha20x20 />;
+      case "early-adopter-client-deck":
+        return <EarlyAdopterClientDeck />;
       case "gsap-showreel":
         return <GsapShowreel />;
       case "globe-explorer":

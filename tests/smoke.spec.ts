@@ -63,3 +63,35 @@ test("Poll-Driven Slides accepts a vote", async ({ page }) => {
   await page.getByRole("button", { name: /kinetic typography/i }).click();
   await expect(page.getByText(/1 votes/i)).toBeVisible();
 });
+
+test("Pecha Kucha 20x20 auto-advances (fast mode)", async ({ page }) => {
+  await page.goto("/examples/pecha-kucha-20x20?autostart=1&seconds=1", {
+    waitUntil: "domcontentloaded",
+  });
+
+  await expect(page.getByTestId("pk-deck")).toBeVisible();
+  await expect(page.getByTestId("pk-slide-position")).toHaveText(
+    /^1\s*\/\s*\d+$/,
+  );
+
+  await expect(page.getByTestId("pk-slide-position")).toHaveText(
+    /^2\s*\/\s*\d+$/,
+    { timeout: 7_000 },
+  );
+});
+
+test("Early Adopter Client Deck renders and can navigate", async ({ page }) => {
+  await page.goto("/examples/early-adopter-client-deck", {
+    waitUntil: "domcontentloaded",
+  });
+
+  await expect(page.getByTestId("ea-deck")).toBeVisible();
+  await expect(page.getByTestId("ea-slide-position")).toHaveText(
+    /^1\s*\/\s*\d+$/,
+  );
+
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByTestId("ea-slide-position")).toHaveText(
+    /^2\s*\/\s*\d+$/,
+  );
+});

@@ -90,6 +90,28 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "pecha-kucha-20x20",
+    title: "Pecha Kucha 20x20",
+    description:
+      "Auto-advancing deck: 20 slides, 20 seconds each. Includes rehearsal controls and a filmstrip timer HUD.",
+    category: "slide-based",
+    format: "pecha-kucha",
+    difficulty: "intermediate",
+    tags: ["pecha-kucha", "auto-advance", "timer", "rehearsal"],
+    status: "available",
+  },
+  {
+    id: "early-adopter-client-deck",
+    title: "Early Adopter Client Deck",
+    description:
+      "A client-facing pitch template for early adopters: problem → approach → pilot → next step. Neo-brutalist warm paper style.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["template", "client-pitch", "early-adopter", "pilot", "sales"],
+    status: "available",
+  },
+  {
     id: "live-data-dashboard",
     title: "Live Data Dashboard",
     description:

@@ -6,8 +6,12 @@ import { Footer } from "../components/Footer";
 import { MrNews } from "../components/mascot/MrNews";
 import { SpeechBubble } from "../components/mascot/SpeechBubble";
 import { CATEGORIES } from "../data/categories";
+import { EXAMPLES } from "../data/examples";
 
 export function Landing() {
+  const exampleCount = EXAMPLES.length;
+  const categoryCount = CATEGORIES.length;
+
   return (
     <div className="min-h-screen bg-bg text-fg font-body overflow-x-hidden relative selection:bg-accent selection:text-fg">
       <div className="noise-overlay" />
@@ -57,7 +61,7 @@ export function Landing() {
               <SpeechBubble
                 status="live"
                 message="Welcome to the showcase! Pick a category and start exploring."
-                subtext="18 EXAMPLES ACROSS 8 CATEGORIES"
+                subtext={`${exampleCount} EXAMPLES ACROSS ${categoryCount} CATEGORIES`}
                 position="left"
                 className="max-w-xs"
               />
@@ -106,8 +110,9 @@ export function Landing() {
                   </div>
 
                   <div className="absolute bottom-0 left-0 right-0 bg-fg text-accent font-mono text-xs py-2 px-4 overflow-hidden whitespace-nowrap border-t-2 border-border">
-                    <span className="animate-pulse mr-4">&#9679; LIVE</span>8
-                    CATEGORIES &mdash; 18 EXAMPLES &mdash; SCROLL &bull; SLIDE
+                    <span className="animate-pulse mr-4">&#9679; LIVE</span>
+                    {categoryCount} CATEGORIES &mdash; {exampleCount} EXAMPLES
+                    &mdash; SCROLL &bull; SLIDE
                     &bull; 3D &bull; CODE &bull; ANIMATION
                   </div>
                 </div>
@@ -132,7 +137,9 @@ export function Landing() {
               <div className="w-12 h-12 mx-auto bg-warn border-2 border-border flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)]">
                 <BookOpen className="w-6 h-6" />
               </div>
-              <h3 className="font-display text-2xl uppercase">18+ Examples</h3>
+              <h3 className="font-display text-2xl uppercase">
+                {exampleCount}+ Examples
+              </h3>
               <p className="text-muted font-medium">
                 Beginner to advanced, each with full source code.
               </p>
