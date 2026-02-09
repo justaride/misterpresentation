@@ -222,6 +222,39 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "webgl-particle-deck-neon-noir",
+    title: "WebGL Particle Deck: Neon Noir",
+    description:
+      "Cyberpunk HUD variant: hotter bloom, longer trails, scanline overlay.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["webgl", "three-js", "neon", "hud"],
+    status: "available",
+  },
+  {
+    id: "webgl-particle-deck-constellation",
+    title: "WebGL Particle Deck: Constellation",
+    description:
+      "Starfield minimalism with faint constellation lines connecting particles.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["webgl", "three-js", "constellation", "minimal"],
+    status: "available",
+  },
+  {
+    id: "webgl-particle-deck-ink",
+    title: "WebGL Particle Deck: Ink",
+    description:
+      "Paper-grain monochrome variant with minimal FX and editorial vibe.",
+    category: "3d-webgl",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["webgl", "three-js", "ink", "editorial"],
+    status: "available",
+  },
+  {
     id: "kinetic-typography",
     title: "Kinetic Typography",
     description:

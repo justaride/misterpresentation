@@ -132,6 +132,25 @@ const WebGLParticleDeck = lazy(() =>
     default: m.WebGLParticleDeck,
   })),
 );
+const WebGLParticleDeckNeonNoir = lazy(() =>
+  import("../components/presentation-modes/WebGLParticleDeckNeonNoir").then(
+    (m) => ({
+      default: m.WebGLParticleDeckNeonNoir,
+    }),
+  ),
+);
+const WebGLParticleDeckConstellation = lazy(() =>
+  import("../components/presentation-modes/WebGLParticleDeckConstellation").then(
+    (m) => ({
+      default: m.WebGLParticleDeckConstellation,
+    }),
+  ),
+);
+const WebGLParticleDeckInk = lazy(() =>
+  import("../components/presentation-modes/WebGLParticleDeckInk").then((m) => ({
+    default: m.WebGLParticleDeckInk,
+  })),
+);
 const TerminalHacker = lazy(() =>
   import("../components/presentation-modes/TerminalHacker").then((m) => ({
     default: m.TerminalHacker,
@@ -262,6 +281,12 @@ export function ExampleViewer() {
         return <GlobeExplorer />;
       case "webgl-particle-deck":
         return <WebGLParticleDeck />;
+      case "webgl-particle-deck-neon-noir":
+        return <WebGLParticleDeckNeonNoir />;
+      case "webgl-particle-deck-constellation":
+        return <WebGLParticleDeckConstellation />;
+      case "webgl-particle-deck-ink":
+        return <WebGLParticleDeckInk />;
       case "terminal-hacker":
         return <TerminalHacker />;
       case "comic-panel-layout":

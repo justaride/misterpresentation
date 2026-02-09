@@ -111,3 +111,21 @@ test("Early Adopter Client Deck renders and can navigate", async ({ page }) => {
     /^2\s*\/\s*\d+$/,
   );
 });
+
+test("WebGL particle deck variants render", async ({ page }) => {
+  const ids = [
+    "webgl-particle-deck",
+    "webgl-particle-deck-neon-noir",
+    "webgl-particle-deck-constellation",
+    "webgl-particle-deck-ink",
+  ];
+
+  for (const id of ids) {
+    await page.goto(`/examples/${id}`, { waitUntil: "domcontentloaded" });
+    // Playwright's browser in CI/sandbox may not have WebGL enabled.
+    // Assert either the deck renders, or the explicit fallback appears.
+    await expect(
+      page.getByText(/WebGL Not Available|Scatter/i),
+    ).toBeVisible();
+  }
+});
