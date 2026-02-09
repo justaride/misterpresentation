@@ -24,6 +24,11 @@ const RevealClassic = lazy(() =>
     default: m.RevealClassic,
   })),
 );
+const MarkdownSlides = lazy(() =>
+  import("../components/presentation-modes/MarkdownSlides").then((m) => ({
+    default: m.MarkdownSlides,
+  })),
+);
 const LottieStoryboard = lazy(() =>
   import("../components/presentation-modes/LottieStoryboard").then((m) => ({
     default: m.LottieStoryboard,
@@ -98,6 +103,11 @@ const PresenterModeDeck = lazy(() =>
 const PechaKucha20x20 = lazy(() =>
   import("../components/presentation-modes/PechaKucha20x20").then((m) => ({
     default: m.PechaKucha20x20,
+  })),
+);
+const Ignite20x15 = lazy(() =>
+  import("../components/presentation-modes/Ignite20x15").then((m) => ({
+    default: m.Ignite20x15,
   })),
 );
 const EarlyAdopterClientDeck = lazy(() =>
@@ -204,6 +214,16 @@ export function ExampleViewer() {
         return <TypewriterNarrative />;
       case "reveal-classic":
         return <RevealClassic />;
+      case "md-investor-pitch-clearbox":
+        return <MarkdownSlides deckId="md-investor-pitch-clearbox" />;
+      case "md-client-proposal-pilot":
+        return <MarkdownSlides deckId="md-client-proposal-pilot" />;
+      case "md-technical-deep-dive":
+        return <MarkdownSlides deckId="md-technical-deep-dive" />;
+      case "md-incident-postmortem":
+        return <MarkdownSlides deckId="md-incident-postmortem" />;
+      case "md-workshop-training":
+        return <MarkdownSlides deckId="md-workshop-training" />;
       case "lottie-storyboard":
         return <LottieStoryboard />;
       case "mdx-presentation":
@@ -232,6 +252,8 @@ export function ExampleViewer() {
         return <PresenterModeDeck />;
       case "pecha-kucha-20x20":
         return <PechaKucha20x20 />;
+      case "ignite-20x15":
+        return <Ignite20x15 />;
       case "early-adopter-client-deck":
         return <EarlyAdopterClientDeck />;
       case "gsap-showreel":

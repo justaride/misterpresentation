@@ -68,6 +68,61 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "md-investor-pitch-clearbox",
+    title: "Markdown Slides: Investor Pitch",
+    description:
+      "Deckset-style markdown deck with speaker notes: a crisp investor pitch narrative.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["markdown", "deckset", "pitch", "template"],
+    status: "available",
+  },
+  {
+    id: "md-client-proposal-pilot",
+    title: "Markdown Slides: Client Proposal",
+    description:
+      "Deckset-style markdown deck: a 30-day pilot proposal with scope, risks, and next steps.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["markdown", "deckset", "proposal", "template"],
+    status: "available",
+  },
+  {
+    id: "md-technical-deep-dive",
+    title: "Markdown Slides: Technical Deep Dive",
+    description:
+      "Deckset-style markdown deck for an engineering talk: architecture, constraints, and tradeoffs.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["markdown", "deckset", "technical", "architecture"],
+    status: "available",
+  },
+  {
+    id: "md-incident-postmortem",
+    title: "Markdown Slides: Incident Postmortem",
+    description:
+      "Deckset-style markdown deck: a no-blame incident postmortem with timeline and follow-ups.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["markdown", "deckset", "postmortem", "ops"],
+    status: "available",
+  },
+  {
+    id: "md-workshop-training",
+    title: "Markdown Slides: Workshop / Training",
+    description:
+      "Deckset-style markdown deck for facilitation: prompts, exercises, timing, and debrief.",
+    category: "slide-based",
+    format: "standard",
+    difficulty: "beginner",
+    tags: ["markdown", "deckset", "workshop", "facilitation"],
+    status: "available",
+  },
+  {
     id: "custom-slide-transitions",
     title: "Custom Slide Transitions",
     description:
@@ -98,6 +153,17 @@ export const EXAMPLES: Example[] = [
     format: "pecha-kucha",
     difficulty: "intermediate",
     tags: ["pecha-kucha", "auto-advance", "timer", "rehearsal"],
+    status: "available",
+  },
+  {
+    id: "ignite-20x15",
+    title: "Ignite 20x15",
+    description:
+      "High-energy auto-advancing Ignite deck: 20 slides, 15 seconds each (5:00). A tight narrative about choosing the right presentation form.",
+    category: "slide-based",
+    format: "ignite",
+    difficulty: "intermediate",
+    tags: ["ignite", "auto-advance", "timer", "high-energy", "narrative"],
     status: "available",
   },
   {

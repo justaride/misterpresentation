@@ -80,6 +80,22 @@ test("Pecha Kucha 20x20 auto-advances (fast mode)", async ({ page }) => {
   );
 });
 
+test("Ignite 20x15 auto-advances (fast mode)", async ({ page }) => {
+  await page.goto("/examples/ignite-20x15?autostart=1&seconds=1", {
+    waitUntil: "domcontentloaded",
+  });
+
+  await expect(page.getByTestId("ignite-deck")).toBeVisible();
+  await expect(page.getByTestId("ignite-slide-position")).toHaveText(
+    /^1\s*\/\s*\d+$/,
+  );
+
+  await expect(page.getByTestId("ignite-slide-position")).toHaveText(
+    /^2\s*\/\s*\d+$/,
+    { timeout: 7_000 },
+  );
+});
+
 test("Early Adopter Client Deck renders and can navigate", async ({ page }) => {
   await page.goto("/examples/early-adopter-client-deck", {
     waitUntil: "domcontentloaded",
