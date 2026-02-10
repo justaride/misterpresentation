@@ -79,6 +79,11 @@ const LiveQAReactionsDeck = lazy(() =>
     default: m.LiveQAReactionsDeck,
   })),
 );
+const RemoteClickerDeck = lazy(() =>
+  import("../components/presentation-modes/RemoteClickerDeck").then((m) => ({
+    default: m.RemoteClickerDeck,
+  })),
+);
 const LessigMethodDeck = lazy(() =>
   import("../components/presentation-modes/LessigMethodDeck").then((m) => ({
     default: m.LessigMethodDeck,
@@ -288,6 +293,8 @@ export function ExampleViewer() {
         return <PollDrivenSlides />;
       case "live-qa-reactions":
         return <LiveQAReactionsDeck />;
+      case "remote-clicker-deck":
+        return <RemoteClickerDeck />;
       case "framer-motion-playground":
         return <FramerMotionPlayground />;
 	      case "kinetic-typography":

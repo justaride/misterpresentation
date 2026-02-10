@@ -233,6 +233,17 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "remote-clicker-deck",
+    title: "Remote Clicker Deck",
+    description:
+      "Second-screen control: open the host on your laptop and use your phone as a realtime clicker via the live hub (WS listen + HTTP push).",
+    category: "interactive-data",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["realtime", "controller", "websocket", "http"],
+    status: "available",
+  },
+  {
     id: "globe-explorer",
     title: "3D Globe Explorer",
     description:
