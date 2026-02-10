@@ -365,6 +365,17 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "runnable-code-lab",
+    title: "Runnable Code Lab",
+    description:
+      "A sandboxed code deck: run and edit HTML/CSS/JS in a locked-down iframe with a live console and error panel.",
+    category: "code-focused",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["sandbox", "iframe", "console", "workshop"],
+    status: "available",
+  },
+  {
     id: "mdx-presentation",
     title: "MDX Presentation",
     description:

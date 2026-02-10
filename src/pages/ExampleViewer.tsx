@@ -54,6 +54,11 @@ const LiveCodeWalkthrough = lazy(() =>
     default: m.LiveCodeWalkthrough,
   })),
 );
+const RunnableCodeLab = lazy(() =>
+  import("../components/presentation-modes/RunnableCodeLab").then((m) => ({
+    default: m.RunnableCodeLab,
+  })),
+);
 const NeccGritIntro = lazy(() =>
   import("../components/presentation-modes/NeccGritIntro").then((m) => ({
     default: m.NeccGritIntro,
@@ -273,6 +278,8 @@ export function ExampleViewer() {
         return <ParallaxStoryteller />;
       case "live-code-walkthrough":
         return <LiveCodeWalkthrough />;
+      case "runnable-code-lab":
+        return <RunnableCodeLab />;
       case "necc-grit-intro":
         return <NeccGritIntro />;
       case "live-data-dashboard":
