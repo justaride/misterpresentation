@@ -349,16 +349,18 @@ export function ExampleViewer() {
   };
 
   return (
-    <div className="min-h-screen bg-bg text-fg flex flex-col">
-      <header className="border-b border-border bg-card/50 p-4 flex items-center gap-4">
+    <div className="min-h-screen bg-bg text-fg font-body flex flex-col selection:bg-accent selection:text-fg">
+      <header className="border-b-2 border-border bg-card/80 backdrop-blur-sm p-4 flex items-center gap-4 sticky top-0 z-40">
         <Link
           to="/examples"
-          className="p-2 hover:bg-accent/10 rounded-full transition-colors"
+          className="p-2 border-2 border-border bg-card rounded-full shadow-[3px_3px_0px_0px_rgba(17,24,39,1)] hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] active:translate-y-1 active:shadow-none transition-all focus:outline-none"
         >
           <ArrowLeft size={20} />
         </Link>
         <div>
-          <h1 className="font-display text-lg leading-none">{example.title}</h1>
+          <h1 className="font-display text-xl leading-none uppercase">
+            {example.title}
+          </h1>
           <p className="text-xs font-mono text-fg/50">
             {example.format} • {example.difficulty}
           </p>

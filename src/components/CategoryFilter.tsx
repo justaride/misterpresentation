@@ -12,10 +12,10 @@ export function CategoryFilter({ selected, onSelect }: CategoryFilterProps) {
       <button
         onClick={() => onSelect(null)}
         className={clsx(
-          "shrink-0 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider border-2 border-border transition-all",
+          "shrink-0 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider border-2 border-border rounded-full transition-all",
           selected === null
             ? "bg-accent text-fg shadow-[2px_2px_0px_0px_rgba(17,24,39,1)]"
-            : "bg-card text-fg hover:bg-bg",
+            : "bg-card text-fg shadow-[3px_3px_0px_0px_rgba(17,24,39,1)] hover:bg-bg hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] active:translate-y-1 active:shadow-none",
         )}
       >
         All
@@ -27,10 +27,10 @@ export function CategoryFilter({ selected, onSelect }: CategoryFilterProps) {
             key={cat.id}
             onClick={() => onSelect(cat.id)}
             className={clsx(
-              "shrink-0 inline-flex items-center gap-2 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider border-2 border-border transition-all",
+              "shrink-0 inline-flex items-center gap-2 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider border-2 border-border rounded-full transition-all",
               selected === cat.id
                 ? "bg-accent text-fg shadow-[2px_2px_0px_0px_rgba(17,24,39,1)]"
-                : "bg-card text-fg hover:bg-bg",
+                : "bg-card text-fg shadow-[3px_3px_0px_0px_rgba(17,24,39,1)] hover:bg-bg hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] active:translate-y-1 active:shadow-none",
             )}
           >
             <Icon className="w-3.5 h-3.5" />

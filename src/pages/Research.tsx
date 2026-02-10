@@ -1,11 +1,16 @@
 import { RESEARCH_DATA } from "../data/research";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export function Research() {
   return (
-    <div className="min-h-screen bg-bg text-fg pb-20">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="min-h-screen bg-bg text-fg font-body overflow-x-hidden relative selection:bg-accent selection:text-fg">
+      <div className="noise-overlay" />
+      <Header />
+
+      <main className="max-w-7xl mx-auto px-6 py-12 relative z-10 pb-20">
         <header className="mb-16 max-w-3xl">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +92,9 @@ export function Research() {
                 Data compiled by <span className="text-accent">Lead Research Assistant</span> & <span className="text-accent">Presentation Architect</span>
             </p>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

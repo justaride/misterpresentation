@@ -11,7 +11,8 @@
   --color-border: rgb(var(--border));
 
   --font-display: "Anton", "Bebas Neue", sans-serif;
-  --font-body: "Inter", sans-serif;
+  /* More character than Inter; already loaded via Google Fonts in index.html */
+  --font-body: "Fraunces", serif;
   --font-mono: "IBM Plex Mono", monospace;
   --font-typewriter: "Courier Prime", monospace;
 }
@@ -27,13 +28,54 @@
   --border: 17 24 39;
 }
 
+/* Baseline polish */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   background-color: rgb(var(--bg));
+  background-image:
+    radial-gradient(
+      900px 500px at 8% 12%,
+      rgba(182, 255, 77, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 500px at 92% 18%,
+      rgba(255, 176, 0, 0.14),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 251, 242, 0.55),
+      rgba(255, 251, 242, 0) 40%
+    );
   color: rgb(var(--fg));
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+/* Consistent keyboard focus across the app */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid rgb(var(--accent));
+  outline-offset: 3px;
 }
 
 .scanlines {
@@ -73,6 +115,16 @@ body {
   background-size: 20px 20px;
 }
 
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE/Edge legacy */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -85,4 +137,15 @@ body {
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--fg));
   border: 2px solid rgb(var(--bg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
