@@ -519,6 +519,7 @@ export function RunnableCodeLab() {
 
             <button
               onClick={() => run()}
+              data-testid="rcl-run"
               className="inline-flex items-center gap-2 px-3 py-2 border-2 border-border bg-accent text-fg shadow-[3px_3px_0px_0px_rgba(17,24,39,1)] hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] active:translate-y-1 active:shadow-none transition-all font-mono text-xs uppercase tracking-wider"
             >
               <Play className="w-4 h-4" />
@@ -675,6 +676,7 @@ export function RunnableCodeLab() {
 
               <div
                 ref={consoleRef}
+                data-testid="rcl-console"
                 className="h-full max-h-[260px] overflow-auto px-4 py-3 font-mono text-xs leading-relaxed"
               >
                 {consoleEntries.length === 0 ? (
@@ -696,4 +698,3 @@ export function RunnableCodeLab() {
     </div>
   );
 }
-
