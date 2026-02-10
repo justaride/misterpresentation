@@ -29,6 +29,11 @@ const MarkdownSlides = lazy(() =>
     default: m.MarkdownSlides,
   })),
 );
+const BentoGridDeck = lazy(() =>
+  import("../components/presentation-modes/BentoGridDeck").then((m) => ({
+    default: m.BentoGridDeck,
+  })),
+);
 const LottieStoryboard = lazy(() =>
   import("../components/presentation-modes/LottieStoryboard").then((m) => ({
     default: m.LottieStoryboard,
@@ -64,6 +69,16 @@ const PollDrivenSlides = lazy(() =>
     default: m.PollDrivenSlides,
   })),
 );
+const LiveQAReactionsDeck = lazy(() =>
+  import("../components/presentation-modes/LiveQAReactionsDeck").then((m) => ({
+    default: m.LiveQAReactionsDeck,
+  })),
+);
+const LessigMethodDeck = lazy(() =>
+  import("../components/presentation-modes/LessigMethodDeck").then((m) => ({
+    default: m.LessigMethodDeck,
+  })),
+);
 const FramerMotionPlayground = lazy(() =>
   import("../components/presentation-modes/FramerMotionPlayground").then(
     (m) => ({
@@ -74,6 +89,11 @@ const FramerMotionPlayground = lazy(() =>
 const KineticTypography = lazy(() =>
   import("../components/presentation-modes/KineticTypography").then((m) => ({
     default: m.KineticTypography,
+  })),
+);
+const RefinedGritDeck = lazy(() =>
+  import("../components/presentation-modes/RefinedGritDeck").then((m) => ({
+    default: m.RefinedGritDeck,
   })),
 );
 const BranchingNarrative = lazy(() =>
@@ -241,10 +261,12 @@ export function ExampleViewer() {
         return <MarkdownSlides deckId="md-technical-deep-dive" />;
       case "md-incident-postmortem":
         return <MarkdownSlides deckId="md-incident-postmortem" />;
-      case "md-workshop-training":
-        return <MarkdownSlides deckId="md-workshop-training" />;
-      case "lottie-storyboard":
-        return <LottieStoryboard />;
+	      case "md-workshop-training":
+	        return <MarkdownSlides deckId="md-workshop-training" />;
+	      case "bento-grid-deck":
+	        return <BentoGridDeck />;
+	      case "lottie-storyboard":
+	        return <LottieStoryboard />;
       case "mdx-presentation":
         return <MDXPresentation />;
       case "parallax-storyteller":
@@ -257,12 +279,16 @@ export function ExampleViewer() {
         return <LiveDataDashboard />;
       case "poll-driven-slides":
         return <PollDrivenSlides />;
+      case "live-qa-reactions":
+        return <LiveQAReactionsDeck />;
       case "framer-motion-playground":
         return <FramerMotionPlayground />;
-      case "kinetic-typography":
-        return <KineticTypography />;
-      case "branching-narrative":
-        return <BranchingNarrative />;
+	      case "kinetic-typography":
+	        return <KineticTypography />;
+	      case "refined-grit-deck":
+	        return <RefinedGritDeck />;
+	      case "branching-narrative":
+	        return <BranchingNarrative />;
       case "custom-slide-transitions":
         return <CustomSlideTransitions />;
       case "scroll-timeline-showcase":
@@ -271,10 +297,12 @@ export function ExampleViewer() {
         return <PresenterModeDeck />;
       case "pecha-kucha-20x20":
         return <PechaKucha20x20 />;
-      case "ignite-20x15":
-        return <Ignite20x15 />;
-      case "early-adopter-client-deck":
-        return <EarlyAdopterClientDeck />;
+	      case "ignite-20x15":
+	        return <Ignite20x15 />;
+	      case "lessig-method-deck":
+	        return <LessigMethodDeck />;
+	      case "early-adopter-client-deck":
+	        return <EarlyAdopterClientDeck />;
       case "gsap-showreel":
         return <GsapShowreel />;
       case "globe-explorer":

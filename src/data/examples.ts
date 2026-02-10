@@ -134,6 +134,17 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "bento-grid-deck",
+    title: "Bento Grid Deck",
+    description:
+      "Modern bento tile slides with strict hierarchy: one hero tile, supporting tiles, and fast scanning.",
+    category: "slide-based",
+    format: "bento",
+    difficulty: "intermediate",
+    tags: ["bento", "layout", "template", "product"],
+    status: "available",
+  },
+  {
     id: "presenter-mode-deck",
     title: "Presenter Mode Deck",
     description:
@@ -167,6 +178,17 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "lessig-method-deck",
+    title: "Lessig Method Deck",
+    description:
+      "Script-synced rapid cue deck: slide changes become punctuation. Includes rehearsal autoplay controls.",
+    category: "slide-based",
+    format: "lessig",
+    difficulty: "intermediate",
+    tags: ["lessig", "autoplay", "rehearsal", "typography"],
+    status: "available",
+  },
+  {
     id: "early-adopter-client-deck",
     title: "Early Adopter Client Deck",
     description:
@@ -197,6 +219,17 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "advanced",
     tags: ["realtime", "polling", "broadcast-channel", "charts"],
+    status: "available",
+  },
+  {
+    id: "live-qa-reactions",
+    title: "Live Q&A + Reactions",
+    description:
+      "Collaborative room-based deck: audience submits questions and reactions in realtime; host moderates and navigates.",
+    category: "interactive-data",
+    format: "standard",
+    difficulty: "advanced",
+    tags: ["realtime", "workshop", "q&a", "audience", "websocket"],
     status: "available",
   },
   {
@@ -274,6 +307,17 @@ export const EXAMPLES: Example[] = [
     format: "standard",
     difficulty: "beginner",
     tags: ["css-view-transitions"],
+    status: "available",
+  },
+  {
+    id: "refined-grit-deck",
+    title: "Refined Grit Deck",
+    description:
+      "Tactile print-adjacent deck aesthetic: grain, halftone dots, warm paper, and misregistration shadows.",
+    category: "storytelling",
+    format: "standard",
+    difficulty: "intermediate",
+    tags: ["tactile", "grain", "halftone", "print", "editorial"],
     status: "available",
   },
   {
