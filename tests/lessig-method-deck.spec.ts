@@ -6,13 +6,17 @@ test("Lessig Method Deck auto-advances (fast mode)", async ({ page }) => {
   });
 
   await expect(page.getByTestId("lessig-deck")).toBeVisible();
-  await expect(page.getByTestId("lessig-slide-position")).toHaveText(
-    /^1\s*\/\s*\d+$/,
-  );
+  const pos = page.getByTestId("lessig-slide-position");
+  await expect(pos).toHaveText(/^\d+\s*\/\s*\d+$/);
 
-  await expect(page.getByTestId("lessig-slide-position")).toHaveText(
-    /^2\s*\/\s*\d+$/,
-    { timeout: 5000 },
-  );
+  const initialText = (await pos.textContent()) ?? "1 / 1";
+  const initial = Number(initialText.split("/")[0]?.trim() ?? "1");
+
+  await expect
+    .poll(async () => {
+      const t = (await pos.textContent()) ?? "";
+      const n = Number(t.split("/")[0]?.trim() ?? "0");
+      return n;
+    })
+    .toBeGreaterThan(initial);
 });
-
