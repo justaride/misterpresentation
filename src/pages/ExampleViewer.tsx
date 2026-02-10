@@ -147,6 +147,11 @@ const EarlyAdopterClientDeck = lazy(() =>
     }),
   ),
 );
+const TenTwentyThirtyDeck = lazy(() =>
+  import("../components/presentation-modes/TenTwentyThirtyDeck").then((m) => ({
+    default: m.TenTwentyThirtyDeck,
+  })),
+);
 const GsapShowreel = lazy(() =>
   import("../components/presentation-modes/GsapShowreel").then((m) => ({
     default: m.GsapShowreel,
@@ -315,8 +320,10 @@ export function ExampleViewer() {
 	        return <Ignite20x15 />;
 	      case "lessig-method-deck":
 	        return <LessigMethodDeck />;
-	      case "early-adopter-client-deck":
-	        return <EarlyAdopterClientDeck />;
+      case "early-adopter-client-deck":
+        return <EarlyAdopterClientDeck />;
+      case "ten-twenty-thirty":
+        return <TenTwentyThirtyDeck />;
       case "gsap-showreel":
         return <GsapShowreel />;
       case "globe-explorer":

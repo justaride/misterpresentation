@@ -200,6 +200,17 @@ export const EXAMPLES: Example[] = [
     status: "available",
   },
   {
+    id: "ten-twenty-thirty",
+    title: "10/20/30 Deck",
+    description:
+      "Classic pitch constraint deck: 10 slides, 20 minutes, 30pt minimum. Includes a built-in pace timer and rehearsal speed mode.",
+    category: "slide-based",
+    format: "10-20-30",
+    difficulty: "beginner",
+    tags: ["pitch", "format", "timer", "typography"],
+    status: "available",
+  },
+  {
     id: "live-data-dashboard",
     title: "Live Data Dashboard",
     description:
