@@ -153,6 +153,36 @@
       backdrop-filter: blur(4px);
     }
 
+    .logo-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(0.45rem, 1vw, 0.78rem);
+      align-items: center;
+      margin-top: clamp(0.35rem, 1vw, 0.72rem);
+    }
+
+    .logo-card {
+      height: clamp(44px, 6.4vh, 64px);
+      min-width: clamp(136px, 20vw, 210px);
+      padding: clamp(0.28rem, 0.76vw, 0.5rem) clamp(0.44rem, 1.1vw, 0.72rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1px solid rgba(149, 177, 206, 0.42);
+      background: rgba(243, 248, 255, 0.95);
+      box-shadow: 0 10px 24px rgba(2, 11, 22, 0.33);
+    }
+
+    .logo-card img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
@@ -637,6 +667,11 @@
         --title-size: clamp(1.18rem, 6.8vw, 2.35rem);
       }
 
+      .logo-card {
+        min-width: clamp(118px, 42vw, 180px);
+        height: clamp(38px, 6.2vh, 52px);
+      }
+
       .phase-track,
       .stats-row,
       .arch-blocks {
@@ -679,6 +714,14 @@
           <span class="pill">Nordic Ecosystem for Circular Construction</span>
           <span class="pill">Short deck: 7-8 minutes</span>
           <span class="pill">Date: 12 Feb 2026</span>
+        </div>
+        <div class="logo-strip" aria-label="Project logos">
+          <div class="logo-card">
+            <img src="/shares/assets/nordic-circular-hotspot.svg" alt="Nordic Circular Hotspot logo">
+          </div>
+          <div class="logo-card">
+            <img src="/shares/assets/natural-state-logo.webp" alt="Natural State logo">
+          </div>
         </div>
       </div>
     </section>
