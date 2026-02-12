@@ -8,7 +8,28 @@ function readSessionUnlock() {
     return false;
   }
 
-  return window.sessionStorage.getItem(SESSION_UNLOCK_KEY) === "1";
+  try {
+    return window.sessionStorage.getItem(SESSION_UNLOCK_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function writeSessionUnlock(unlocked: boolean) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  try {
+    if (unlocked) {
+      window.sessionStorage.setItem(SESSION_UNLOCK_KEY, "1");
+    } else {
+      window.sessionStorage.removeItem(SESSION_UNLOCK_KEY);
+    }
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function ShareNeccBriefPage() {
@@ -44,7 +65,7 @@ export function ShareNeccBriefPage() {
     }
 
     if (enteredPasscode === expectedPasscode) {
-      window.sessionStorage.setItem(SESSION_UNLOCK_KEY, "1");
+      writeSessionUnlock(true);
       setIsUnlocked(true);
       setUnlockError(null);
       return;
@@ -57,8 +78,15 @@ export function ShareNeccBriefPage() {
     const handleIframeLoad = (
       event: SyntheticEvent<HTMLIFrameElement, Event>,
     ) => {
-      const frameDoc = event.currentTarget.contentDocument;
-      const loadedTitle = frameDoc?.title?.trim() ?? "";
+      let loadedTitle = "";
+      try {
+        loadedTitle = event.currentTarget.contentDocument?.title?.trim() ?? "";
+      } catch {
+        setDeckLoadError(
+          "Browser frame access is restricted in this session. Use the direct deck link below.",
+        );
+        return;
+      }
 
       // If the app shell loads inside the iframe, the static share file is missing from deployment.
       if (loadedTitle === "Mister Presentations") {
@@ -72,6 +100,27 @@ export function ShareNeccBriefPage() {
 
     return (
       <main className="h-screen w-screen bg-black relative">
+        <div className="absolute top-3 left-3 z-20 flex flex-wrap gap-2">
+          <a
+            href={SHARED_DECK_SRC}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center border-2 border-border bg-card/90 text-fg px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(17,24,39,1)] hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] transition-all"
+          >
+            Open Deck Directly
+          </a>
+          <button
+            type="button"
+            onClick={() => {
+              writeSessionUnlock(false);
+              setIsUnlocked(false);
+              setDeckLoadError(null);
+            }}
+            className="inline-flex items-center border-2 border-border bg-card/90 text-fg px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(17,24,39,1)] hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] transition-all"
+          >
+            Lock
+          </button>
+        </div>
         {deckLoadError ? (
           <section className="absolute inset-0 z-10 flex items-center justify-center p-6 pointer-events-none">
             <div className="max-w-xl w-full border-2 border-border bg-card text-fg shadow-[6px_6px_0px_0px_rgba(17,24,39,1)] p-5 space-y-3 pointer-events-auto">
