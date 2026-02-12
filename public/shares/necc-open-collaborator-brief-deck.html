@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NECC | Circular Construction Brief Deck</title>
+  <meta name="description" content="Short NECC project deck for potential strategic and technical collaborators.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2307111f'/%3E%3Ccircle cx='18' cy='22' r='4' fill='%2345d4ff'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23ffbf66'/%3E%3Ccircle cx='46' cy='20' r='4' fill='%2371e6c4'/%3E%3Cpath d='M18 22l14 10 14-12' stroke='%23cde6ff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+  <style>
+    /* ===========================================
+       VIEWPORT FITTING: MANDATORY BASE STYLES
+       =========================================== */
+    html,
+    body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg-deep: #07111f;
+      --bg-mid: #0d1d35;
+      --bg-soft: #162b4d;
+      --ink-bright: #f4f8ff;
+      --ink-muted: #b5c4db;
+      --accent-cyan: #45d4ff;
+      --accent-amber: #ffbf66;
+      --accent-green: #71e6c4;
+      --accent-rose: #ff879b;
+      --active-accent: #45d4ff;
+
+      --title-size: clamp(1.5rem, 5vw, 4rem);
+      --h2-size: clamp(1.2rem, 3.4vw, 2.5rem);
+      --h3-size: clamp(1rem, 2.3vw, 1.6rem);
+      --body-size: clamp(0.78rem, 1.45vw, 1.08rem);
+      --small-size: clamp(0.65rem, 0.95vw, 0.88rem);
+
+      --slide-padding: clamp(1rem, 4vw, 4rem);
+      --content-gap: clamp(0.55rem, 2vw, 1.8rem);
+      --element-gap: clamp(0.35rem, 1vw, 0.9rem);
+
+      --card-bg: rgba(12, 27, 49, 0.66);
+      --card-border: rgba(161, 195, 231, 0.22);
+      --card-shadow: 0 14px 44px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Gill Sans", "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--ink-bright);
+      background: radial-gradient(circle at 15% 10%, #142d52 0%, var(--bg-deep) 45%, #050c18 100%);
+      line-height: 1.4;
+    }
+
+    #constellation {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(69, 212, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 84% 78%, rgba(255, 191, 102, 0.08) 0%, transparent 42%),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0) 65%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-height: 100%;
+      overflow: hidden;
+      padding: var(--slide-padding);
+      width: min(1140px, 100%);
+      margin-inline: auto;
+      gap: var(--content-gap);
+    }
+
+    .eyebrow {
+      font-size: var(--small-size);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: color-mix(in srgb, var(--active-accent) 78%, white 22%);
+      opacity: 0.92;
+      margin: 0;
+    }
+
+    .headline {
+      margin: 0;
+      font-size: var(--title-size);
+      font-weight: 700;
+      line-height: 1.05;
+      text-wrap: balance;
+      max-width: 18ch;
+    }
+
+    .subhead {
+      margin: 0;
+      font-size: clamp(0.95rem, 1.65vw, 1.35rem);
+      color: var(--ink-muted);
+      max-width: 64ch;
+      text-wrap: pretty;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(0.35rem, 0.8vw, 0.65rem);
+    }
+
+    .pill {
+      font-size: var(--small-size);
+      padding: 0.3rem 0.72rem;
+      border: 1px solid rgba(172, 205, 236, 0.4);
+      border-radius: 999px;
+      background: rgba(17, 40, 69, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+      gap: clamp(0.5rem, 1.25vw, 1rem);
+      align-items: stretch;
+    }
+
+    .metric-card,
+    .content-card,
+    .flow-step,
+    .impact-card,
+    .partner-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      border-radius: clamp(10px, 1.6vw, 18px);
+      padding: clamp(0.62rem, 1.4vw, 1rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.26rem, 0.85vw, 0.55rem);
+      max-height: min(36vh, 320px);
+      overflow: hidden;
+    }
+
+    .metric-label,
+    .card-label {
+      margin: 0;
+      font-size: clamp(0.68rem, 0.92vw, 0.82rem);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: color-mix(in srgb, var(--active-accent) 72%, white 28%);
+    }
+
+    .metric-value,
+    .card-title {
+      margin: 0;
+      font-size: clamp(1rem, 2.2vw, 1.5rem);
+      line-height: 1.12;
+      font-weight: 650;
+      text-wrap: balance;
+    }
+
+    .metric-text,
+    .card-text,
+    .flow-text,
+    .impact-text,
+    .partner-text {
+      margin: 0;
+      font-size: var(--body-size);
+      color: var(--ink-muted);
+      text-wrap: pretty;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(0.8rem, 2vw, 1.7rem);
+      align-items: center;
+    }
+
+    .list-clean {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: clamp(0.2rem, 0.65vw, 0.45rem);
+      color: var(--ink-muted);
+      font-size: var(--body-size);
+    }
+
+    .list-clean strong {
+      color: var(--ink-bright);
+      font-weight: 630;
+    }
+
+    .platform-scaffold {
+      display: grid;
+      grid-template-columns: 0.9fr 1.2fr 0.9fr;
+      gap: clamp(0.55rem, 1.2vw, 0.95rem);
+      align-items: stretch;
+      min-height: min(63vh, 560px);
+    }
+
+    .layer-col,
+    .center-col {
+      display: grid;
+      gap: clamp(0.5rem, 1vw, 0.8rem);
+      align-content: center;
+    }
+
+    .layer-tag {
+      font-size: var(--small-size);
+      color: color-mix(in srgb, var(--active-accent) 78%, white 22%);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .node-card {
+      border: 1px solid var(--card-border);
+      background: rgba(8, 20, 38, 0.7);
+      border-radius: clamp(10px, 1.35vw, 14px);
+      padding: clamp(0.5rem, 1.1vw, 0.8rem);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.26);
+      font-size: clamp(0.72rem, 1vw, 0.9rem);
+      color: var(--ink-muted);
+    }
+
+    .node-card strong {
+      color: var(--ink-bright);
+      font-weight: 620;
+      display: block;
+      margin-bottom: 0.24rem;
+    }
+
+    .center-hub {
+      background: linear-gradient(135deg, rgba(18, 43, 75, 0.88) 0%, rgba(10, 23, 43, 0.78) 100%);
+      border: 1px solid color-mix(in srgb, var(--active-accent) 45%, #b4d9ff 55%);
+      border-radius: clamp(14px, 1.9vw, 20px);
+      padding: clamp(0.78rem, 1.5vw, 1.15rem);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.36);
+      display: grid;
+      gap: clamp(0.42rem, 0.9vw, 0.64rem);
+      align-content: start;
+      max-height: min(64vh, 560px);
+      overflow: hidden;
+    }
+
+    .hub-title {
+      margin: 0;
+      font-size: clamp(1.06rem, 1.95vw, 1.45rem);
+      line-height: 1.15;
+      max-width: 26ch;
+    }
+
+    .hub-list {
+      margin: 0;
+      padding-left: 1.05rem;
+      display: grid;
+      gap: 0.28rem;
+      color: var(--ink-muted);
+      font-size: clamp(0.72rem, 0.96vw, 0.88rem);
+    }
+
+    .criteria-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.18rem;
+    }
+
+    .criteria-chip {
+      font-size: clamp(0.66rem, 0.82vw, 0.78rem);
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(167, 208, 242, 0.4);
+      color: var(--ink-bright);
+      background: rgba(7, 22, 42, 0.65);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+      gap: clamp(0.45rem, 1vw, 0.8rem);
+    }
+
+    .flow-step {
+      position: relative;
+      justify-content: space-between;
+      max-height: min(45vh, 280px);
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      right: -0.35rem;
+      top: 50%;
+      width: 0.6rem;
+      height: 0.08rem;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--active-accent) 65%, transparent 35%) 0%, transparent 100%);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .quote {
+      margin: 0;
+      padding: clamp(0.6rem, 1.2vw, 0.85rem);
+      border-left: 3px solid color-mix(in srgb, var(--active-accent) 80%, #ffffff 20%);
+      background: rgba(10, 24, 45, 0.6);
+      border-radius: 0 10px 10px 0;
+      font-size: var(--body-size);
+      color: var(--ink-bright);
+      max-width: 72ch;
+    }
+
+    .arch-blocks {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.45rem, 0.9vw, 0.78rem);
+      align-items: stretch;
+    }
+
+    .arch-block {
+      background: rgba(9, 24, 42, 0.72);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.58rem;
+      display: grid;
+      gap: 0.2rem;
+      font-size: clamp(0.67rem, 0.86vw, 0.8rem);
+      color: var(--ink-muted);
+    }
+
+    .arch-block strong {
+      color: var(--ink-bright);
+      font-weight: 620;
+      font-size: clamp(0.71rem, 0.9vw, 0.84rem);
+    }
+
+    .phase-track {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.35rem, 0.8vw, 0.64rem);
+    }
+
+    .phase {
+      border: 1px solid rgba(164, 201, 238, 0.3);
+      border-radius: 11px;
+      background: rgba(8, 21, 38, 0.67);
+      padding: 0.5rem;
+      font-size: clamp(0.64rem, 0.84vw, 0.78rem);
+      color: var(--ink-muted);
+      display: grid;
+      gap: 0.22rem;
+    }
+
+    .phase strong {
+      color: var(--ink-bright);
+      font-weight: 620;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.35rem, 0.9vw, 0.7rem);
+    }
+
+    .stat-tile {
+      border: 1px solid rgba(164, 200, 234, 0.3);
+      border-radius: 10px;
+      padding: 0.48rem;
+      background: rgba(11, 25, 43, 0.66);
+    }
+
+    .stat-tile p {
+      margin: 0;
+      font-size: clamp(0.63rem, 0.82vw, 0.77rem);
+      color: var(--ink-muted);
+    }
+
+    .stat-tile strong {
+      font-size: clamp(0.93rem, 1.45vw, 1.2rem);
+      color: var(--ink-bright);
+      font-weight: 700;
+      display: block;
+      line-height: 1.1;
+      margin-bottom: 0.12rem;
+    }
+
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(0.55rem, 1.2vw, 0.9rem);
+    }
+
+    .partner-list {
+      margin: 0;
+      padding-left: 1rem;
+      display: grid;
+      gap: 0.26rem;
+      color: var(--ink-muted);
+      font-size: clamp(0.71rem, 0.96vw, 0.86rem);
+    }
+
+    .cta-band {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: clamp(0.7rem, 1.6vw, 1.1rem);
+      align-items: stretch;
+    }
+
+    .cta-panel {
+      background: linear-gradient(120deg, rgba(12, 30, 55, 0.88) 0%, rgba(16, 40, 65, 0.75) 100%);
+      border: 1px solid rgba(170, 206, 241, 0.32);
+      border-radius: clamp(12px, 1.6vw, 16px);
+      box-shadow: var(--card-shadow);
+      padding: clamp(0.65rem, 1.4vw, 1rem);
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .cta-panel h3 {
+      margin: 0;
+      font-size: var(--h3-size);
+      line-height: 1.2;
+    }
+
+    .cta-panel ol {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.26rem;
+      color: var(--ink-muted);
+      font-size: var(--body-size);
+    }
+
+    .closing-line {
+      margin: 0;
+      font-size: clamp(0.94rem, 1.55vw, 1.22rem);
+      color: var(--ink-bright);
+      max-width: 42ch;
+    }
+
+    .chrome {
+      position: fixed;
+      z-index: 3;
+      pointer-events: none;
+      inset: 0;
+    }
+
+    .progress {
+      position: absolute;
+      top: clamp(0.45rem, 1.4vw, 0.95rem);
+      left: clamp(0.55rem, 1.6vw, 1.2rem);
+      background: rgba(8, 20, 38, 0.6);
+      border: 1px solid rgba(165, 199, 232, 0.3);
+      border-radius: 999px;
+      padding: 0.28rem 0.62rem;
+      font-size: clamp(0.62rem, 0.85vw, 0.76rem);
+      color: var(--ink-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-dots {
+      position: absolute;
+      right: clamp(0.42rem, 1.2vw, 0.85rem);
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      gap: clamp(0.28rem, 0.7vw, 0.48rem);
+      pointer-events: auto;
+    }
+
+    .nav-dot {
+      width: clamp(7px, 0.76vw, 10px);
+      height: clamp(7px, 0.76vw, 10px);
+      border-radius: 50%;
+      border: 1px solid rgba(186, 214, 240, 0.6);
+      background: rgba(20, 42, 69, 0.72);
+      cursor: pointer;
+      transition: transform 0.24s ease, background-color 0.24s ease;
+    }
+
+    .nav-dot:hover,
+    .nav-dot:focus-visible {
+      transform: scale(1.14);
+      background: rgba(93, 208, 248, 0.6);
+      outline: none;
+    }
+
+    .nav-dot.active {
+      background: color-mix(in srgb, var(--active-accent) 78%, white 22%);
+      transform: scale(1.24);
+      border-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .keyboard-hint {
+      position: absolute;
+      bottom: clamp(0.35rem, 1vw, 0.75rem);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(0.58rem, 0.84vw, 0.73rem);
+      color: rgba(203, 219, 238, 0.78);
+      letter-spacing: 0.04em;
+      background: rgba(6, 15, 29, 0.45);
+      border: 1px solid rgba(147, 186, 227, 0.24);
+      border-radius: 999px;
+      padding: 0.2rem 0.56rem;
+    }
+
+    @media (max-height: 700px) {
+      :root {
+        --slide-padding: clamp(0.7rem, 2.8vw, 1.8rem);
+        --content-gap: clamp(0.35rem, 1.3vw, 0.9rem);
+        --title-size: clamp(1.2rem, 4.4vw, 2.35rem);
+        --h2-size: clamp(1rem, 2.8vw, 1.65rem);
+      }
+
+      .metric-card,
+      .content-card,
+      .flow-step,
+      .impact-card,
+      .partner-card,
+      .node-card,
+      .center-hub {
+        max-height: min(32vh, 220px);
+      }
+    }
+
+    @media (max-height: 600px) {
+      :root {
+        --slide-padding: clamp(0.5rem, 2.4vw, 1.2rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.72rem);
+        --title-size: clamp(1.05rem, 3.9vw, 1.95rem);
+        --body-size: clamp(0.68rem, 1.12vw, 0.94rem);
+      }
+
+      .nav-dots,
+      .keyboard-hint {
+        display: none;
+      }
+    }
+
+    @media (max-height: 500px) {
+      :root {
+        --slide-padding: clamp(0.35rem, 2vw, 0.9rem);
+        --title-size: clamp(0.95rem, 3.2vw, 1.42rem);
+        --h2-size: clamp(0.82rem, 2.2vw, 1.12rem);
+        --body-size: clamp(0.62rem, 0.95vw, 0.82rem);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .split,
+      .cta-band,
+      .platform-scaffold,
+      .partner-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phase-track,
+      .stats-row,
+      .arch-blocks {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+
+      .headline {
+        max-width: 24ch;
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --title-size: clamp(1.18rem, 6.8vw, 2.35rem);
+      }
+
+      .phase-track,
+      .stats-row,
+      .arch-blocks {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+
+  <div class="chrome" aria-hidden="true">
+    <div id="progressText" class="progress">Slide 1 / 8</div>
+    <div id="navDots" class="nav-dots"></div>
+    <div class="keyboard-hint">Arrow keys / wheel / swipe</div>
+  </div>
+
+  <main id="deck">
+    <section id="slide-1" class="slide" data-slide="1">
+      <div class="slide-content">
+        <p class="eyebrow">Project Briefing | Potential Strategic and Technical Collaborators</p>
+        <h1 class="headline">NECC: Building the Nordic Circular Construction Engine</h1>
+        <p class="subhead">
+          A short briefing on what this project wants to achieve, how the platform works, and the impact it can create for circular construction in the Nordics.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Nordic Ecosystem for Circular Construction</span>
+          <span class="pill">Short deck: 7-8 minutes</span>
+          <span class="pill">Date: 12 Feb 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-2" class="slide" data-slide="2">
+      <div class="slide-content">
+        <p class="eyebrow">Challenge and Timing</p>
+        <h2 class="headline">Why this matters now</h2>
+        <div class="split">
+          <div class="content-card" style="max-height:min(62vh,520px)">
+            <p class="card-label">Core market frictions</p>
+            <h3 class="card-title">Circular intent is rising, execution is fragmented</h3>
+            <ul class="list-clean">
+              <li><strong>Supply-demand disconnection:</strong> buyers and suppliers still struggle to find each other at Nordic scale.</li>
+              <li><strong>Low trust and weak comparability:</strong> circular options are often harder to assess against linear alternatives.</li>
+              <li><strong>Regulatory and language fragmentation:</strong> cross-border scaling remains operationally heavy.</li>
+              <li><strong>Financing complexity:</strong> teams lack a single place to navigate relevant funding and incentives.</li>
+            </ul>
+          </div>
+          <div class="grid">
+            <article class="metric-card">
+              <p class="metric-label">Expected policy pressure</p>
+              <p class="metric-value">23-24%</p>
+              <p class="metric-text">EU-aligned circularity level expected in construction by 2030, with 2026 as a critical policy year.</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">Current Nordic baseline</p>
+              <p class="metric-value">5-8%</p>
+              <p class="metric-text">Current circularity range in Nordic construction and property value chains.</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">Technical upside</p>
+              <p class="metric-value">50-95%</p>
+              <p class="metric-text">Documented technical circularity potential in building projects, depending on project type.</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">Strategic window</p>
+              <p class="metric-value">Now</p>
+              <p class="metric-text">This is a narrow timing window to build practical infrastructure that helps circular solutions become standard choices.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-3" class="slide" data-slide="3">
+      <div class="slide-content">
+        <p class="eyebrow">Vision 2030</p>
+        <h2 class="headline">The outcome NECC is designed to produce</h2>
+        <p class="subhead">This project aims to move from fragmented circular initiatives to shared Nordic acceleration infrastructure, building on pre-project and proof-of-concept work.</p>
+        <div class="grid">
+          <article class="impact-card">
+            <p class="card-label">Demand side</p>
+            <h3 class="card-title">Double circular ambition in projects</h3>
+            <p class="impact-text">Leading property owners, developers, and architects increase circular requirements in real procurement decisions.</p>
+          </article>
+          <article class="impact-card">
+            <p class="card-label">Supply side</p>
+            <h3 class="card-title">50 companies scale across borders</h3>
+            <p class="impact-text">Nordic circular suppliers grow turnover through structured cross-border visibility and qualified demand.</p>
+          </article>
+          <article class="impact-card">
+            <p class="card-label">Ecosystem</p>
+            <h3 class="card-title">Stronger alignment across market actors</h3>
+            <p class="impact-text">Owners, suppliers, advisors, and public actors coordinate around clearer data, opportunities, and practical pathways.</p>
+          </article>
+          <article class="impact-card">
+            <p class="card-label">Policy</p>
+            <h3 class="card-title">Nordic ambition aligned around 2030 goals</h3>
+            <p class="impact-text">Actionable policy signals and market evidence support stronger circular requirements across countries.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-4" class="slide" data-slide="4">
+      <div class="slide-content">
+        <p class="eyebrow">Platform Blueprint</p>
+        <h2 class="headline">What we are building: a market accelerator platform</h2>
+        <div class="platform-scaffold">
+          <div class="layer-col">
+            <p class="layer-tag">Demand side</p>
+            <article class="node-card">
+              <strong>Property owners and project clients</strong>
+              KLP, Entra, Veidekke, AF Gruppen, municipalities, and public procurement teams.
+            </article>
+            <article class="node-card">
+              <strong>High-need buyers</strong>
+              Organizations under ESG and CSRD pressure with immediate circular sourcing gaps.
+            </article>
+            <article class="node-card">
+              <strong>Key market criteria</strong>
+              Affordability, availability, and profitability must all be solved simultaneously.
+            </article>
+          </div>
+
+          <div class="center-col">
+            <article class="center-hub">
+              <p class="card-label">NECC Core</p>
+              <h3 class="hub-title">Market (Innovation) Accelerator Platform</h3>
+              <ul class="hub-list">
+                <li>Catalog of 50-100 circular solutions in construction</li>
+                <li>AI search (Go Circular) matched to project context</li>
+                <li>Funding opportunity map and deal pathways</li>
+                <li>Regulatory guidance across Nordic jurisdictions</li>
+                <li>Value-chain intelligence: who can deliver what, where, and when</li>
+                <li>Built on pre-project and proof-of-concept work from Public Circular Buildings</li>
+              </ul>
+              <div class="criteria-row">
+                <span class="criteria-chip">Affordability</span>
+                <span class="criteria-chip">Availability</span>
+                <span class="criteria-chip">Profitability</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="layer-col">
+            <p class="layer-tag">Supply side</p>
+            <article class="node-card">
+              <strong>Circular products and services</strong>
+              Material reuse, engineered timber, upgraded steel, low-carbon and circular components.
+            </article>
+            <article class="node-card">
+              <strong>Examples already mapped</strong>
+              Resirqel, Omtre, Nordic Circles, Brukspecialisten, Recoma, Naeste.
+            </article>
+            <article class="node-card">
+              <strong>External ecosystem partners</strong>
+              Nordic Circular Hotspot (owner), Natural State (host), plus partner network integrations.
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-5" class="slide" data-slide="5">
+      <div class="slide-content">
+        <p class="eyebrow">User Flow</p>
+        <h2 class="headline">How it works in a real project journey</h2>
+        <p class="quote">"I need circular facade and interior solutions for a 4-floor project in Western Sweden. Show me viable suppliers, regulation constraints, and funding paths."</p>
+        <div class="flow-grid">
+          <article class="flow-step">
+            <p class="card-label">Step 1</p>
+            <h3 class="card-title">Project brief input</h3>
+            <p class="flow-text">Location, building type, timeline, material preferences, and circular ambition level.</p>
+          </article>
+          <article class="flow-step">
+            <p class="card-label">Step 2</p>
+            <h3 class="card-title">AI-assisted search</h3>
+            <p class="flow-text">Go Circular identifies candidate products and suppliers by fit, geography, and readiness.</p>
+          </article>
+          <article class="flow-step">
+            <p class="card-label">Step 3</p>
+            <h3 class="card-title">Decision support</h3>
+            <p class="flow-text">Comparable options with circular attributes, availability indicators, and advisory context.</p>
+          </article>
+          <article class="flow-step">
+            <p class="card-label">Step 4</p>
+            <h3 class="card-title">Regulation and funding</h3>
+            <p class="flow-text">Country-specific guidance plus relevant grants, public schemes, and financing opportunities.</p>
+          </article>
+          <article class="flow-step">
+            <p class="card-label">Step 5</p>
+            <h3 class="card-title">Action and matchmaking</h3>
+            <p class="flow-text">Buyer-supplier connection, pilot activation, and progress tracked through platform analytics.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-6" class="slide" data-slide="6">
+      <div class="slide-content">
+        <p class="eyebrow">Technical Confidence</p>
+        <h2 class="headline">Execution model: phased build, grounded in proven pre-project work</h2>
+        <div class="phase-track">
+          <article class="phase">
+            <strong>Phase 1 | Foundation</strong>
+            M1-M6: schema adaptation, catalog MVP, basic search.
+          </article>
+          <article class="phase">
+            <strong>Phase 2 | Integrations</strong>
+            M4-M12: supplier onboarding, Nordic data coverage, API links.
+          </article>
+          <article class="phase">
+            <strong>Phase 3 | AI and features</strong>
+            M12-M24: advisory, matching, reporting, paid features.
+          </article>
+          <article class="phase">
+            <strong>Phase 4 | Scale</strong>
+            M24-M36: optimization, expansion, self-sustaining operations.
+          </article>
+        </div>
+
+        <div class="arch-blocks">
+          <article class="arch-block">
+            <strong>Experience layer</strong>
+            Next.js App Router UI for buyers, suppliers, and partners.
+          </article>
+          <article class="arch-block">
+            <strong>Integration layer</strong>
+            API gateway for registry, statistics, and ecosystem data sources.
+          </article>
+          <article class="arch-block">
+            <strong>Data layer</strong>
+            PostgreSQL core, full-text search baseline, structured product catalog.
+          </article>
+          <article class="arch-block">
+            <strong>Intelligence layer</strong>
+            AI parsing, matching, explainable recommendations, report generation.
+          </article>
+        </div>
+
+        <div class="stats-row">
+          <article class="stat-tile">
+            <strong>Public Circular Buildings</strong>
+            <p>Established pre-project and proof-of-concept foundation for this project direction.</p>
+          </article>
+          <article class="stat-tile">
+            <strong>80</strong>
+            <p>documented public circular building projects across Nordic countries.</p>
+          </article>
+          <article class="stat-tile">
+            <strong>48</strong>
+            <p>detailed case studies with quantified circularity and material insights.</p>
+          </article>
+          <article class="stat-tile">
+            <strong>5</strong>
+            <p>Nordic countries already covered in the knowledge base that informs NECC.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-7" class="slide" data-slide="7">
+      <div class="slide-content">
+        <p class="eyebrow">Ecosystem and Dialogue</p>
+        <h2 class="headline">How collaborators can engage with this project</h2>
+        <div class="partner-grid">
+          <article class="partner-card">
+            <p class="card-label">Current ecosystem anchors</p>
+            <h3 class="card-title">Ownership and platform stewardship</h3>
+            <ul class="partner-list">
+              <li>Nordic Circular Hotspot - Project Owner</li>
+              <li>Natural State - Host and technical platform lead</li>
+              <li>CIL, Future Built, Building Innovation - ecosystem partners</li>
+            </ul>
+          </article>
+
+          <article class="partner-card">
+            <p class="card-label">Potential contributions</p>
+            <h3 class="card-title">Where collaborators can add value</h3>
+            <p class="partner-text">The project is open to collaborators who can strengthen execution, adoption, communication, and practical implementation quality.</p>
+            <ul class="partner-list">
+              <li>Strategic input on ecosystem positioning and adoption</li>
+              <li>Technical input on integrations, reliability, and user value</li>
+              <li>Practical support for dissemination and stakeholder onboarding</li>
+            </ul>
+          </article>
+
+          <article class="partner-card">
+            <p class="card-label">Open position</p>
+            <h3 class="card-title">Role to be co-defined in dialogue</h3>
+            <p class="partner-text">We keep this intentionally open so the role can match each collaborator's strengths, priorities, and ambition level.</p>
+            <ul class="partner-list">
+              <li>Scope shaped through conversation, not predefined packages</li>
+              <li>Responsibilities aligned to concrete project needs</li>
+              <li>Shared ownership of outcomes and long-term impact</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="slide-8" class="slide" data-slide="8">
+      <div class="slide-content">
+        <p class="eyebrow">Impact and Action</p>
+        <h2 class="headline">What success can change, and how we continue the conversation</h2>
+        <div class="grid">
+          <article class="impact-card">
+            <p class="card-label">Industry impact</p>
+            <h3 class="card-title">Circular sourcing becomes operational, not aspirational</h3>
+            <p class="impact-text">Faster match quality and more predictable delivery reduce friction for circular adoption at project level.</p>
+          </article>
+          <article class="impact-card">
+            <p class="card-label">Climate and resource impact</p>
+            <h3 class="card-title">Higher circularity where decisions are made</h3>
+            <p class="impact-text">NECC targets practical shifts in procurement behavior across high-impact construction value chains.</p>
+          </article>
+          <article class="impact-card">
+            <p class="card-label">Business impact</p>
+            <h3 class="card-title">Cross-border growth for Nordic circular suppliers</h3>
+            <p class="impact-text">The platform creates better visibility and trusted pathways for circular suppliers to grow across the region.</p>
+          </article>
+        </div>
+
+        <div class="cta-band">
+          <article class="cta-panel">
+            <h3>Why this can make a real difference</h3>
+            <ol>
+              <li>It makes circular choices easier to act on in real, time-constrained projects.</li>
+              <li>It connects fragmented actors into a shared Nordic operating context.</li>
+              <li>It can raise circular ambition from isolated pilots to scalable market practice.</li>
+            </ol>
+          </article>
+          <article class="cta-panel">
+            <h3>Open dialogue</h3>
+            <p class="closing-line">If this vision resonates, we would like to continue the dialogue about how your organization could contribute to this project.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DECK_META = {
+      title: "NECC Partner Brief",
+      version: "1.0",
+      audience: "Potential strategic and technical collaborators",
+      date: "2026-02-12"
+    };
+
+    const PARTNER_MODEL = {
+      current: ["Potential strategic and technical collaborators"],
+      pending: ["Role to be co-defined in dialogue"]
+    };
+
+    const METRICS_MODEL = {
+      policy2030: "23-24%",
+      nordicBaseline: "5-8%",
+      technicalPotential: "50-95%",
+      scaleGoal: "50 suppliers"
+    };
+
+    const SLIDES = [
+      { id: "slide-1", title: "Cover", accent: "#45d4ff", nodes: [[0.18, 0.26], [0.52, 0.38], [0.8, 0.22], [0.72, 0.68]] },
+      { id: "slide-2", title: "Challenge", accent: "#ffbf66", nodes: [[0.2, 0.2], [0.42, 0.66], [0.7, 0.35], [0.85, 0.7]] },
+      { id: "slide-3", title: "Vision", accent: "#71e6c4", nodes: [[0.22, 0.45], [0.4, 0.22], [0.58, 0.5], [0.8, 0.24], [0.83, 0.72]] },
+      { id: "slide-4", title: "Platform", accent: "#45d4ff", nodes: [[0.13, 0.52], [0.36, 0.58], [0.5, 0.4], [0.63, 0.52], [0.88, 0.55]] },
+      { id: "slide-5", title: "Journey", accent: "#71e6c4", nodes: [[0.12, 0.56], [0.3, 0.5], [0.48, 0.46], [0.66, 0.5], [0.84, 0.56]] },
+      { id: "slide-6", title: "Technical", accent: "#ff879b", nodes: [[0.16, 0.35], [0.34, 0.35], [0.52, 0.35], [0.7, 0.35], [0.84, 0.62]] },
+      { id: "slide-7", title: "Partners", accent: "#45d4ff", nodes: [[0.2, 0.36], [0.5, 0.54], [0.8, 0.38], [0.5, 0.2]] },
+      { id: "slide-8", title: "Impact", accent: "#ffbf66", nodes: [[0.24, 0.25], [0.52, 0.35], [0.75, 0.3], [0.5, 0.72]] }
+    ];
+
+    const canvas = document.getElementById("constellation");
+    const ctx = canvas.getContext("2d", { alpha: true });
+
+    let width = 0;
+    let height = 0;
+    let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    let particles = [];
+    let currentSlide = 0;
+    let currentAccent = SLIDES[0].accent;
+    let activeNodes = SLIDES[0].nodes;
+    let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const pointer = {
+      x: 0,
+      y: 0,
+      active: false,
+      timeout: null
+    };
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function hexToRgb(hex) {
+      const clean = hex.replace("#", "");
+      const full = clean.length === 3 ? clean.split("").map((c) => c + c).join("") : clean;
+      const intVal = Number.parseInt(full, 16);
+      return {
+        r: (intVal >> 16) & 255,
+        g: (intVal >> 8) & 255,
+        b: intVal & 255
+      };
+    }
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initParticles();
+      drawFrame();
+    }
+
+    function initParticles() {
+      const count = clamp(Math.floor((width * height) / 18000), 55, 140);
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: 0.8 + Math.random() * 1.9,
+        drift: Math.random() * Math.PI * 2
+      }));
+    }
+
+    function getNodePixels() {
+      return activeNodes.map(([nx, ny]) => ({ x: nx * width, y: ny * height }));
+    }
+
+    function updateParticles() {
+      const nodes = getNodePixels();
+      const attractStrength = 0.0022;
+      const pointerStrength = 0.003;
+
+      for (const p of particles) {
+        if (nodes.length > 0) {
+          let closest = nodes[0];
+          let best = Infinity;
+          for (const node of nodes) {
+            const dx = node.x - p.x;
+            const dy = node.y - p.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < best) {
+              best = distSq;
+              closest = node;
+            }
+          }
+          const dx = closest.x - p.x;
+          const dy = closest.y - p.y;
+          p.vx += dx * attractStrength;
+          p.vy += dy * attractStrength;
+        }
+
+        if (pointer.active) {
+          const dx = pointer.x - p.x;
+          const dy = pointer.y - p.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < 50000) {
+            p.vx += dx * pointerStrength * 0.4;
+            p.vy += dy * pointerStrength * 0.4;
+          }
+        }
+
+        p.vx = clamp(p.vx, -0.75, 0.75);
+        p.vy = clamp(p.vy, -0.75, 0.75);
+
+        p.x += p.vx + Math.sin(p.drift) * 0.05;
+        p.y += p.vy + Math.cos(p.drift) * 0.05;
+        p.drift += 0.008;
+
+        if (p.x < -8 || p.x > width + 8) {
+          p.vx *= -1;
+          p.x = clamp(p.x, -6, width + 6);
+        }
+        if (p.y < -8 || p.y > height + 8) {
+          p.vy *= -1;
+          p.y = clamp(p.y, -6, height + 6);
+        }
+
+        p.vx *= 0.995;
+        p.vy *= 0.995;
+      }
+    }
+
+    function drawFrame() {
+      const rgb = hexToRgb(currentAccent);
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(5, 12, 24, 0.42)";
+      ctx.fillRect(0, 0, width, height);
+
+      const maxDist = 150;
+      for (let i = 0; i < particles.length; i += 1) {
+        const a = particles[i];
+        for (let j = i + 1; j < particles.length; j += 1) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < maxDist) {
+            const alpha = (1 - dist / maxDist) * 0.24;
+            ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
+            ctx.lineWidth = 0.75;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      for (const p of particles) {
+        ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.82)`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      const nodes = getNodePixels();
+      for (const node of nodes) {
+        const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 80);
+        gradient.addColorStop(0, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.22)`);
+        gradient.addColorStop(1, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0)`);
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 80, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function animate() {
+      updateParticles();
+      drawFrame();
+      if (!reducedMotion) {
+        window.requestAnimationFrame(animate);
+      }
+    }
+
+    const slideElements = SLIDES.map((slide) => document.getElementById(slide.id));
+    const navDots = document.getElementById("navDots");
+    const progressText = document.getElementById("progressText");
+
+    function goToSlide(index) {
+      const safeIndex = clamp(index, 0, SLIDES.length - 1);
+      slideElements[safeIndex].scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    }
+
+    function setActiveSlide(index) {
+      currentSlide = index;
+      const slide = SLIDES[index];
+      currentAccent = slide.accent;
+      activeNodes = slide.nodes;
+      document.documentElement.style.setProperty("--active-accent", slide.accent);
+
+      const dots = navDots.querySelectorAll("button");
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("active", dotIndex === index);
+      });
+      progressText.textContent = `Slide ${index + 1} / ${SLIDES.length}`;
+
+      if (reducedMotion) {
+        drawFrame();
+      }
+    }
+
+    function buildNavigation() {
+      SLIDES.forEach((slide, index) => {
+        const button = document.createElement("button");
+        button.className = "nav-dot";
+        button.type = "button";
+        button.setAttribute("aria-label", `Go to slide ${index + 1}: ${slide.title}`);
+        button.title = `${index + 1}. ${slide.title}`;
+        button.addEventListener("click", () => goToSlide(index));
+        navDots.appendChild(button);
+      });
+    }
+
+    function setupObserver() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.57) {
+              const index = slideElements.indexOf(entry.target);
+              if (index >= 0) {
+                setActiveSlide(index);
+              }
+            }
+          }
+        },
+        {
+          threshold: [0.58, 0.85]
+        }
+      );
+
+      slideElements.forEach((slide) => observer.observe(slide));
+    }
+
+    let wheelLocked = false;
+    window.addEventListener(
+      "wheel",
+      (event) => {
+        if (Math.abs(event.deltaY) < 18) {
+          return;
+        }
+        event.preventDefault();
+        if (wheelLocked) {
+          return;
+        }
+        wheelLocked = true;
+        if (event.deltaY > 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+        window.setTimeout(() => {
+          wheelLocked = false;
+        }, 480);
+      },
+      { passive: false }
+    );
+
+    window.addEventListener("keydown", (event) => {
+      if (["ArrowDown", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(currentSlide + 1);
+      }
+      if (["ArrowUp", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        goToSlide(currentSlide - 1);
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        goToSlide(0);
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        goToSlide(SLIDES.length - 1);
+      }
+    });
+
+    let touchStartY = null;
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.changedTouches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchend", (event) => {
+      if (touchStartY === null) {
+        return;
+      }
+      const endY = event.changedTouches[0].clientY;
+      const diff = touchStartY - endY;
+      if (Math.abs(diff) > 46) {
+        if (diff > 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+      }
+      touchStartY = null;
+    }, { passive: true });
+
+    window.addEventListener("mousemove", (event) => {
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      pointer.active = true;
+      if (pointer.timeout) {
+        window.clearTimeout(pointer.timeout);
+      }
+      pointer.timeout = window.setTimeout(() => {
+        pointer.active = false;
+      }, 350);
+    }, { passive: true });
+
+    window.addEventListener("resize", resizeCanvas);
+    window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", (event) => {
+      reducedMotion = event.matches;
+      if (!reducedMotion) {
+        animate();
+      } else {
+        drawFrame();
+      }
+    });
+
+    buildNavigation();
+    setupObserver();
+    resizeCanvas();
+    setActiveSlide(0);
+    if (!reducedMotion) {
+      animate();
+    }
+
+    // Expose minimal metadata for quick inspection in dev tools.
+    window.NECCDeck = {
+      DECK_META,
+      PARTNER_MODEL,
+      METRICS_MODEL,
+      SLIDES
+    };
+  </script>
+</body>
+</html>

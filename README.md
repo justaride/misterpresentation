@@ -8,6 +8,29 @@ A showcase of creative, interactive, and experimental web presentation modes bui
 
 This project explores various ways to present information on the web, moving beyond standard slide decks into scroll-driven narratives, typography-focused experiences, and interactive visualizations.
 
+## Shared External Brief (Isolated Route)
+
+The app includes an isolated share route for the NECC external brief:
+
+- Route: `/share/necc-circular-construction-brief`
+- Purpose: shareable URL outside normal Mister Presentations browsing flow.
+- Behavior:
+  - Not linked from home/examples/research navigation.
+  - Requires passcode before loading the deck.
+  - Loads deck artifact from `/shares/necc-open-collaborator-brief-deck.html`.
+
+### Configure passcode
+
+Set this env var in your frontend deployment:
+
+```bash
+VITE_SHARE_PASSCODE=<your-passcode>
+```
+
+If `VITE_SHARE_PASSCODE` is missing, the share page remains locked with a configuration message.
+
+Note: this is client-side gating for controlled sharing, not server-enforced authentication.
+
 ## Presentation Modes
 
 ### 1. The Takahashi Method
