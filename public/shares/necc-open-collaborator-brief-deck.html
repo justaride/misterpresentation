@@ -13,7 +13,7 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Geist+Mono:wght@400;600&family=Manrope:wght@400;500;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2307111f'/%3E%3Ccircle cx='18' cy='22' r='4' fill='%2345d4ff'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23ffbf66'/%3E%3Ccircle cx='46' cy='20' r='4' fill='%2371e6c4'/%3E%3Cpath d='M18 22l14 10 14-12' stroke='%23cde6ff' stroke-width='2' fill='none'/%3E%3C/svg%3E"
@@ -28,36 +28,42 @@
       html {
         scroll-snap-type: y mandatory;
         scroll-behavior: smooth;
+        background: #040810;
       }
 
       :root {
-        --bg-deep: #050a14;
-        --bg-mid: #0b1426;
-        --bg-soft: #121e36;
-        --ink-bright: #ffffff;
-        --ink-muted: #a0aec0;
+        --bg-deep: #040810;
+        --bg-mid: #0a1428;
+        --bg-soft: #12203a;
+        --ink-bright: #f6f9ff;
+        --ink-body: #d9e4f3;
+        --ink-muted: #9caec8;
+        --ink-soft: #7c90aa;
         --accent-cyan: #00e5ff;
         --accent-amber: #f6ad55;
         --accent-green: #48bb78;
         --accent-rose: #f56565;
+        --accent-violet: #a78bfa;
         --active-accent: var(--accent-cyan);
 
-        --font-display: 'Outfit', system-ui, sans-serif;
-        --font-mono: 'Geist Mono', monospace;
+        --font-display: "Outfit", sans-serif;
+        --font-body: "Manrope", sans-serif;
+        --font-serif: "Cormorant Garamond", serif;
+        --font-mono: "Geist Mono", monospace;
 
-        --title-size: clamp(2.5rem, 8vw, 5.5rem);
-        --h2-size: clamp(1.8rem, 5vw, 3.5rem);
-        --h3-size: clamp(1.2rem, 3vw, 2rem);
-        --body-size: clamp(1rem, 1.2vw, 1.25rem);
-        --small-size: clamp(0.75rem, 0.9vw, 0.9rem);
+        --title-size: clamp(2.3rem, 6.8vw, 5.4rem);
+        --h2-size: clamp(1.85rem, 4.6vw, 3.55rem);
+        --h3-size: clamp(1.3rem, 2.6vw, 2rem);
+        --body-size: clamp(0.98rem, 1.05vw, 1.18rem);
+        --small-size: clamp(0.68rem, 0.88vw, 0.86rem);
 
-        --slide-padding: clamp(2rem, 6vw, 8rem);
-        --content-gap: clamp(1.5rem, 3vw, 4rem);
-        --element-gap: clamp(0.75rem, 1.5vw, 2rem);
+        --slide-padding: clamp(1.1rem, 4.2vw, 4.8rem);
+        --content-gap: clamp(0.9rem, 1.65vw, 1.8rem);
+        --element-gap: clamp(0.6rem, 1.25vw, 1.2rem);
 
-        --card-bg: rgba(15, 23, 42, 0.6);
-        --card-border: rgba(255, 255, 255, 0.08);
-        --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        --card-bg: color-mix(in srgb, #0d1b32 80%, transparent);
+        --card-border: rgba(255, 255, 255, 0.13);
+        --card-shadow: 0 16px 42px rgba(0, 0, 0, 0.45);
       }
 
       * {
@@ -66,11 +72,12 @@
 
       body {
         margin: 0;
-        font-family: 'Outfit', sans-serif;
         color: var(--ink-bright);
+        font-family: var(--font-body);
+        line-height: 1.45;
         background: var(--bg-deep);
-        line-height: 1.5;
         -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
 
       #constellation {
@@ -91,7 +98,7 @@
         z-index: 0;
         pointer-events: none;
         filter: blur(12px);
-        opacity: 0.3;
+        opacity: 0.28;
         mix-blend-mode: screen;
       }
 
@@ -107,7 +114,6 @@
         overflow: hidden;
         scroll-snap-align: start;
         display: flex;
-        flex-direction: column;
         position: relative;
         isolation: isolate;
       }
@@ -117,60 +123,72 @@
         position: absolute;
         inset: 0;
         pointer-events: none;
+        z-index: -2;
+      }
+
+      .slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
         z-index: -1;
+        background:
+          linear-gradient(130deg, rgba(255, 255, 255, 0.05) 0%, transparent 30%),
+          radial-gradient(circle at 85% 82%, rgba(255, 255, 255, 0.03) 0%, transparent 55%);
+        mix-blend-mode: soft-light;
       }
 
       [data-slide-theme="hero"]::before {
         background:
-          radial-gradient(circle at 50% 40%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
-          radial-gradient(circle at 85% 15%, rgba(72, 187, 120, 0.1) 0%, transparent 40%),
-          linear-gradient(180deg, #050a14 0%, #0a1426 100%);
+          radial-gradient(circle at 18% 14%, rgba(0, 229, 255, 0.18) 0%, transparent 58%),
+          radial-gradient(circle at 83% 20%, rgba(72, 187, 120, 0.14) 0%, transparent 48%),
+          linear-gradient(165deg, #03070f 0%, #0a1428 65%, #061324 100%);
       }
 
       [data-slide-theme="data"]::before {
         background:
-          radial-gradient(circle at 15% 30%, rgba(246, 173, 85, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 85% 70%, rgba(245, 101, 101, 0.08) 0%, transparent 45%),
-          linear-gradient(145deg, #0f172a 0%, #050a14 100%);
+          radial-gradient(circle at 12% 28%, rgba(246, 173, 85, 0.14) 0%, transparent 52%),
+          radial-gradient(circle at 90% 76%, rgba(245, 101, 101, 0.12) 0%, transparent 45%),
+          linear-gradient(155deg, #0d162a 0%, #050c19 100%);
       }
 
       [data-slide-theme="aspiration"]::before {
         background:
-          radial-gradient(circle at 30% 20%, rgba(72, 187, 120, 0.12) 0%, transparent 50%),
-          radial-gradient(circle at 70% 80%, rgba(0, 229, 255, 0.08) 0%, transparent 45%),
-          linear-gradient(155deg, #050a14 0%, #0f172a 100%);
+          radial-gradient(circle at 24% 20%, rgba(72, 187, 120, 0.15) 0%, transparent 56%),
+          radial-gradient(circle at 80% 80%, rgba(0, 229, 255, 0.1) 0%, transparent 44%),
+          linear-gradient(148deg, #07101f 0%, #0d1a2f 100%);
       }
 
       [data-slide-theme="blueprint"]::before {
         background:
-          linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(160deg, #050a14 0%, #1e293b 100%);
-        background-size: 50px 50px, 50px 50px, 100% 100%;
+          linear-gradient(rgba(0, 229, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 229, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(160deg, #071224 0%, #131f35 100%);
+        background-size: 42px 42px, 42px 42px, 100% 100%;
       }
 
       [data-slide-theme="narrative"]::before {
         background:
-          linear-gradient(90deg, rgba(5, 10, 20, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%),
-          radial-gradient(circle at 10% 40%, rgba(72, 187, 120, 0.1) 0%, transparent 40%);
+          radial-gradient(circle at 10% 60%, rgba(72, 187, 120, 0.11) 0%, transparent 43%),
+          linear-gradient(102deg, #050a14 0%, #0d1930 55%, #0b1428 100%);
       }
 
       [data-slide-theme="architecture"]::before {
         background:
-          radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%),
-          linear-gradient(180deg, #020617 0%, #050a14 100%);
+          radial-gradient(circle at 68% 24%, rgba(245, 101, 101, 0.1) 0%, transparent 44%),
+          linear-gradient(180deg, #03060f 0%, #0a1324 100%);
       }
 
       [data-slide-theme="dialogue"]::before {
         background:
-          radial-gradient(circle at 50% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 60%),
-          linear-gradient(160deg, #0c0a1d 0%, #050a14 100%);
+          radial-gradient(circle at 48% 28%, rgba(167, 139, 250, 0.17) 0%, transparent 53%),
+          linear-gradient(155deg, #0d0a1f 0%, #071021 100%);
       }
 
       [data-slide-theme="closing"]::before {
         background:
-          radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.12) 0%, transparent 60%),
-          linear-gradient(180deg, #050a14 0%, #000000 100%);
+          radial-gradient(circle at 50% 36%, rgba(0, 229, 255, 0.18) 0%, transparent 62%),
+          linear-gradient(180deg, #060a14 0%, #010307 100%);
       }
 
       .slide-content {
@@ -178,468 +196,697 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width: min(1440px, 100%);
+        margin-inline: auto;
         max-height: 100%;
         overflow: hidden;
         padding: var(--slide-padding);
-        width: min(1400px, 100%);
-        margin-inline: auto;
         gap: var(--content-gap);
-        animation: slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: slide-in 0.85s cubic-bezier(0.18, 1, 0.34, 1) forwards;
+      }
+
+      .slide-tight {
+        gap: clamp(0.6rem, 1.2vw, 1rem);
+      }
+
+      .slide-tight .headline {
+        font-size: clamp(2rem, 4.1vw, 3.2rem);
+        max-width: 19ch;
+      }
+
+      .slide-tight .execution-layout {
+        gap: 0.5rem;
+      }
+
+      .slide-tight .phase-lane {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+      }
+
+      .slide-tight .phase-block {
+        padding: 0.68rem;
+      }
+
+      .slide-tight .phase-heading {
+        font-size: 0.94rem;
+      }
+
+      .slide-tight .phase-detail,
+      .slide-tight .friction-list li,
+      .slide-tight .stack-list li {
+        font-size: 0.74rem;
+        line-height: 1.3;
+      }
+
+      .slide-tight .content-card {
+        padding: 0.9rem;
+      }
+
+      .slide-tight .card-title {
+        font-size: clamp(1.06rem, 1.55vw, 1.38rem);
       }
 
       @keyframes slide-in {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(26px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .eyebrow {
+        margin: 0;
         font-family: var(--font-mono);
         font-size: var(--small-size);
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.2em;
+        letter-spacing: 0.19em;
         color: var(--active-accent);
-        opacity: 0.9;
-        margin: 0;
       }
 
       .headline {
         margin: 0;
+        max-width: 16.5ch;
         font-family: var(--font-display);
         font-size: var(--title-size);
         font-weight: 700;
-        line-height: 1;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.022em;
+        line-height: 0.95;
         text-wrap: balance;
-        max-width: 16ch;
       }
 
+      .lead,
       .subhead {
         margin: 0;
-        font-size: clamp(1.1rem, 2vw, 1.6rem);
-        line-height: 1.4;
-        font-weight: 300;
-        color: var(--ink-muted);
-        max-width: 55ch;
+        max-width: 62ch;
+        color: var(--ink-body);
+        font-size: clamp(1rem, 1.55vw, 1.34rem);
+        line-height: 1.5;
         text-wrap: pretty;
       }
 
       .pill-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: 0.6rem;
       }
 
       .pill {
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.4rem 0.9rem;
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        padding: 0.4rem 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.03);
+        letter-spacing: 0.02em;
+        color: var(--ink-body);
         backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
       }
 
       .logo-strip {
+        margin-top: 0.5rem;
         display: flex;
         flex-wrap: wrap;
-        gap: 1.5rem;
+        gap: 0.8rem;
         align-items: center;
-        margin-top: 1rem;
       }
 
       .logo-card {
+        min-width: 170px;
         height: 60px;
-        min-width: 180px;
-        padding: 0.75rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease;
-      }
-
-      .grid {
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.93);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.26);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-        gap: var(--element-gap);
-        align-items: stretch;
+        place-items: center;
+        padding: 0.75rem 1.1rem;
       }
 
-      .metric-card,
+      .logo-card img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 40px;
+        object-fit: contain;
+      }
+
+      .card-surface,
       .content-card,
-      .flow-step,
+      .metric-card,
+      .vision-card,
       .impact-card,
-      .partner-card {
-        background: var(--card-bg);
+      .partner-card,
+      .journey-step,
+      .phase-block,
+      .stat-tile,
+      .prompt-strip {
         border: 1px solid var(--card-border);
+        background: var(--card-bg);
         box-shadow: var(--card-shadow);
-        border-radius: 20px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        border-radius: 18px;
         backdrop-filter: blur(12px);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      .metric-label,
-      .card-label {
+      .card-label,
+      .metric-label {
         margin: 0;
         font-family: var(--font-mono);
         font-size: var(--small-size);
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
         color: var(--active-accent);
       }
 
-      .metric-value,
-      .card-title {
+      .card-title,
+      .metric-value {
         margin: 0;
         font-family: var(--font-display);
-        font-size: clamp(1.5rem, 3vw, 2.2rem);
-        line-height: 1.1;
+        font-size: var(--h3-size);
         font-weight: 700;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
       }
 
-      .metric-text,
       .card-text,
-      .flow-text,
-      .impact-text,
-      .partner-text {
+      .metric-text,
+      .impact-text {
         margin: 0;
-        font-size: var(--body-size);
-        line-height: 1.6;
         color: var(--ink-muted);
-        font-weight: 400;
+        font-size: var(--body-size);
+        line-height: 1.5;
       }
 
-      /* Layout Variations */
-      .layout-centered {
-        text-align: center;
+      .hero-stage {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: clamp(1rem, 2.4vw, 2.2rem);
         align-items: center;
       }
 
-      .layout-centered .headline {
-        margin-inline: auto;
-      }
-
-      .layout-centered .pill-row,
-      .layout-centered .logo-strip {
-        justify-content: center;
-      }
-
-      .layout-split-large {
+      .hero-copy {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: var(--content-gap);
-        align-items: start;
+        gap: 0.85rem;
       }
 
-      .layout-bento {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 1.5rem;
-      }
-
-      .bento-item {
-        grid-column: span 6;
-      }
-
-      .bento-item:nth-child(1),
-      .bento-item:nth-child(4) {
-        grid-column: span 7;
-      }
-
-      .bento-item:nth-child(2),
-      .bento-item:nth-child(3) {
-        grid-column: span 5;
-      }
-
-      .list-clean {
-        margin: 0;
-        padding-left: 1.5rem;
+      .hero-brief {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(0, 229, 255, 0.16), transparent 54%),
+          rgba(10, 20, 36, 0.8);
+        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.42);
+        padding: 1.2rem;
         display: grid;
         gap: 1rem;
-        color: var(--ink-muted);
-        font-size: var(--body-size);
       }
 
-      .list-clean li {
-        position: relative;
+      .hero-list {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.68rem;
         list-style: none;
       }
 
-      .list-clean li::before {
-        content: "→";
-        position: absolute;
-        left: -1.5rem;
-        color: var(--active-accent);
-        font-family: var(--font-mono);
+      .hero-list li {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.7rem 0.75rem;
+        color: var(--ink-muted);
+        font-size: 0.88rem;
       }
 
-      .list-clean strong {
-        color: var(--ink-bright);
-        font-weight: 600;
+      .hero-list strong {
         display: block;
+        color: var(--ink-bright);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+      }
+
+      .challenge-layout {
+        display: grid;
+        grid-template-columns: 1.24fr 0.76fr;
+        gap: var(--element-gap);
+      }
+
+      .content-card {
+        padding: 1.2rem 1.3rem;
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .friction-list {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.66rem;
+        list-style: none;
+      }
+
+      .friction-list li {
+        position: relative;
+        border-left: 2px solid rgba(255, 255, 255, 0.12);
+        padding-left: 0.75rem;
+        color: var(--ink-muted);
+        font-size: 0.93rem;
+        line-height: 1.36;
+      }
+
+      .friction-list strong {
+        display: block;
+        color: var(--ink-bright);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         margin-bottom: 0.2rem;
+      }
+
+      .metric-rail {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .metric-node,
+      .signal-card {
+        padding: 1rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(10, 19, 36, 0.78);
+        box-shadow: var(--card-shadow);
+      }
+
+      .metric-number {
+        margin: 0.35rem 0 0.4rem;
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 2.45vw, 2.35rem);
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+
+      .signal-list {
+        margin: 0.55rem 0 0;
+        padding-left: 1rem;
+        display: grid;
+        gap: 0.34rem;
+        color: var(--ink-muted);
+        font-size: 0.82rem;
+      }
+
+      .vision-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--element-gap);
+      }
+
+      .vision-card {
+        position: relative;
+        overflow: hidden;
+        padding: 1.15rem 1.15rem 1.1rem;
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .vision-card::after {
+        content: "";
+        position: absolute;
+        inset: auto auto 0 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--active-accent), transparent 70%);
+        opacity: 0.5;
+      }
+
+      .vision-index {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        color: var(--active-accent);
       }
 
       .platform-scaffold {
         display: grid;
-        grid-template-columns: 1fr 1.5fr 1fr;
-        gap: 1.5rem;
+        grid-template-columns: 1fr 1.35fr 1fr;
+        gap: 1rem;
         align-items: center;
-        min-height: 50vh;
       }
 
       .layer-col {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        display: grid;
+        gap: 0.7rem;
       }
 
       .layer-tag {
+        margin: 0;
         font-family: var(--font-mono);
-        font-size: var(--small-size);
-        color: var(--active-accent);
-        letter-spacing: 0.1em;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        margin-bottom: 0.5rem;
+        color: var(--active-accent);
       }
 
       .node-card {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 16px;
-        padding: 1.25rem;
-        font-size: 0.95rem;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.045);
+        padding: 0.88rem;
         color: var(--ink-muted);
-        backdrop-filter: blur(8px);
+        font-size: 0.86rem;
+        line-height: 1.35;
       }
 
       .node-card strong {
-        color: var(--ink-bright);
-        font-weight: 600;
         display: block;
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.26rem;
+        color: var(--ink-bright);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
       .center-hub {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-        border: 1px solid var(--active-accent);
-        border-radius: 24px;
-        padding: 2.5rem;
-        box-shadow: 0 0 50px rgba(0, 229, 255, 0.15);
+        border-radius: 21px;
+        border: 1px solid color-mix(in srgb, var(--active-accent) 72%, white 8%);
+        background:
+          radial-gradient(circle at 86% 18%, rgba(0, 229, 255, 0.18) 0%, transparent 48%),
+          rgba(9, 18, 33, 0.85);
+        box-shadow: 0 0 52px rgba(0, 229, 255, 0.14);
+        padding: 1.3rem;
         display: grid;
-        gap: 1.5rem;
-        position: relative;
-      }
-
-      .center-hub::after {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 26px;
-        background: linear-gradient(45deg, var(--active-accent), transparent, var(--active-accent));
-        z-index: -1;
-        opacity: 0.3;
+        gap: 0.85rem;
       }
 
       .hub-title {
         margin: 0;
         font-family: var(--font-display);
-        font-size: 1.8rem;
+        font-size: clamp(1.22rem, 2.3vw, 1.75rem);
         font-weight: 700;
-        line-height: 1.2;
+        line-height: 1.1;
       }
 
       .hub-list {
         margin: 0;
-        padding-left: 1.25rem;
+        padding-left: 1rem;
         display: grid;
-        gap: 0.75rem;
+        gap: 0.45rem;
         color: var(--ink-muted);
-        font-size: 1rem;
+        font-size: 0.89rem;
       }
 
       .criteria-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: 0.42rem;
       }
 
       .criteria-chip {
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        padding: 0.4rem 0.8rem;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: var(--ink-bright);
+        border: 1px solid rgba(255, 255, 255, 0.19);
         background: rgba(255, 255, 255, 0.05);
+        padding: 0.3rem 0.66rem;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
-      .flow-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 1rem;
-      }
-
-      .flow-step {
-        padding: 1.5rem;
-        text-align: center;
-        justify-content: flex-start;
-      }
-
-      .quote {
+      .journey-quote {
         margin: 0;
-        padding: 2rem;
-        border-left: 4px solid var(--active-accent);
-        background: rgba(255, 255, 255, 0.03);
-        font-family: var(--font-display);
+        max-width: 37ch;
+        font-family: var(--font-serif);
+        font-size: clamp(1.55rem, 3.3vw, 2.45rem);
         font-style: italic;
-        font-size: 1.8rem;
-        font-weight: 300;
-        color: var(--ink-bright);
-        max-width: 800px;
-        line-height: 1.4;
+        line-height: 1.07;
+        letter-spacing: -0.01em;
+        color: #f4f8ff;
+        border-left: 4px solid var(--active-accent);
+        padding-left: 0.86rem;
       }
 
-      .unified-track {
+      .journey-track {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.62rem;
       }
 
-      .phase {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 1.5rem;
-        position: relative;
-        overflow: hidden;
+      .journey-step {
+        padding: 0.85rem;
+        display: grid;
+        gap: 0.45rem;
       }
 
-      .phase .phase-num {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        font-size: 5rem;
-        font-weight: 800;
-        color: rgba(255, 255, 255, 0.03);
-        line-height: 1;
-        pointer-events: none;
+      .step-num {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--active-accent);
       }
 
-      .phase strong {
+      .step-title {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+      }
+
+      .step-text {
+        margin: 0;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        color: var(--ink-muted);
+      }
+
+      .execution-layout {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: var(--element-gap);
+      }
+
+      .phase-lane {
+        display: grid;
+        gap: 0.62rem;
+      }
+
+      .phase-block {
+        padding: 0.86rem;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .phase-window {
+        margin: 0;
         font-family: var(--font-mono);
         color: var(--active-accent);
-        font-size: 0.85rem;
         text-transform: uppercase;
-        display: block;
-        margin-bottom: 0.5rem;
+        letter-spacing: 0.12em;
+        font-size: 0.64rem;
       }
 
-      .arch-block {
-        border: 1px dashed rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
-        padding: 1rem;
-        font-size: 0.85rem;
+      .phase-heading {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.06rem;
+      }
+
+      .phase-detail {
+        margin: 0;
         color: var(--ink-muted);
-        margin-top: 1rem;
+        font-size: 0.82rem;
+        line-height: 1.36;
       }
 
-      .arch-block strong {
-        color: var(--ink-bright);
+      .execution-side {
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .stack-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.46rem;
+      }
+
+      .stack-list li {
+        border-radius: 10px;
+        border: 1px dashed rgba(255, 255, 255, 0.22);
+        padding: 0.54rem 0.6rem;
+        color: var(--ink-muted);
+        font-size: 0.8rem;
+      }
+
+      .stack-list strong {
         display: block;
-        margin-bottom: 0.25rem;
+        color: var(--ink-bright);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.18rem;
       }
 
       .stats-row {
         display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr 1fr;
-        gap: 1rem;
-        margin-top: 2rem;
+        grid-template-columns: 1.35fr 1fr 1fr 1fr;
+        gap: 0.62rem;
       }
 
       .stat-tile {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 1.25rem;
+        padding: 0.86rem;
       }
 
       .stat-tile strong {
-        font-family: var(--font-display);
-        font-size: 2rem;
-        color: var(--active-accent);
         display: block;
+        margin-bottom: 0.22rem;
+        font-family: var(--font-display);
+        font-size: clamp(1.15rem, 2.25vw, 1.9rem);
+        letter-spacing: -0.02em;
+        color: var(--active-accent);
       }
 
-      .partner-grid {
+      .stat-tile p {
+        margin: 0;
+        color: var(--ink-muted);
+        font-size: 0.8rem;
+        line-height: 1.35;
+      }
+
+      .partner-layout {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--element-gap);
       }
 
       .partner-card {
-        padding: 2.5rem;
+        padding: 1rem;
+        display: grid;
+        gap: 0.5rem;
       }
 
       .partner-list {
         margin: 0;
-        padding-left: 1.25rem;
+        padding: 0;
+        list-style: none;
         display: grid;
-        gap: 1rem;
-        color: var(--ink-muted);
-        font-size: 1rem;
+        gap: 0.42rem;
       }
 
       .partner-list li {
-        position: relative;
-        list-style: none;
+        border-left: 2px solid rgba(255, 255, 255, 0.14);
+        padding-left: 0.56rem;
+        color: var(--ink-muted);
+        font-size: 0.82rem;
+        line-height: 1.33;
       }
 
-      .partner-list li::before {
-        content: "—";
-        position: absolute;
-        left: -1.25rem;
-        color: var(--active-accent);
+      .prompt-strip {
+        padding: 0.95rem;
+        display: grid;
+        gap: 0.56rem;
+      }
+
+      .prompt-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }
+
+      .prompt-pill {
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.33rem 0.72rem;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-body);
+      }
+
+      .closing-layout {
+        text-align: center;
+        align-items: center;
+      }
+
+      .closing-layout .headline {
+        margin-inline: auto;
+      }
+
+      .closing-layout .lead {
+        margin-inline: auto;
+      }
+
+      .closing-grid {
+        width: min(1040px, 100%);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--element-gap);
+      }
+
+      .impact-card {
+        padding: 1.05rem;
+        text-align: left;
+        display: grid;
+        gap: 0.46rem;
+      }
+
+      .closing-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.42rem;
+      }
+
+      .action-pill {
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        padding: 0.35rem 0.72rem;
+        font-family: var(--font-mono);
+        font-size: 0.64rem;
+        color: var(--ink-body);
       }
 
       .chrome {
         position: fixed;
+        inset: 0;
         z-index: 3;
         pointer-events: none;
-        inset: 0;
       }
 
       .progress {
         position: absolute;
-        top: 2rem;
-        left: 2rem;
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        top: 1.1rem;
+        left: 1.1rem;
         border-radius: 999px;
-        padding: 0.5rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(7, 16, 31, 0.72);
+        padding: 0.4rem 0.8rem;
         font-family: var(--font-mono);
-        font-size: 0.75rem;
+        font-size: 0.67rem;
         color: var(--active-accent);
         backdrop-filter: blur(8px);
       }
 
       .nav-dots {
         position: absolute;
-        right: 2rem;
+        right: 1.2rem;
         top: 50%;
         transform: translateY(-50%);
         display: grid;
-        gap: 0.75rem;
+        gap: 0.52rem;
         pointer-events: auto;
       }
 
@@ -647,46 +894,90 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.24);
         background: transparent;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.22s ease;
       }
 
       .nav-dot.active {
         background: var(--active-accent);
         border-color: var(--active-accent);
-        transform: scale(1.4);
+        transform: scale(1.36);
       }
 
       .keyboard-hint {
         position: absolute;
-        bottom: 2rem;
+        bottom: 1.2rem;
         left: 50%;
         transform: translateX(-50%);
         font-family: var(--font-mono);
-        font-size: 0.7rem;
-        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.45);
       }
 
-      @media (max-width: 1024px) {
-        .layout-split-large,
+      @media (max-width: 1200px) {
+        .headline {
+          max-width: 19ch;
+        }
+
+        .hero-stage,
+        .challenge-layout,
+        .execution-layout,
         .platform-scaffold,
-        .flow-grid,
-        .unified-track,
-        .partner-grid {
+        .partner-layout,
+        .journey-track,
+        .closing-grid {
           grid-template-columns: 1fr;
         }
 
-        .layout-bento {
-          display: flex;
-          flex-direction: column;
+        .vision-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .stats-row {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .slide {
+          overflow-y: auto;
+        }
+
+        .slide-tight .phase-lane {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 840px) {
+        :root {
+          --slide-padding: clamp(0.9rem, 5vw, 1.45rem);
+          --title-size: clamp(1.95rem, 7.8vw, 2.85rem);
+          --h2-size: clamp(1.45rem, 5.7vw, 2.15rem);
+          --body-size: clamp(0.92rem, 3.35vw, 1rem);
+        }
+
+        .slide {
+          scroll-snap-align: none;
+          height: auto;
+          min-height: 100dvh;
+        }
+
+        .slide-content {
+          overflow: visible;
+          max-height: none;
+        }
+
+        .vision-grid,
+        .stats-row,
+        .closing-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-dots,
+        .keyboard-hint {
+          display: none;
         }
       }
 
@@ -722,37 +1013,59 @@
         data-slide="1"
         data-slide-theme="hero"
       >
-        <div class="slide-content layout-centered">
-          <p class="eyebrow">
-            Project Briefing | Potential Strategic and Technical Collaborators
-          </p>
-          <h1 class="headline">
-            NECC: Building the Nordic Circular Construction Engine
-          </h1>
-          <p class="subhead">
-            A short briefing on what this project wants to achieve, how the
-            platform works, and the impact it can create for circular
-            construction in the Nordics.
-          </p>
-          <div class="pill-row">
-            <span class="pill">Nordic Ecosystem for Circular Construction</span>
-            <span class="pill">Short deck: 7-8 minutes</span>
-            <span class="pill">Date: 12 Feb 2026</span>
-          </div>
-          <div class="logo-strip" aria-label="Project logos">
-            <div class="logo-card">
-              <img
-                src="/shares/assets/nordic-circular-hotspot.svg"
-                alt="Nordic Circular Hotspot logo"
-              />
-            </div>
-            <div class="logo-card">
-              <img
-                src="/shares/assets/natural-state-logo.webp"
-                alt="Natural State logo"
-              />
+        <div class="slide-content hero-stage">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              Project Briefing | Potential Strategic and Technical Collaborators
+            </p>
+            <h1 class="headline">
+              NECC: Building the Nordic Circular Construction Engine
+            </h1>
+            <p class="lead">
+              A focused overview of the market gap, the platform architecture,
+              and the collaboration model needed to move circular construction
+              from isolated pilots to repeatable delivery.
+            </p>
+            <div class="pill-row">
+              <span class="pill">Nordic Ecosystem for Circular Construction</span>
+              <span class="pill">8-slide briefing</span>
+              <span class="pill">Updated: 13 Feb 2026</span>
             </div>
           </div>
+          <aside class="hero-brief">
+            <p class="card-label">Reading frame</p>
+            <ul class="hero-list">
+              <li>
+                <strong>Audience</strong>
+                Decision-makers evaluating strategic and technical partnership
+                fit.
+              </li>
+              <li>
+                <strong>Focus</strong>
+                Market friction, platform model, delivery phases, and practical
+                collaboration structure.
+              </li>
+              <li>
+                <strong>Outcome</strong>
+                Shared confidence on scope, architecture direction, and first
+                implementation steps.
+              </li>
+            </ul>
+            <div class="logo-strip" aria-label="Project logos">
+              <div class="logo-card">
+                <img
+                  src="/shares/assets/nordic-circular-hotspot.svg"
+                  alt="Nordic Circular Hotspot logo"
+                />
+              </div>
+              <div class="logo-card">
+                <img
+                  src="/shares/assets/natural-state-logo.webp"
+                  alt="Natural State logo"
+                />
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -765,50 +1078,59 @@
         <div class="slide-content">
           <p class="eyebrow">Challenge and Timing</p>
           <h2 class="headline">Why this matters now</h2>
-          <div class="layout-split-large">
-            <div class="content-card">
+          <div class="challenge-layout">
+            <article class="content-card">
               <p class="card-label">Core market frictions</p>
               <h3 class="card-title">
-                Circular intent is rising, execution is fragmented
+                Circular intent is rising, but execution remains fragmented
               </h3>
-              <ul class="list-clean">
+              <ul class="friction-list">
                 <li>
-                  <strong>Supply-demand disconnection:</strong> buyers and
-                  suppliers still struggle to find each other at Nordic scale.
+                  <strong>Supply-demand disconnection</strong>
+                  Buyers and suppliers still struggle to find each other at
+                  Nordic scale.
                 </li>
                 <li>
-                  <strong>Low trust and weak comparability:</strong> circular
-                  options are often harder to assess against linear
+                  <strong>Low trust and weak comparability</strong>
+                  Circular options are often harder to evaluate against linear
                   alternatives.
                 </li>
                 <li>
-                  <strong>Regulatory and language fragmentation:</strong>
-                  cross-border scaling remains operationally heavy.
+                  <strong>Regulatory and language fragmentation</strong>
+                  Cross-border scaling remains operationally heavy.
                 </li>
                 <li>
-                  <strong>Financing complexity:</strong> teams lack a single
-                  place to navigate relevant funding and incentives.
+                  <strong>Financing complexity</strong>
+                  Teams lack a single place to navigate grants and incentives.
                 </li>
               </ul>
-            </div>
-            <div class="grid" style="grid-template-columns: 1fr;">
-              <article class="metric-card">
+            </article>
+            <aside class="metric-rail">
+              <article class="metric-node">
                 <p class="metric-label">Expected policy pressure</p>
-                <p class="metric-value">23-24%</p>
+                <p class="metric-number">23-24%</p>
                 <p class="metric-text">
-                  EU-aligned circularity level expected in construction by 2030,
-                  with 2026 as a critical policy year.
+                  EU-aligned circularity level expected in construction by
+                  2030, with 2026 as a critical policy year.
                 </p>
               </article>
-              <article class="metric-card">
+              <article class="metric-node">
                 <p class="metric-label">Current Nordic baseline</p>
-                <p class="metric-value">5-8%</p>
+                <p class="metric-number">5-8%</p>
                 <p class="metric-text">
                   Current circularity range in Nordic construction and property
                   value chains.
                 </p>
               </article>
-            </div>
+              <article class="signal-card">
+                <p class="card-label">2026 urgency signals</p>
+                <ul class="signal-list">
+                  <li>Higher CSRD pressure in procurement workflows</li>
+                  <li>Public buyers asking for stronger comparability data</li>
+                  <li>Supplier readiness exists, but discovery is weak</li>
+                </ul>
+              </article>
+            </aside>
           </div>
         </div>
       </section>
@@ -822,46 +1144,46 @@
         <div class="slide-content">
           <p class="eyebrow">Vision 2030</p>
           <h2 class="headline">The outcome NECC is designed to produce</h2>
-          <p class="subhead">
-            This project aims to move from fragmented circular initiatives to
-            shared Nordic acceleration infrastructure, building on pre-project
-            and proof-of-concept work.
+          <p class="lead">
+            Move from fragmented circular initiatives to shared Nordic
+            acceleration infrastructure, using existing pre-project momentum as
+            the launch platform.
           </p>
-          <div class="layout-bento">
-            <article class="impact-card bento-item">
+          <div class="vision-grid">
+            <article class="vision-card">
+              <span class="vision-index">01</span>
               <p class="card-label">Demand side</p>
               <h3 class="card-title">Double circular ambition in projects</h3>
               <p class="impact-text">
-                Leading property owners, developers, and architects increase
-                circular requirements in real procurement decisions.
+                Property owners, developers, and architects increase circular
+                requirements in real procurement.
               </p>
             </article>
-            <article class="impact-card bento-item">
+            <article class="vision-card">
+              <span class="vision-index">02</span>
               <p class="card-label">Supply side</p>
               <h3 class="card-title">50 companies scale across borders</h3>
               <p class="impact-text">
-                Nordic circular suppliers grow turnover through structured
-                cross-border visibility and qualified demand.
+                Nordic circular suppliers grow turnover through qualified
+                cross-border visibility.
               </p>
             </article>
-            <article class="impact-card bento-item">
+            <article class="vision-card">
+              <span class="vision-index">03</span>
               <p class="card-label">Ecosystem</p>
-              <h3 class="card-title">
-                Stronger alignment across market actors
-              </h3>
+              <h3 class="card-title">Shared coordination becomes practical</h3>
               <p class="impact-text">
-                Owners, suppliers, advisors, and public actors coordinate around
-                clearer data, opportunities, and practical pathways.
+                Owners, suppliers, advisors, and public actors align on clearer
+                pathways and execution data.
               </p>
             </article>
-            <article class="impact-card bento-item">
+            <article class="vision-card">
+              <span class="vision-index">04</span>
               <p class="card-label">Policy</p>
-              <h3 class="card-title">
-                Nordic ambition aligned around 2030 goals
-              </h3>
+              <h3 class="card-title">Nordic ambition aligns around 2030 goals</h3>
               <p class="impact-text">
-                Actionable policy signals and market evidence support stronger
-                circular requirements across countries.
+                Market evidence supports stronger circular requirements across
+                countries.
               </p>
             </article>
           </div>
@@ -879,6 +1201,10 @@
           <h2 class="headline">
             What we are building: a market accelerator platform
           </h2>
+          <p class="lead">
+            NECC connects high-need buyers with trusted circular suppliers and
+            makes discovery, comparison, and funding pathways operational.
+          </p>
           <div class="platform-scaffold">
             <div class="layer-col">
               <p class="layer-tag">Demand side</p>
@@ -894,25 +1220,21 @@
               </article>
             </div>
 
-            <div class="center-col">
-              <article class="center-hub">
-                <p class="card-label">NECC Core</p>
-                <h3 class="hub-title">
-                  Market Accelerator Platform
-                </h3>
-                <ul class="hub-list">
-                  <li>Catalog of 50-100 circular solutions</li>
-                  <li>AI search (Go Circular) matched to context</li>
-                  <li>Funding opportunity map and deal pathways</li>
-                  <li>Value-chain intelligence & regulatory guidance</li>
-                </ul>
-                <div class="criteria-row">
-                  <span class="criteria-chip">Affordability</span>
-                  <span class="criteria-chip">Availability</span>
-                  <span class="criteria-chip">Profitability</span>
-                </div>
-              </article>
-            </div>
+            <article class="center-hub">
+              <p class="card-label">NECC Core</p>
+              <h3 class="hub-title">Market Accelerator Platform</h3>
+              <ul class="hub-list">
+                <li>Catalog of 50-100 circular solutions</li>
+                <li>AI search (Go Circular) matched to project context</li>
+                <li>Funding map and deal pathways</li>
+                <li>Value-chain intelligence and regulatory guidance</li>
+              </ul>
+              <div class="criteria-row">
+                <span class="criteria-chip">Affordability</span>
+                <span class="criteria-chip">Availability</span>
+                <span class="criteria-chip">Profitability</span>
+              </div>
+            </article>
 
             <div class="layer-col">
               <p class="layer-tag">Supply side</p>
@@ -938,45 +1260,44 @@
         <div class="slide-content">
           <p class="eyebrow">User Flow</p>
           <h2 class="headline">How it works in a real project journey</h2>
-          <div style="margin-bottom: 2rem;">
-            <p class="quote">
-              "I need circular facade solutions for a project in Western Sweden. Show me viable suppliers and funding paths."
-            </p>
-          </div>
-          <div class="flow-grid">
-            <article class="flow-step">
-              <p class="card-label">Step 1</p>
-              <h3 class="card-title">Project brief</h3>
-              <p class="flow-text">
-                Location, building type, and circular ambition level.
+          <p class="journey-quote">
+            "I need circular facade solutions for a project in Western Sweden.
+            Show viable suppliers and funding paths."
+          </p>
+          <div class="journey-track">
+            <article class="journey-step">
+              <p class="step-num">Step 1</p>
+              <h3 class="step-title">Project brief</h3>
+              <p class="step-text">
+                Capture location, building type, and circular ambition level.
               </p>
             </article>
-            <article class="flow-step">
-              <p class="card-label">Step 2</p>
-              <h3 class="card-title">AI search</h3>
-              <p class="flow-text">
+            <article class="journey-step">
+              <p class="step-num">Step 2</p>
+              <h3 class="step-title">AI search</h3>
+              <p class="step-text">
                 Go Circular identifies candidate products and suppliers by fit.
               </p>
             </article>
-            <article class="flow-step">
-              <p class="card-label">Step 3</p>
-              <h3 class="card-title">Decision</h3>
-              <p class="flow-text">
-                Comparable options with circular attributes and availability.
+            <article class="journey-step">
+              <p class="step-num">Step 3</p>
+              <h3 class="step-title">Comparison</h3>
+              <p class="step-text">
+                Compare options on circular attributes and availability.
               </p>
             </article>
-            <article class="flow-step">
-              <p class="card-label">Step 4</p>
-              <h3 class="card-title">Regulation</h3>
-              <p class="flow-text">
-                Country-specific guidance plus relevant grants and financing.
+            <article class="journey-step">
+              <p class="step-num">Step 4</p>
+              <h3 class="step-title">Guidance</h3>
+              <p class="step-text">
+                Add country-specific regulation, incentives, and grant context.
               </p>
             </article>
-            <article class="flow-step">
-              <p class="card-label">Step 5</p>
-              <h3 class="card-title">Action</h3>
-              <p class="flow-text">
-                Buyer-supplier connection and pilot activation.
+            <article class="journey-step">
+              <p class="step-num">Step 5</p>
+              <h3 class="step-title">Activation</h3>
+              <p class="step-text">
+                Connect buyer and supplier with clear pilot execution actions.
               </p>
             </article>
           </div>
@@ -989,67 +1310,88 @@
         data-slide="6"
         data-slide-theme="architecture"
       >
-        <div class="slide-content">
+        <div class="slide-content slide-tight">
           <p class="eyebrow">Technical Confidence</p>
           <h2 class="headline">
-            Execution model: phased build, grounded in proven pre-project work
+            Execution model: phased build with proven pre-project evidence
           </h2>
-          <div class="unified-track">
-            <article class="phase">
-              <span class="phase-num">1</span>
-              <strong>Foundation</strong>
-              M1-M6: schema adaptation, catalog MVP, basic search.
-              <div class="arch-block">
-                <strong>Experience</strong>
-                Next.js App Router UI for buyers & suppliers.
-              </div>
-            </article>
-            <article class="phase">
-              <span class="phase-num">2</span>
-              <strong>Integrations</strong>
-              M4-M12: supplier onboarding, Nordic data coverage.
-              <div class="arch-block">
-                <strong>Integration</strong>
-                API gateway for registry and ecosystem data.
-              </div>
-            </article>
-            <article class="phase">
-              <span class="phase-num">3</span>
-              <strong>AI & Features</strong>
-              M12-M24: matching, reporting, paid features.
-              <div class="arch-block">
-                <strong>Data Layer</strong>
-                PostgreSQL, full-text search, product catalog.
-              </div>
-            </article>
-            <article class="phase">
-              <span class="phase-num">4</span>
-              <strong>Scale</strong>
-              M24-M36: expansion, self-sustaining operations.
-              <div class="arch-block">
-                <strong>Intelligence</strong>
-                AI parsing, matching, recommendations.
-              </div>
-            </article>
-          </div>
-
-          <div class="stats-row">
-            <article class="stat-tile">
-              <strong>Public Circular Buildings</strong>
-              <p>Established foundation for this project direction.</p>
-            </article>
-            <article class="stat-tile">
-              <strong>80</strong>
-              <p>documented building projects across Nordics.</p>
-            </article>
-            <article class="stat-tile">
-              <strong>48</strong>
-              <p>detailed case studies with quantified insights.</p>
-            </article>
-            <article class="stat-tile">
-              <strong>5</strong>
-              <p>Nordic countries already covered in the knowledge base.</p>
-            </article>
+          <div class="execution-layout">
+            <div class="phase-lane">
+              <article class="phase-block">
+                <p class="phase-window">M1-M6 | Foundation</p>
+                <h3 class="phase-heading">Schema and catalog MVP</h3>
+                <p class="phase-detail">
+                  Shared schema, first catalog ingestion, baseline search.
+                </p>
+              </article>
+              <article class="phase-block">
+                <p class="phase-window">M4-M12 | Integrations</p>
+                <h3 class="phase-heading">Supplier onboarding and coverage</h3>
+                <p class="phase-detail">
+                  Expand coverage, onboard suppliers, connect ecosystem data.
+                </p>
+              </article>
+              <article class="phase-block">
+                <p class="phase-window">M12-M24 | AI and productization</p>
+                <h3 class="phase-heading">Matching, reporting, paid features</h3>
+                <p class="phase-detail">
+                  Launch context ranking, reporting, and paid workflows.
+                </p>
+              </article>
+              <article class="phase-block">
+                <p class="phase-window">M24-M36 | Scale</p>
+                <h3 class="phase-heading">Regional expansion and operations</h3>
+                <p class="phase-detail">
+                  Stabilize operations and scale supplier participation.
+                </p>
+              </article>
+            </div>
+            <div class="execution-side">
+              <article class="content-card">
+                <p class="card-label">Evidence base already in place</p>
+                <h3 class="card-title">Public Circular Buildings pre-project</h3>
+                <p class="card-text">
+                  This initiative starts with a documented foundation, not a
+                  greenfield assumption.
+                </p>
+                <ul class="friction-list">
+                  <li>
+                    <strong>80 projects</strong>
+                    documented across Nordic construction contexts.
+                  </li>
+                  <li>
+                    <strong>48 case studies</strong>
+                    with structured qualitative and quantitative insight.
+                  </li>
+                  <li>
+                    <strong>5 countries</strong>
+                    already represented in the knowledge base.
+                  </li>
+                </ul>
+              </article>
+              <article class="content-card">
+                <p class="card-label">Core architecture layers</p>
+                <ul class="stack-list">
+                  <li>
+                    <strong>Experience layer</strong>
+                    Next.js App Router interface for buyers and suppliers.
+                  </li>
+                  <li>
+                    <strong>Integration layer</strong>
+                    API gateway connecting registries and ecosystem data.
+                  </li>
+                  <li>
+                    <strong>Data layer</strong>
+                    PostgreSQL, full-text search, and structured product
+                    catalog.
+                  </li>
+                  <li>
+                    <strong>Intelligence layer</strong>
+                    AI parsing, matching, and recommendation workflows.
+                  </li>
+                </ul>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -1063,39 +1405,47 @@
         <div class="slide-content">
           <p class="eyebrow">Partnership Dialogue</p>
           <h2 class="headline">
-            What we want to discuss with a technical collaboration partner
+            What we want to define with a technical collaboration partner
           </h2>
-          <div class="partner-grid">
+          <div class="partner-layout">
             <article class="partner-card">
-              <p class="card-label">Why we are reaching out</p>
-              <h3 class="card-title">Open conversation on partnership</h3>
+              <p class="card-label">Partnership fit</p>
+              <h3 class="card-title">Clarify role and value contribution</h3>
               <ul class="partner-list">
-                <li>Explore fit for a collaboration role in NECC</li>
-                <li>Assess where your strengths can accelerate delivery</li>
-                <li>Shape a practical collaboration model together</li>
+                <li>Map where your strengths accelerate delivery speed.</li>
+                <li>Define where ownership should be shared or delegated.</li>
+                <li>Align on collaboration model from day one.</li>
               </ul>
             </article>
-
             <article class="partner-card">
-              <p class="card-label">Early project phase</p>
-              <h3 class="card-title">Define architecture and build plan</h3>
+              <p class="card-label">Early phase alignment</p>
+              <h3 class="card-title">Set architecture and build boundaries</h3>
               <ul class="partner-list">
-                <li>Co-define technical architecture and boundaries</li>
-                <li>Align implementation priorities and sequencing</li>
-                <li>Establish an executable plan for initial build</li>
+                <li>Co-define technical boundaries and implementation lanes.</li>
+                <li>Sequence MVP milestones with clear quality gates.</li>
+                <li>Establish shared delivery and review rhythm.</li>
               </ul>
             </article>
-
             <article class="partner-card">
-              <p class="card-label">Project rhythm</p>
-              <h3 class="card-title">Touch points throughout the period</h3>
+              <p class="card-label">Operating cadence</p>
+              <h3 class="card-title">Keep execution transparent over time</h3>
               <ul class="partner-list">
-                <li>Regular checkpoints on progress and risks</li>
-                <li>Shared review points for delivery quality</li>
-                <li>Collaboration scope refined as project evolves</li>
+                <li>Run structured checkpoints on risks and dependencies.</li>
+                <li>Review technical quality and roadmap tradeoffs jointly.</li>
+                <li>Adapt scope as market evidence and adoption evolve.</li>
               </ul>
             </article>
           </div>
+          <article class="prompt-strip">
+            <p class="card-label">First workshop decision prompts</p>
+            <div class="prompt-list">
+              <span class="prompt-pill">Scope boundaries</span>
+              <span class="prompt-pill">Data ownership</span>
+              <span class="prompt-pill">MVP architecture</span>
+              <span class="prompt-pill">Onboarding process</span>
+              <span class="prompt-pill">Pilot activation criteria</span>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -1105,26 +1455,45 @@
         data-slide="8"
         data-slide-theme="closing"
       >
-        <div class="slide-content layout-centered">
+        <div class="slide-content closing-layout">
           <p class="eyebrow">Impact and Action</p>
-          <h1 class="headline" style="max-width: 20ch;">
-            Higher circularity where decisions are made
-          </h1>
-          <div class="grid" style="margin-top: 2rem;">
-            <article class="impact-card" style="text-align: left;">
-              <p class="card-label">Industry</p>
-              <h3 class="card-title">Operational Circularity</h3>
+          <h1 class="headline">Higher circularity where decisions are made</h1>
+          <p class="lead">
+            NECC turns scattered circular intent into a clear operating system
+            for procurement decisions, supplier growth, and measurable Nordic
+            transition outcomes.
+          </p>
+          <div class="closing-grid">
+            <article class="impact-card">
+              <p class="card-label">Industry impact</p>
+              <h3 class="card-title">Operational circularity</h3>
               <p class="impact-text">
-                Faster match quality and predictable delivery reduce friction for circular adoption.
+                Better match quality and faster decision cycles reduce friction
+                in real project execution.
               </p>
             </article>
-            <article class="impact-card" style="text-align: left;">
-              <p class="card-label">Business</p>
-              <h3 class="card-title">Nordic Growth</h3>
+            <article class="impact-card">
+              <p class="card-label">Business impact</p>
+              <h3 class="card-title">Nordic supplier growth</h3>
               <p class="impact-text">
-                Creating visibility and trusted pathways for circular suppliers to scale regionally.
+                Trusted discovery and cross-border visibility open scale paths
+                for circular suppliers.
               </p>
             </article>
+            <article class="impact-card">
+              <p class="card-label">Collaboration next step</p>
+              <h3 class="card-title">Joint architecture workshop</h3>
+              <p class="impact-text">
+                Align on MVP boundaries, delivery cadence, and technical
+                governance for phase 1.
+              </p>
+            </article>
+          </div>
+          <div class="closing-actions" aria-label="Suggested action tracks">
+            <span class="action-pill">Catalog onboarding</span>
+            <span class="action-pill">Architecture framing</span>
+            <span class="action-pill">Pilot shortlist</span>
+            <span class="action-pill">Data partnership map</span>
           </div>
         </div>
       </section>
@@ -1133,8 +1502,8 @@
     <script>
       const DECK_META = {
         title: "NECC Project Brief",
-        version: "1.2.0",
-        updated: "2026-02-12",
+        version: "1.3.0",
+        updated: "2026-02-13",
       };
 
       const SLIDES = [
