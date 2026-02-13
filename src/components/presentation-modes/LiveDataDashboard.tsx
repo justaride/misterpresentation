@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { clsx } from "clsx";
 import { useSearchParams } from "react-router-dom";
+import * as d3 from "d3";
 import {
   ChevronLeft,
   ChevronRight,
@@ -215,23 +216,32 @@ function coercePoint(
 ): LivePoint | null {
   if (!isRecord(value)) return null;
 
-  const activeUsers = toNum(value.activeUsers) ?? fallback?.activeUsers;
-  const signups = toNum(value.signups) ?? fallback?.signups;
-  const conversions = toNum(value.conversions) ?? fallback?.conversions;
-  const revenue = toNum(value.revenue) ?? fallback?.revenue;
-  const latencyP95 = toNum(value.latencyP95) ?? fallback?.latencyP95;
-  let errorRate = toNum(value.errorRate) ?? fallback?.errorRate ?? 0;
+  const incomingActiveUsers = toNum(value.activeUsers);
+  const incomingSignups = toNum(value.signups);
+  const incomingConversions = toNum(value.conversions);
+  const incomingRevenue = toNum(value.revenue);
+  const incomingLatencyP95 = toNum(value.latencyP95);
+  const incomingErrorRate = toNum(value.errorRate);
+  const hasIncomingChannelUpdate = value.channels != null;
+
+  const hasIncomingMetric =
+    incomingActiveUsers != null ||
+    incomingSignups != null ||
+    incomingConversions != null ||
+    incomingRevenue != null ||
+    incomingLatencyP95 != null ||
+    incomingErrorRate != null ||
+    hasIncomingChannelUpdate;
+  if (!hasIncomingMetric) return null;
+
+  const activeUsers = incomingActiveUsers ?? fallback?.activeUsers;
+  const signups = incomingSignups ?? fallback?.signups;
+  const conversions = incomingConversions ?? fallback?.conversions;
+  const revenue = incomingRevenue ?? fallback?.revenue;
+  const latencyP95 = incomingLatencyP95 ?? fallback?.latencyP95;
+  let errorRate = incomingErrorRate ?? fallback?.errorRate ?? 0;
 
   const channels = coerceChannels(value.channels, fallback?.channels);
-
-  const hasAnyMetric =
-    activeUsers != null ||
-    signups != null ||
-    conversions != null ||
-    revenue != null ||
-    latencyP95 != null ||
-    value.errorRate != null;
-  if (!hasAnyMetric) return null;
 
   if (errorRate > 1 && errorRate <= 100) errorRate = errorRate / 100;
   errorRate = clamp(errorRate, 0, 1);
@@ -296,6 +306,16 @@ function toPct(value: number) {
   return `${(value * 100).toFixed(1)}%`;
 }
 
+function formatTimeWindowLabel(points: Array<{ ts: number }>) {
+  if (points.length < 2) return "live";
+  const firstTs = points[0]?.ts ?? Date.now();
+  const lastTs = points[points.length - 1]?.ts ?? firstTs;
+  const spanSec = Math.max(1, Math.round((lastTs - firstTs) / 1000));
+  return spanSec < 120
+    ? `last ${spanSec}s`
+    : `last ${Math.floor(spanSec / 60)}m ${String(spanSec % 60).padStart(2, "0")}s`;
+}
+
 function deltaTone(delta: number, invert = false) {
   const effective = invert ? -delta : delta;
   if (effective > 0) return "text-emerald-300";
@@ -339,6 +359,7 @@ function Sparkline({
   color: string;
   fill?: boolean;
 }) {
+  const fillId = useId();
   const width = 120;
   const height = 32;
   const padding = 2;
@@ -373,13 +394,13 @@ function Sparkline({
       aria-label="Trend sparkline"
     >
       <defs>
-        <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.28" />
           <stop offset="100%" stopColor={color} stopOpacity="0" />
         </linearGradient>
       </defs>
       {fill && (
-        <path d={areaPath} fill="url(#sparkFill)" stroke="none" opacity={0.9} />
+        <path d={areaPath} fill={`url(#${fillId})`} stroke="none" opacity={0.9} />
       )}
       <polyline
         points={points}
@@ -397,56 +418,104 @@ function LineChart({
   data,
   labelLeft,
 }: {
-  data: number[];
+  data: Array<{ ts: number; value: number }>;
   labelLeft: string;
 }) {
   const width = 720;
   const height = 240;
   const padding = 18;
+  const xTickCount = 6;
+  const gradientId = useId();
+  const lineGradientId = useId();
+  const glowId = useId();
 
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
+  if (data.length === 0) return null;
 
-  const pts = data.map((d, i) => {
-    const x =
-      padding + (i / Math.max(1, data.length - 1)) * (width - padding * 2);
-    const y =
-      height -
-      padding -
-      ((d - min) / range) * (height - padding * 2);
-    return { x, y };
+  const xDomain = d3.extent(data, (d) => new Date(d.ts));
+  const yDomain = d3.extent(data, (d) => d.value);
+  const xMin = xDomain[0] ?? new Date();
+  const xMax = xDomain[1] ?? new Date(xMin.getTime() + BASE_TICK_MS);
+  const yMin = yDomain[0] ?? 0;
+  const yMax = yDomain[1] ?? 1;
+
+  const xMaxSafe = xMax.getTime() <= xMin.getTime()
+    ? new Date(xMin.getTime() + BASE_TICK_MS)
+    : xMax;
+  const yPad = Math.max(1, (yMax - yMin) * 0.08);
+  const yMinSafe = yMin - yPad;
+  const yMaxSafe = yMax + yPad;
+
+  const xScale = d3
+    .scaleTime()
+    .domain([xMin, xMaxSafe])
+    .range([padding, width - padding]);
+  const yScale = d3
+    .scaleLinear()
+    .domain([yMinSafe, yMaxSafe])
+    .nice(4)
+    .range([height - padding, padding]);
+
+  const lineGenerator = d3
+    .line<{ ts: number; value: number }>()
+    .x((d) => xScale(new Date(d.ts)))
+    .y((d) => yScale(d.value))
+    .curve(d3.curveMonotoneX);
+
+  const areaGenerator = d3
+    .area<{ ts: number; value: number }>()
+    .x((d) => xScale(new Date(d.ts)))
+    .y0(height - padding)
+    .y1((d) => yScale(d.value))
+    .curve(d3.curveMonotoneX);
+
+  const line = lineGenerator(data) ?? "";
+  const area = areaGenerator(data) ?? "";
+  const yTicks = yScale.ticks(4);
+  const xTicks = xScale.ticks(xTickCount);
+  const xTickFormat = xScale.tickFormat(xTickCount, "%H:%M:%S");
+
+  const spanLabel = formatTimeWindowLabel(data);
+
+  const endPoint = data[data.length - 1];
+  const endX = endPoint ? xScale(new Date(endPoint.ts)) : 0;
+  const endY = endPoint ? yScale(endPoint.value) : 0;
+
+  const minValue = d3.min(data, (d) => d.value) ?? 0;
+  const maxValue = d3.max(data, (d) => d.value) ?? 0;
+
+  const yLabelFormat = d3.format("~s");
+  const axisStroke = "rgba(255,255,255,0.08)";
+  const gridStroke = "rgba(255,255,255,0.06)";
+  const tickFill = "rgba(148,163,184,0.9)";
+  const isDense = xTicks.length > 4;
+
+  const points = data.map((d) => {
+    const x = xScale(new Date(d.ts));
+    const y = yScale(d.value);
+    return `${x},${y}`;
   });
-
-  const line = pts
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
-    .join(" ");
-  const area = `${line} L ${width - padding} ${height - padding} L ${padding} ${height - padding} Z`;
-
-  const yTicks = 4;
-  const ticks = Array.from({ length: yTicks + 1 }, (_, i) => i);
 
   return (
     <div className="p-5">
       <div className="flex items-baseline justify-between">
         <div className="text-sm font-mono text-slate-300/80">{labelLeft}</div>
         <div className="text-[11px] font-mono text-slate-400/80">
-          last {data.length}s
+          {spanLabel}
         </div>
       </div>
 
       <div className="mt-3 h-60">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
           <defs>
-            <linearGradient id="areaGlow" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.35" />
               <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
+            <linearGradient id={lineGradientId} x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#a5f3fc" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.9" />
             </linearGradient>
-            <filter id="softGlow">
+            <filter id={glowId}>
               <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
               <feMerge>
                 <feMergeNode in="coloredBlur" />
@@ -455,48 +524,93 @@ function LineChart({
             </filter>
           </defs>
 
-          {/* Grid */}
-          {ticks.map((t) => {
-            const y = padding + (t / yTicks) * (height - padding * 2);
+          {yTicks.map((tick) => {
+            const y = yScale(tick);
             return (
               <line
-                key={t}
+                key={`grid-${tick}`}
                 x1={padding}
                 y1={y}
                 x2={width - padding}
                 y2={y}
-                stroke="rgba(255,255,255,0.06)"
+                stroke={gridStroke}
                 strokeWidth="1"
               />
             );
           })}
 
-          {/* Area + Line */}
-          <path d={area} fill="url(#areaGlow)" stroke="none" />
+          <line
+            x1={padding}
+            y1={height - padding}
+            x2={width - padding}
+            y2={height - padding}
+            stroke={axisStroke}
+            strokeWidth="1"
+          />
+
+          {xTicks.map((tick) => {
+            const x = xScale(tick);
+            return (
+              <g key={`x-${tick.getTime()}`}>
+                <line
+                  x1={x}
+                  y1={height - padding}
+                  x2={x}
+                  y2={height - padding + 4}
+                  stroke={axisStroke}
+                  strokeWidth="1"
+                />
+                <text
+                  x={x}
+                  y={height - 2}
+                  textAnchor={isDense ? "end" : "middle"}
+                  transform={isDense ? `rotate(-35 ${x} ${height - 2})` : undefined}
+                  fontSize="10"
+                  fill={tickFill}
+                >
+                  {xTickFormat(tick)}
+                </text>
+              </g>
+            );
+          })}
+
+          {yTicks.map((tick) => (
+            <text
+              key={`y-${tick}`}
+              x={padding - 6}
+              y={yScale(tick)}
+              textAnchor="end"
+              dominantBaseline="middle"
+              fontSize="10"
+              fill={tickFill}
+            >
+              {yLabelFormat(tick)}
+            </text>
+          ))}
+
+          <path d={area} fill={`url(#${gradientId})`} stroke="none" />
           <path
             d={line}
             fill="none"
-            stroke="url(#lineGlow)"
+            stroke={`url(#${lineGradientId})`}
             strokeWidth="2.5"
             strokeLinecap="round"
-            filter="url(#softGlow)"
+            filter={`url(#${glowId})`}
           />
 
-          {/* End dot */}
-          {pts.length > 0 && (
-            <circle
-              cx={pts[pts.length - 1]?.x ?? 0}
-              cy={pts[pts.length - 1]?.y ?? 0}
-              r="4"
-              fill="#22d3ee"
-            />
-          )}
+          <polyline
+            points={points.join(" ")}
+            fill="none"
+            stroke="transparent"
+            strokeWidth="16"
+          />
+          <circle cx={endX} cy={endY} r="4" fill="#22d3ee" />
         </svg>
       </div>
 
       <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-slate-400/80">
-        <div>min {formatInt.format(Math.round(min))}</div>
-        <div>max {formatInt.format(Math.round(max))}</div>
+        <div>min {formatInt.format(Math.round(minValue))}</div>
+        <div>max {formatInt.format(Math.round(maxValue))}</div>
       </div>
     </div>
   );
@@ -505,14 +619,17 @@ function LineChart({
 function BarChart({
   labels,
   values,
+  windowLabel,
 }: {
   labels: string[];
   values: number[];
+  windowLabel: string;
 }) {
   const width = 560;
   const height = 220;
   const paddingX = 18;
   const paddingY = 22;
+  const gradientId = useId();
 
   const max = Math.max(...values, 1);
   const barGap = 10;
@@ -525,13 +642,13 @@ function BarChart({
         <div className="text-sm font-mono text-slate-300/80">
           Signups by channel
         </div>
-        <div className="text-[11px] font-mono text-slate-400/80">last 60s</div>
+        <div className="text-[11px] font-mono text-slate-400/80">{windowLabel}</div>
       </div>
 
       <div className="mt-3 h-56">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
           <defs>
-            <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#22c55e" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#22c55e" stopOpacity="0.2" />
             </linearGradient>
@@ -548,7 +665,7 @@ function BarChart({
                   width={barWidth}
                   height={h}
                   rx={10}
-                  fill="url(#barGrad)"
+                  fill={`url(#${gradientId})`}
                   stroke="rgba(34,197,94,0.55)"
                 />
               </g>
@@ -1240,6 +1357,16 @@ export function LiveDataDashboard() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
       if (e.key === " " || e.code === "Space") {
         e.preventDefault();
         setRunning((r) => !r);
@@ -1261,6 +1388,7 @@ export function LiveDataDashboard() {
   const prev = points[points.length - 2];
 
   const series = useMemo(() => {
+    const activeTimed = points.map((p) => ({ ts: p.ts, value: p.activeUsers }));
     const active = points.map((p) => p.activeUsers);
     const signups = points.map((p) => p.signups);
     const revenue = points.map((p) => p.revenue);
@@ -1269,7 +1397,7 @@ export function LiveDataDashboard() {
     const conversion = points.map((p) =>
       p.signups > 0 ? p.conversions / p.signups : 0,
     );
-    return { active, signups, revenue, latency, errors, conversion };
+    return { activeTimed, active, signups, revenue, latency, errors, conversion };
   }, [points]);
 
   const kpis = useMemo(() => {
@@ -1351,6 +1479,8 @@ export function LiveDataDashboard() {
       color: colors[ch],
     }));
   }, [latest]);
+
+  const historyWindowLabel = useMemo(() => formatTimeWindowLabel(points), [points]);
 
   const alerts = useMemo(() => {
     const list: Array<{ severity: FeedSeverity; title: string; detail: string }> = [];
@@ -1706,7 +1836,7 @@ export function LiveDataDashboard() {
                 dimmed: isDimmed("chart-active"),
               })}
             >
-              <LineChart data={series.active} labelLeft="Active users" />
+              <LineChart data={series.activeTimed} labelLeft="Active users" />
             </div>
 
             <div className="grid grid-rows-2 gap-4">
@@ -1724,7 +1854,11 @@ export function LiveDataDashboard() {
                   dimmed: isDimmed("chart-bars"),
                 })}
               >
-                <BarChart labels={[...CHANNELS]} values={signupsByChannel} />
+                <BarChart
+                  labels={[...CHANNELS]}
+                  values={signupsByChannel}
+                  windowLabel={historyWindowLabel}
+                />
               </div>
             </div>
 

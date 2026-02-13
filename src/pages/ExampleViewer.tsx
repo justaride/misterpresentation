@@ -236,6 +236,11 @@ const AudioReactive = lazy(() =>
     default: m.AudioReactive,
   })),
 );
+const BlueEconomyLeaders = lazy(() =>
+  import("../components/presentation-modes/BlueEconomyLeaders").then((m) => ({
+    default: m.BlueEconomyLeaders,
+  })),
+);
 
 export function ExampleViewer() {
   const { id } = useParams();
@@ -276,12 +281,12 @@ export function ExampleViewer() {
         return <MarkdownSlides deckId="md-technical-deep-dive" />;
       case "md-incident-postmortem":
         return <MarkdownSlides deckId="md-incident-postmortem" />;
-	      case "md-workshop-training":
-	        return <MarkdownSlides deckId="md-workshop-training" />;
-	      case "bento-grid-deck":
-	        return <BentoGridDeck />;
-	      case "lottie-storyboard":
-	        return <LottieStoryboard />;
+      case "md-workshop-training":
+        return <MarkdownSlides deckId="md-workshop-training" />;
+      case "bento-grid-deck":
+        return <BentoGridDeck />;
+      case "lottie-storyboard":
+        return <LottieStoryboard />;
       case "mdx-presentation":
         return <MDXPresentation />;
       case "parallax-storyteller":
@@ -302,12 +307,12 @@ export function ExampleViewer() {
         return <RemoteClickerDeck />;
       case "framer-motion-playground":
         return <FramerMotionPlayground />;
-	      case "kinetic-typography":
-	        return <KineticTypography />;
-	      case "refined-grit-deck":
-	        return <RefinedGritDeck />;
-	      case "branching-narrative":
-	        return <BranchingNarrative />;
+      case "kinetic-typography":
+        return <KineticTypography />;
+      case "refined-grit-deck":
+        return <RefinedGritDeck />;
+      case "branching-narrative":
+        return <BranchingNarrative />;
       case "custom-slide-transitions":
         return <CustomSlideTransitions />;
       case "scroll-timeline-showcase":
@@ -316,10 +321,10 @@ export function ExampleViewer() {
         return <PresenterModeDeck />;
       case "pecha-kucha-20x20":
         return <PechaKucha20x20 />;
-	      case "ignite-20x15":
-	        return <Ignite20x15 />;
-	      case "lessig-method-deck":
-	        return <LessigMethodDeck />;
+      case "ignite-20x15":
+        return <Ignite20x15 />;
+      case "lessig-method-deck":
+        return <LessigMethodDeck />;
       case "early-adopter-client-deck":
         return <EarlyAdopterClientDeck />;
       case "ten-twenty-thirty":
@@ -356,6 +361,8 @@ export function ExampleViewer() {
         return <SpatialCanvas />;
       case "audio-reactive":
         return <AudioReactive />;
+      case "blue-economy-leaders":
+        return <BlueEconomyLeaders />;
       default:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
