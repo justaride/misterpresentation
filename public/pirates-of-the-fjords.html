@@ -248,6 +248,102 @@
 
     .chapter-description p { margin-bottom: 15px; }
 
+    /* Cast + Endings (Story Completeness) */
+    .cast-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .cast-card {
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      border: 1px solid transparent;
+    }
+
+    .chapter.light .cast-card {
+      background: rgba(10, 26, 26, 0.06);
+      border-color: rgba(10, 26, 26, 0.12);
+    }
+
+    .chapter.dark .cast-card {
+      background: rgba(240, 248, 248, 0.06);
+      border-color: rgba(240, 248, 248, 0.12);
+    }
+
+    .cast-role {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.65;
+      font-weight: 500;
+    }
+
+    .cast-name {
+      margin-top: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .cast-desc {
+      margin-top: 10px;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    .ending-choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .ending-button {
+      appearance: none;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      opacity: 0.8;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .ending-button:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .ending-button:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    .ending-button.active {
+      background: currentColor;
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .chapter.light .ending-button.active { color: var(--foam); }
+    .chapter.dark .ending-button.active { color: var(--deep); }
+
+    .ending-detail {
+      margin-top: 18px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      max-width: 46ch;
+    }
+
     /* Illustration */
     .illustration {
       position: relative;
@@ -360,6 +456,7 @@
       .chapter { padding: 60px 30px; }
       .hero { padding: 40px 30px; }
       .chapter-number { left: 30px; }
+      .cast-grid { grid-template-columns: 1fr; }
       @media (pointer: coarse) {
         .cursor-ring, .cursor-dot { display: none; }
       }
@@ -426,7 +523,8 @@
         <h2 class="chapter-title">The Black Cat Sets Sail</h2>
         <div class="chapter-description">
           <p>In the icy harbors of Norland, Captain Soren of the Black Cat gathers exiles, smugglers, and drifters into one outlaw fleet.</p>
-          <p>Their prize is not just silver. Hidden runestones in the fjords can bend the wind, and every ruler in Scandinavia wants them first.</p>
+          <p>Their prize is not just silver. Hidden runestones in the fjords can bend the wind, and every jarl and guildmaster wants them first.</p>
+          <p>You choose your first crew by mercy or leverage: free prisoners, bargain with smugglers, or blackmail rivals. The Black Cat's politics are forged before the sails are.</p>
         </div>
       </div>
       <div class="illustration">
@@ -471,6 +569,7 @@
         <div class="chapter-description">
           <p>Word of the Black Cat reaches the Viking jarls. At Iron Fjord, longships seal the channel and the sea turns into a maze of hooks, arrows, and fire.</p>
           <p>This is where the game reveals its edge: win by outmaneuvering, boarding in chaos, and stealing momentum before the war horn finishes its call.</p>
+          <p>Between volleys, you gamble with rune-wind. Use it openly to terrify, or subtly to misdirect. Either way, the sea collects what you owe.</p>
         </div>
       </div>
     </div>
@@ -491,6 +590,7 @@
         <div class="chapter-description">
           <p>After the clash, the crew is scattered into the wilderness. You hunt, salvage, and rebuild through frozen forests and hidden coves.</p>
           <p>The journey turns personal when Soren spares Astrid, a Viking navigator. Their uneasy alliance becomes a love story shaped by survival, not destiny.</p>
+          <p>Keep her as a hostage and the crew obeys. Treat her as a partner and the map opens. Trust becomes your most expensive resource.</p>
         </div>
       </div>
       <div class="illustration">
@@ -534,7 +634,114 @@
         <h2 class="chapter-title">War on the Three Fjords</h2>
         <div class="chapter-description">
           <p>The finale erupts across sea and stone. Pirates and Vikings collide in boats, on black beaches, and in ravines where the runestone altar waits.</p>
-          <p>Your choices shape the ending: unite rival crews, betray the jarls, or forge a new sea law with Astrid at your side.</p>
+          <p>Your choices shape the ending: unite rival crews, betray the jarls, forge a new sea law with Astrid at your side, or break the runestones and vanish into the wild.</p>
+          <p>The crown is not a hat, it's a rulebook. Claim the wind, shatter it, or bind it to a code, and the North will remember you accordingly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <div class="transition-section">
+    <div class="transition-line"></div>
+  </div>
+
+  <!-- Chapter 5 -->
+  <section class="chapter light" data-testid="pirates-chapter-05">
+    <span class="chapter-number">05</span>
+    <div class="chapter-inner">
+      <div class="chapter-content">
+        <p class="chapter-label">Chapter Five</p>
+        <h2 class="chapter-title">The People of the Fjords</h2>
+        <div class="chapter-description">
+          <p>In the North, every fjord has a law, and every law has a loophole. Outlaws, jarls, and rune-keepers all sell a version of truth.</p>
+          <p>Your campaign is carried by faces as much as ships. The allies you keep and the enemies you spare decide what "victory" even means.</p>
+        </div>
+
+        <div class="cast-grid" data-testid="pirates-cast-grid">
+          <div class="cast-card" data-testid="pirates-cast-soren">
+            <div class="cast-role">Captain</div>
+            <div class="cast-name">Soren "Black Cat"</div>
+            <p class="cast-desc">An outlaw with a diplomat's smile and a raider's timing. Builds a fleet by turning desperation into strategy.</p>
+          </div>
+          <div class="cast-card" data-testid="pirates-cast-astrid">
+            <div class="cast-role">Navigator</div>
+            <div class="cast-name">Astrid of the Hidden Coves</div>
+            <p class="cast-desc">A Viking navigator who knows every narrow passage. Her trust is the difference between a route and a home.</p>
+          </div>
+          <div class="cast-card" data-testid="pirates-cast-eirik">
+            <div class="cast-role">Antagonist</div>
+            <div class="cast-name">Jarl Eirik Ironhook</div>
+            <p class="cast-desc">Wages war like a blockade: slow, inevitable, suffocating. Wants the runestones to turn the sea into property.</p>
+          </div>
+          <div class="cast-card" data-testid="pirates-cast-ragna">
+            <div class="cast-role">Rival</div>
+            <div class="cast-name">Ragna Frostjaw</div>
+            <p class="cast-desc">A pirate captain who believes fear is the only stable law. Offers alliance when it benefits her, not a moment sooner.</p>
+          </div>
+          <div class="cast-card" data-testid="pirates-cast-edda">
+            <div class="cast-role">Leverage</div>
+            <div class="cast-name">Edda Skald-Runner</div>
+            <p class="cast-desc">Runs rumor like a supply line. Can turn your mercy into legend or your cruelty into a bounty.</p>
+          </div>
+          <div class="cast-card" data-testid="pirates-cast-hjalmar">
+            <div class="cast-role">Rune-Keeper</div>
+            <div class="cast-name">Hjalmar of the Stones</div>
+            <p class="cast-desc">An exiled keeper of runestone lore. Teaches the cost rules of rune-wind, and what happens when you ignore them.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="illustration" aria-hidden="true">
+        <svg viewBox="0 0 500 500" fill="none">
+          <path class="organic-path fade-path" fill="var(--deep)" opacity="0.26"
+            d="M80 360 Q130 250 210 200 Q290 150 350 190 Q300 235 285 290 Q270 350 205 385 Q140 420 90 395 Q60 380 80 360 Z"/>
+          <path class="organic-path fade-path draw-path" fill="var(--deep)" opacity="0.34"
+            d="M205 95 Q250 65 295 95 Q330 125 318 180 Q300 270 290 345 Q280 420 250 430 Q220 420 210 345 Q200 270 182 180 Q170 125 205 95 Z"/>
+          <path class="organic-path fade-path scale-path" fill="var(--deep)" opacity="0.32"
+            d="M215 210 Q230 195 250 200 Q270 205 282 222 Q270 238 250 243 Q230 248 216 238 Q205 228 215 210 Z"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <div class="transition-section">
+    <div class="transition-line"></div>
+  </div>
+
+  <!-- Chapter 6 -->
+  <section class="chapter dark" data-testid="pirates-chapter-06">
+    <span class="chapter-number">06</span>
+    <div class="chapter-inner reverse">
+      <div class="illustration" aria-hidden="true">
+        <svg viewBox="0 0 500 500" fill="none">
+          <path class="organic-path fade-path" fill="var(--foam)" opacity="0.18"
+            d="M60 330 Q130 255 220 245 Q310 235 385 270 Q455 305 465 360 Q385 400 300 405 Q215 410 140 392 Q75 375 60 330 Z"/>
+          <path class="organic-path fade-path draw-path" fill="var(--foam)" opacity="0.26"
+            d="M240 110 Q285 120 315 160 Q345 200 332 245 Q320 285 285 308 Q250 330 214 308 Q178 286 168 245 Q158 205 186 165 Q212 128 240 110 Z"/>
+          <path class="organic-path fade-path scale-path" fill="var(--foam)" opacity="0.26"
+            d="M210 250 Q225 236 250 236 Q275 236 290 250 Q275 265 250 268 Q225 271 210 258 Q200 250 210 250 Z"/>
+        </svg>
+      </div>
+
+      <div class="chapter-content">
+        <p class="chapter-label">Chapter Six</p>
+        <h2 class="chapter-title">Paths to the Crown</h2>
+        <div class="chapter-description">
+          <p>The ending is not a coin flip. It is the sum of what you paid for power: who you saved, who you burned, and how often you asked the wind to lie.</p>
+          <p>Choose a path to preview the kind of North your story creates.</p>
+        </div>
+
+        <div class="ending-choices" data-testid="pirates-ending-choices">
+          <button class="ending-button active" type="button" aria-pressed="true" data-ending="unite" data-testid="pirates-ending-choice-unite">Unite the Crews</button>
+          <button class="ending-button" type="button" aria-pressed="false" data-ending="betray" data-testid="pirates-ending-choice-betray">Betray the Jarls</button>
+          <button class="ending-button" type="button" aria-pressed="false" data-ending="law" data-testid="pirates-ending-choice-law">Forge the Sea Law</button>
+          <button class="ending-button" type="button" aria-pressed="false" data-ending="break" data-testid="pirates-ending-choice-break">Break the Runes</button>
+        </div>
+
+        <div class="ending-detail" data-testid="pirates-ending-detail">
+          A coalition of outlaws holds the fjords together by shared rules and shared spoils. The jarls lose not to conquest, but to unity.
         </div>
       </div>
     </div>
@@ -608,13 +815,29 @@
     });
 
     // Toggle spotlight on dark sections
-    ScrollTrigger.create({
-      trigger: '.hero, .chapter, .quote-section, .finale',
-      start: 'top center',
-      end: 'bottom center',
-      onEnter: () => spotlightLayer?.classList.add('active'),
-      onLeave: () => spotlightLayer?.classList.remove('active'),
-      toggleActions: 'play reverse play reverse'
+    let spotlightActiveCount = 0;
+    darkSections.forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        onEnter: () => {
+          spotlightActiveCount += 1;
+          spotlightLayer?.classList.add('active');
+        },
+        onEnterBack: () => {
+          spotlightActiveCount += 1;
+          spotlightLayer?.classList.add('active');
+        },
+        onLeave: () => {
+          spotlightActiveCount = Math.max(0, spotlightActiveCount - 1);
+          if (spotlightActiveCount === 0) spotlightLayer?.classList.remove('active');
+        },
+        onLeaveBack: () => {
+          spotlightActiveCount = Math.max(0, spotlightActiveCount - 1);
+          if (spotlightActiveCount === 0) spotlightLayer?.classList.remove('active');
+        }
+      });
     });
 
     // Hero Animations
@@ -777,6 +1000,34 @@
         }
       });
     });
+
+    // Endings explorer (interactive, no reload)
+    const endingDetail = document.querySelector('[data-testid="pirates-ending-detail"]');
+    const endingButtons = document.querySelectorAll('.ending-button[data-ending]');
+    const ENDINGS = {
+      unite: "A coalition of outlaws holds the fjords together by shared rules and shared spoils. The jarls lose not to conquest, but to unity.",
+      betray: "You win by turning jarl against jarl and selling their oaths back to them. The fjords quiet down, but the quiet is bought with fear.",
+      law: "Soren and Astrid bind pirates and Vikings to a code of passage. The North does not become good. It becomes possible.",
+      break: "You shatter the runestones at the altar and disappear into pine and frost. No one owns the wind again, and the fjords must learn honesty."
+    };
+
+    function setEnding(id) {
+      if (!endingDetail) return;
+      endingButtons.forEach((btn) => {
+        const isActive = btn.dataset.ending === id;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+      endingDetail.textContent = ENDINGS[id] || "";
+    }
+
+    endingButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setEnding(btn.dataset.ending));
+    });
+
+    // Ensure initial state matches any pre-marked active button.
+    const initial = document.querySelector('.ending-button.active')?.dataset.ending || 'unite';
+    setEnding(initial);
   </script>
 </body>
 </html>

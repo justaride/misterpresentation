@@ -2,3 +2,4 @@
 # Format: [DATE] [STATUS] Description
 # STATUS: DONE | BLOCKED | LEARNING
 
+[2026-02-15] DONE Pirates of the Fjord Crown: full game story bible + expanded scroll page + Playwright coverage.
